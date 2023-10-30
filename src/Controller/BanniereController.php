@@ -82,6 +82,8 @@ class BanniereController extends AbstractController
                 $banniere->setTroisiemeImage($newFilename); // On redéfinit l’image de notre objet pour permettre l’enregistrement du bon nom d’image en BDD
             }
 
+            $banniere->setActivated(false);
+
             $entityManager->persist($banniere);
             $entityManager->flush();
 

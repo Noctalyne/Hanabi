@@ -61,7 +61,7 @@ class ContactController extends AbstractController
             $client->setUser($user);
 
             $formulaireDemandeProduit->setRefClient($client);
-            dd($formulaireDemandeProduit);
+            // dd($formulaireDemandeProduit);
             
             // Permet d enregistrer la date et l heure de l envoie (format gmt a changer)
             $dateEnvoiForm = new \DateTime();

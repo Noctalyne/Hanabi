@@ -25,6 +25,9 @@ class Banniere
     #[ORM\Column(length: 100)]
     private ?string $troisiemeImage = null;
 
+    #[ORM\Column]
+    private ?bool $activated = null;
+
   
 
     public function getId(): ?int
@@ -76,6 +79,18 @@ class Banniere
     public function setNomBanniere(string $nomBanniere): static
     {
         $this->nomBanniere = $nomBanniere;
+
+        return $this;
+    }
+
+    public function isActivated(): ?bool
+    {
+        return $this->activated;
+    }
+
+    public function setActivated(bool $activated): static
+    {
+        $this->activated = $activated;
 
         return $this;
     }

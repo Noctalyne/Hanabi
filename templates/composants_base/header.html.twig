@@ -1,12 +1,13 @@
 {% block stylesheets %}
-  <link rel="stylesheet" href="{{ asset('css/composants/header.css') }}" />
+  {# <link rel="stylesheet" href="{{ asset('css/composants/header.css') }}" /> #}
 {% endblock %}
 
 <header>
   <!-- Barre de navigation -->
-<nav>
-    <div class="header">
-      {# <div class="parent"> #}
+{# <nav> #}
+    <div class="header">{# <div class="parent"> #}
+    
+      
       <div class="div1">
         <a href="{{ path('app_accueil') }}"><img src="{{ asset('images/logo/grp_marque.png') }}" alt="#" /></a>
       </div>
@@ -16,23 +17,18 @@
           <a href="{{ path('app_shop')}}">Boutique</a>
 
           {% if app.user %} {# si utilisateur connecter #}
-            <a href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">Contact</a> {# bloque l accès si utilisateur non connecter #}
+            <a href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">Contact</a> 
           {% else %}
-            <a href="{{ path('app_contact')}}">Contact</a>
+            <a href="{{ path('app_contact')}}">Contact</a>{# bloque l accès si utilisateur non connecter #}
           {% endif %}
 
           {# Modifier la vue celon si le user est admin ou pas #}
+
           <a href="{{ path('app_administration')}}">Admin</a>
         </div>
       </div>
 
-      <!-- Partie input de recherche -->
-      <form class="div3">
-        <div class="searchBar">
-          <img src="{{ asset('images/icones/search.png') }}" alt="" width="20px" height="20px" />
-          <input type="text" placeholder="produit, licence... " />
-        </div>
-      </form>
+
 
       <!-- Ajouter ici les éléments apres la création des utilisateurs -->
 
@@ -49,7 +45,7 @@
 
             {% elseif app.user.vendeurs %} {# si user est un vendeur --> affiche profil du vendeur #}
               <a href="{{ path('app_vendeurs_show', { user_id : app.user.id }) }}">Profil vendeur</a>
-            {% else %} {#  #}
+            {% else %} 
 
               <a href="{{ path('app_user_show', { id : app.user.id }) }}">Profil user</a>
             {% endif %}
@@ -73,4 +69,141 @@
 
   <!-- trait de séparation -->
   <div class="trait_x"></div>
+
+
+
+
+
+
+
+
+
+
+  <nav class="navbar navbar-expand-lg">
+
+  <div class="container-fluid">
+
+    <a href="{{ path('app_accueil') }}"><img src="{{ asset('images/logo/grp_marque.png') }}" alt="Logo Hanabi" /></a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="collapse navbar-collapse" id="navbarColor03">
+
+      <ul class="navbar-nav me-auto">
+
+        <li class="nav-link p-1 m-1"><a href="{{ path('app_accueil') }}">Accueil</a></li>
+        <li class="nav-link p-1 m-1"><a href="{{ path('app_shop')}}">Boutique</a></li>
+
+        {% if app.user %} {# si utilisateur connecter #}
+          <li class="nav-link p-1 m-1"><a href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">Contact</a></li> 
+        {% else %}
+          <li class="nav-link p-1 m-1"><a href="{{ path('app_contact')}}">Contact</a></li>{# bloque l accès si utilisateur non connecter #}
+        {% endif %}
+
+        {# {% if not app.user.vendeurs %} #}
+          <li class="nav-link p-1 m-1"><a href="{{ path('app_administration')}}">Admin</a></li>
+        {# {% endif %} #}
+
+      </ul>
+      
+      <form class=" d-flex p-1 "> <!--ici le dflex permet de mettre les 2 éléments cote à cote-->
+        <div class="input-group border rounded texte-color">
+          <input type="text" class="form-control form-control-lg" placeholder="produit, licence...">
+          <div class="input-group-text btn">
+            <img src="{{ asset('images/icones/search.png') }}" alt="" width="20px" height="20px">
+          </div>
+        </div>
+      </form>
+
+      {% if app.user %}
+        <div id="shoppingCart">
+          <img src="{{ asset('images/icones/shopping-cart_1.png') }}" alt="Pannier d'achats" class="m-1" width="30px" height="30px">
+        </div>
+
+        <div id="loveCart">
+          <img src="{{ asset('images/icones/heart_1.png') }}" alt="Liste des favoris" class="m-1" width="30px" height="30px">
+        </div>
+
+        {# <div class="dropdown-center d-inline-flex">
+
+          <button id="menuProfil" class="btn btn-sm dropdown-toggle dropdown-toggle-split" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          
+            <img id="img_profil" src="" alt="#" class="m-1" width="40px"height="40px"><!-- le m-1 sers lors de la responssive-->
+            aa
+          
+          </button>
+
+          <div class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="menuProfil">
+            <a class="dropdown-item" href="#">Profil</a>
+            <hr class="dropdown-divider">
+            <a class="dropdown-item" href="#">Panier</a>
+            <hr class="dropdown-divider">
+            <a id="logoutButton" class="dropdown-item" href="./accueil.html">Deconnexion</a>
+          </div>
+
+        </div> #}
+
+
+        {# <div class="nav-item dropdown">
+          <a class="btn btn-sm dropdown-toggle show" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </div>       #}
+
+
+          <div class="dropdown-center d-inline-flex">
+
+          <button id="menuProfil" class="btn btn-sm dropdown-toggle dropdown-toggle-split show" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          
+            {# <img id="img_profil" src="" alt="#" class="m-1" width="40px"height="40px">#}
+            aa
+          
+          </button>
+
+          <div class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="menuProfil">
+            <a class="dropdown-item" href="#">Profil</a>
+            <hr class="dropdown-divider">
+            <a class="dropdown-item" href="#">Panier</a>
+            <hr class="dropdown-divider">
+            <a id="logoutButton" class="dropdown-item" href="./accueil.html">Deconnexion</a>
+          </div>
+
+        </div>
+        
+          
+
+
+      {# {% else %} #}
+
+
+      {% endif %}
+      
+
+    </div>
+  </div>
+{# </nav> #}
+
+
+    {% block javascripts %}
+      <script src="{{ asset('asset/script/bootstrap.min.js') }}" async></script> {# Import du script de Bootstrap #}
+    {% endblock %}
 </header>

@@ -11,14 +11,21 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
        
-    {# Import du style valble sur toute les pages (ex: titre/texte) pour que se soit homogène #}
+    {# Import du style valable sur toute les pages (ex: titre/texte) pour que se soit homogène #}
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
-        
-    {% block stylesheets %}
-    
-    {% endblock %}
 
-    {% block javascripts %}{% endblock %}
+    {# Import du css de Bootstrap #}
+        <link rel="stylesheet" href="{{ asset('asset/style/bootstrap.min.css') }}">
+
+    {% block stylesheets %}
+      
+    {% endblock %}
+      
+
+    {% block javascripts %}
+      <script src="{{ asset('asset/script/bootstrap.min.js') }}" async></script> {# Import du script de Bootstrap #}
+    {% endblock %}
+    
 
   </head>
 

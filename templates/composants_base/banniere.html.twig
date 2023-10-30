@@ -4,22 +4,41 @@
 
 
 <div>
-    <section class="banner">
+    <section class="container d-flex flex-row pt-2 pb-2" > <!-- class="banner" -->
 
         <!-- chibi Aurore -->
-        <div class="chibi">
-            <img src="{{ asset('./images/chibi/test_aurore.png')}}" alt="chibi Aurore">
-            {# <p>" Aurore"</p> #}
+        <div class="col-2"> 
+            <img  src="{{ asset('./images/chibi/test_aurore.png')}}" alt="chibi Aurore" style="height:200px;">
         </div>
 
         <!-- carrousel nouveaux arrivages -->
-        <div class="carroussel">  {# AJOUTER ICI LA BANNIER ENTITY EN JS #}
+        {# <div class="carroussel">  AJOUTER ICI LA BANNIER ENTITY EN JS 
             <img src="{{ asset('./images/banniereBrouill/sailor_moon_carrousel.jpg')}}" alt="slide1">
-        </div>
+        </div>#}
+        {% if (carrousels) %}
+            <div class="col-8">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-interval="5000" data-bs-ride="carousel"> <!-- data-bs-interval -> permet d ajuster le temps entre les slides-->
+                    <div class="carousel-inner" role="listbox">
+
+                        <div class="carousel-item active">
+                        <img class="container object-fit-cover" src="{{ asset('images/banniere/' ~ carrousels.premiereImage) }}" data-src="holder.js" alt="First slide" style="height:200px">
+                        </div>
+
+                        <div class="carousel-item">
+                        <img class="container" src="{{ asset('images/banniere/' ~ carrousels.deuxiemeImage) }}" data-src="holder.js" alt="Second slide" style="height:200px">
+                        </div>
+
+                        <div class="carousel-item">
+                        <img class="container" src="{{ asset('images/banniere/' ~ carrousels.troisiemeImage) }}" data-src="holder.js" alt="Third slide" style="height:200px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
 
         <!-- chibi flo -->
-        <div class="chibi">
-            <img src="{{ asset('./images/chibi/test_flo.png')}}" alt="chibi Flo">
+        <div class="col-2"> <!--  class="col-2"style="height:160px;"-->
+            <img src="{{ asset('./images/chibi/test_flo.png')}}" alt="chibi Flo" style="height:200px;">
         </div>
 
     </section>
