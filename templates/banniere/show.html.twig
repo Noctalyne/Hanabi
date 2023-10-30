@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Banniere{% endblock %}
+
+{% block body %}
+    <h1>Banniere</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ banniere.id }}</td>
+            
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ banniere.nomBanniere }}</td>
+            </tr>
+            <tr>
+                <th>Premiere image</th>
+                <td><img src="{{ asset('images/banniere/' ~ banniere.premiereImage ) }}" alt="photo du produit :" ~ {{banniere.premiereImage}} style="height : 200px; width : 800px;"></td>
+                {# <td><a href="{{ path('app_banniere_edit', {'id': banniere.id}) }}">Modifier</a> </td>  #}
+            </tr>
+            <tr>
+                <th>Deuxieme image</th>
+                <td><img src="{{ asset('images/banniere/' ~ banniere.deuxiemeImage  ) }}" alt="photo du produit :" ~ {{banniere.deuxiemeImage}} style="height : 200px; width : 800px;"></td>
+            </tr>
+            <tr>
+                <th>Troisieme image</th>
+                <td><img src="{{ asset('images/banniere/' ~ banniere.troisiemeImage ) }}" alt="photo du produit :" ~ {{banniere.troisiemeImage}} style="height : 200px; width : 800px;"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_banniere_index') }}">Retour</a>
+
+    <a href="{{ path('app_banniere_edit', {'id': banniere.id}) }}">Modifier</a>
+
+    {{ include('banniere/_delete_form.html.twig') }}
+{% endblock %}

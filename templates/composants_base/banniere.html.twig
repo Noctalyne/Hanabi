@@ -1,0 +1,29 @@
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('css/composants/banniere.css')}}">
+{% endblock %}
+
+
+<div>
+    <section class="banner">
+
+        <!-- chibi Aurore -->
+        <div class="chibi">
+            <img src="{{ asset('./images/chibi/test_aurore.png')}}" alt="chibi Aurore">
+            {# <p>" Aurore"</p> #}
+        </div>
+
+        <!-- carrousel nouveaux arrivages -->
+        <div class="carroussel">  {# AJOUTER ICI LA BANNIER ENTITY EN JS #}
+            <img src="{{ asset('./images/banniereBrouill/sailor_moon_carrousel.jpg')}}" alt="slide1">
+        </div>
+
+        <!-- chibi flo -->
+        <div class="chibi">
+            <img src="{{ asset('./images/chibi/test_flo.png')}}" alt="chibi Flo">
+        </div>
+
+    </section>
+
+    <!-- trait de séparation -->
+    <div class=" trait_x"></div> 
+</div> 

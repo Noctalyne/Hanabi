@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Banniere{% endblock %}
+
+{% block body %}
+    <h1>Create new Banniere</h1>
+
+    {{ include('banniere/_form.html.twig') }}
+
+    <a href="{{ path('app_banniere_index') }}">back to list</a>
+{% endblock %}

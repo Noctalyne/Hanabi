@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Boutique{% endblock %}
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('css/shop/shop.css')}}">
+	<link rel="stylesheet" href="{{asset('css/shop/card_produit.css')}}">
+{% endblock %}
+
+
+{% block body %}
+
+    {% include "./composants_base/banniere.html.twig" %}
+
+    <div class="intitule_page">
+        <h1> Boutique </h1>
+    </div>
+
+    <div class="mozaic_produits">
+        {% for produit in produits %} {# Permet de boucler sur chaque produits existant #}
+            <div class="carte_produit">
+                <img src="{{ asset('images/produits/' ~ produit.imgProduit) }}" alt="photo du produit :" ~ {{produit.nomProduit }}>
+
+                <div class="carte_corp_produit">
+                    <h5 class="carte_nom_produit">{{ produit.nomProduit }}</h5>
+
+                    <p class="carte_descritpiton_produit">{{ produit.descriptionProduit }}</p>
+
+                    <div class="carte_footer">
+                        <p>{{ produit.prixProduit }}</p>
+                        <button class="btn_ajout_pannier"> Ajouter </button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}    
+    </div>
+{% endblock %}

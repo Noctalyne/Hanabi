@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mes information personnels{% endblock %}
+
+{% block body %}
+    <h1> Modifier mes information personnels </h1>
+
+    {{ include('clients/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('app_clients_show', {'user_id': app.user.id }) }}">Retour</a>
+
+    {# {{ include('clients/_delete_form.html.twig',{'id': client.id} ) }} #}
+{% endblock %}

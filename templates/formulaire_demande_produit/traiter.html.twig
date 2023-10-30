@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le formulaire{% endblock %}
+
+{% block body %}
+    <h1>Modifier le formulaire</h1>
+
+    {{ include('formulaire_demande_produit/_form.html.twig', {'button_label': 'Appliquer modification'}) }}
+
+    <a href="{{ path('app_formulaire_demande_produit_index') }}">Retour à la liste</a>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la bannière{% endblock %}
+
+{% block body %}
+    <h1>Modifier la bannière</h1>
+
+    {{ include('banniere/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_banniere_index') }}">Retour</a>
+
+    {{ include('banniere/_delete_form.html.twig') }}
+{% endblock %}

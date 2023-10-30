@@ -1,0 +1,76 @@
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('css/composants/header.css') }}" />
+{% endblock %}
+
+<header>
+  <!-- Barre de navigation -->
+<nav>
+    <div class="header">
+      {# <div class="parent"> #}
+      <div class="div1">
+        <a href="{{ path('app_accueil') }}"><img src="{{ asset('images/logo/grp_marque.png') }}" alt="#" /></a>
+      </div>
+      <div class="div2">
+        <div class="navBar">
+          <a href="{{ path('app_accueil') }}">Accueil</a>
+          <a href="{{ path('app_shop')}}">Boutique</a>
+
+          {% if app.user %} {# si utilisateur connecter #}
+            <a href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">Contact</a> {# bloque l accès si utilisateur non connecter #}
+          {% else %}
+            <a href="{{ path('app_contact')}}">Contact</a>
+          {% endif %}
+
+          {# Modifier la vue celon si le user est admin ou pas #}
+          <a href="{{ path('app_administration')}}">Admin</a>
+        </div>
+      </div>
+
+      <!-- Partie input de recherche -->
+      <form class="div3">
+        <div class="searchBar">
+          <img src="{{ asset('images/icones/search.png') }}" alt="" width="20px" height="20px" />
+          <input type="text" placeholder="produit, licence... " />
+        </div>
+      </form>
+
+      <!-- Ajouter ici les éléments apres la création des utilisateurs -->
+
+      {# Si utilisateur non connecter #}
+
+      <div class="div4">
+        {% if app.user %}
+          <div class="menu_connect">
+            {# <img src={{ app.user.image }} alt="Avatar" class="avatar" /> #}
+            {{ app.user.username }}
+
+            {% if app.user.clients %} {# si user est un client --> affiche profil client #}
+              <a href="{{ path('app_clients_show', { user_id : app.user.id }) }}">Profil client</a>
+
+            {% elseif app.user.vendeurs %} {# si user est un vendeur --> affiche profil du vendeur #}
+              <a href="{{ path('app_vendeurs_show', { user_id : app.user.id }) }}">Profil vendeur</a>
+            {% else %} {#  #}
+
+              <a href="{{ path('app_user_show', { id : app.user.id }) }}">Profil user</a>
+            {% endif %}
+
+            <form method="post" action="{{ path('app_logout') }}">
+              <button type="submit" class="logout">Déconnexion</button>
+            </form>
+
+          </div>
+
+        {% else %}
+            <div class="menu_connect">
+                <a href="{{ path('app_register') }}">Inscription</a>
+                <a href="{{ path('app_login') }}">Connexion</a>
+            </div>
+        {% endif %}
+      </div>
+      
+    </div>
+</nav>
+
+  <!-- trait de séparation -->
+  <div class="trait_x"></div>
+</header>

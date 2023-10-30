@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Faire une demande{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveaux formulaire</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.typeProduit, {label: 'ChoisissSez le type de produit voulue :'}) }}
+
+        {{ form_row(form.descriptionProduit, {label: 'Veuillez préciser votre recherche :'}) }}
+
+        <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+    {{ form_end(form) }} 
+
+    <a href="{{ path('app_contact_log') }}">Retour </a>
+    
+{% endblock %}

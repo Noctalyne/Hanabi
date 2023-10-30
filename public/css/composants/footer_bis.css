@@ -1,0 +1,43 @@
+/* VERSION AVEC GRID -- moins responsive */
+
+.foot {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    align-items: center;
+    text-align: center;
+}
+
+.foot a {
+    text-decoration: none;
+    color: #AD0011;
+}
+
+/* Gère l'agencement des éléments */
+.mention { grid-area: 1 / 1 / 2 / 3; }
+
+.plan { grid-area: 1 / 3 / 2 / 4;}
+
+.connaitre { grid-area: 1 / 4 / 2 / 5;}
+
+.cgv { grid-area: 1 / 5 / 2 / 6;}
+
+.trait { grid-area: 1 / 6 / 2 / 7;}
+
+.r_s{ grid-area: 1 / 7 / 2 / 9;}
+
+.icon_fb { grid-area: 1 / 9 / 2 / 10;}
+
+.icon_twitter { grid-area: 1 / 10 / 2 / 11;}
+
+.icon_insta{ grid-area: 1 / 11 / 2 / 12;}
+
+.icon_yt { grid-area: 1 / 12 / 2 / 13;}
+
+/* Gère la taille des icones */
+.icone_reseaux img {
+    width: 25px;
+    height: 25px;
+}

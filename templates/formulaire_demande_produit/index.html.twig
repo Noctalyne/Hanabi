@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FormulaireDemandeProduit index{% endblock %}
+
+{% block body %}
+    <h1>FormulaireDemandeProduit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>TypeProduit</th>
+                <th>DescriptionProduit</th>
+                <th>DateEnvoieForm</th>
+                <th>DateReponseForm</th>
+
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formulaire_demande_produit in formulaire_demande_produits %}
+            <tr>
+                <td>{{ formulaire_demande_produit.id }}</td>
+                {# <td>{{ client.nom }}</td> #}
+
+
+                <td>{{ formulaire_demande_produit.typeProduit }}</td>
+                <td>{{ formulaire_demande_produit.descriptionProduit }}</td>
+                <td>{{ formulaire_demande_produit.dateEnvoieForm ? formulaire_demande_produit.dateEnvoieForm|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ formulaire_demande_produit.dateReponseForm ? formulaire_demande_produit.dateReponseForm|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_formulaire_demande_produit_show', {'id': formulaire_demande_produit.id}) }}">show</a>
+                    {# <a href="{{ path('app_formulaire_demande_produit_edit', {'id': formulaire_demande_produit.id}) }}">edit</a> #}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_formulaire_demande_produit_new', {'id' : app.user.clients.id}) }}">Create new</a>
+{% endblock %}

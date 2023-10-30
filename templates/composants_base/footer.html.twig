@@ -1,0 +1,59 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('css/composants/footer.css')}}">
+{% endblock %}
+
+<footer>
+    <div class="trait_x"></div> <!-- trait de séparation -->
+    
+    <div class="foot">
+
+        {# Bloc de gauche #}
+        <div class="mention">
+            <a href="#">Mentions légales</a> 
+        </div>
+
+        <div class="plan">
+            <a href="#">Plan du site</a> 
+        </div>
+
+        <div class="connaitre">
+            <a href="#">Nous connaître</a>
+        </div>
+
+        <div class="cgv">
+            <a href="#">CGV</a>
+        </div>
+
+        <div class="trait_y">   <p> </p>    </div>         
+
+        {# Bloc de droite #}
+        <div class="r_s">
+            <p>Réseaux sociaux :</p>
+        </div>
+
+        <div class="icon_fb"> 
+            <a href="#" class="icone_reseaux">
+                <img src="{{ asset('images/icones/facebook_4.png') }}" alt="Lien Facebook">
+            </a>
+        </div>
+
+        <div class="icon_twitter">
+            <a href="#" class="icone_reseaux">
+                <img src="{{ asset('images/icones/twitter_5.png') }}" alt="Lien Twitter">
+            </a>
+        </div>
+
+        <div class="icon_insta">
+            <a href="#" class="icone_reseaux">
+                <img src="{{ asset('images/icones/instagram_3.png') }}" alt="Lien Instagram">
+            </a>
+        </div>
+
+        <div class="icon_yt">
+            <a href="#" class="icone_reseaux">
+                <img src="{{ asset('images/icones/youtube_3.png') }}" alt="Lien Youtube">
+            </a>
+        </div>
+    </div>
+
+</footer>
