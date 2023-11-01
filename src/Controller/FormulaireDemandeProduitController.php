@@ -26,11 +26,7 @@ class FormulaireDemandeProduitController extends AbstractController
 
 
     #[Route('/{id}/creer', name: 'app_formulaire_demande_produit_new', methods: ['GET', 'POST'])]
-    public function new(Request $request,
-        EntityManagerInterface $entityManager,
-        ClientsRepository $clientsRepository, 
-    int $id,
-    FormulaireDemandeProduitRepository $formulaireDemandeProduitRepository): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, ClientsRepository $clientsRepository, int $id ): Response   
     {
         $formulaireDemandeProduit = new FormulaireDemandeProduit();
         $form = $this->createForm(FormulaireDemandeProduitType::class, $formulaireDemandeProduit);
@@ -58,7 +54,8 @@ class FormulaireDemandeProduitController extends AbstractController
             $entityManager->persist($newFormulaire);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_formulaire_demande_produit_index', [], Response::HTTP_SEE_OTHER);
+            // renvoie à la page liste des formulaire
+            return $this->redirectToRoute('app_formulaire_demande_produit_show_liste', ['user_id'=> $id], Response::HTTP_SEE_OTHER);  
         }
 
         return $this->render('formulaire_demande_produit/new.html.twig', [
@@ -83,6 +80,7 @@ class FormulaireDemandeProduitController extends AbstractController
         $listeFormulaires = $formulaireDemandeProduitRepository->findAllFormsByClient($user_id);
         $client = $clientsRepository->find($user_id);
         
+        // dd($client);
         return $this->render('formulaire_demande_produit/afficherListe.html.twig', [
             'formulaire_demande_produits' => $listeFormulaires,
             'client' => $client,
@@ -91,29 +89,29 @@ class FormulaireDemandeProduitController extends AbstractController
     }
 
     // Permet de donner une réponse à la demande
-    // #[Route('/traiter/Formulaire{id}', name: 'app_formulaire_demande_produit_traiter', methods: ['GET', 'POST'])]
-    // public function traiter(Request $request, FormulaireDemandeProduit $formulaireDemandeProduit, EntityManagerInterface $entityManager): Response
-    // {
-    //     $form = $this->createForm(FormulaireDemandeProduitType::class, $formulaireDemandeProduit);
-    //     $form->handleRequest($request);
+    #[Route('/traiter/Formulaire/{id}', name: 'app_formulaire_demande_produit_traiter', methods: ['GET', 'POST'])]
+    public function traiter(Request $request, FormulaireDemandeProduit $formulaireDemandeProduit, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(FormulaireDemandeProduitType::class, $formulaireDemandeProduit);
+        $form->handleRequest($request);
 
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         // Enregistrez la réponse du vendeur dans l'entité
-    //         $dateReponseForm = new \DateTime();
-    //         $formulaireDemandeProduit->setDateReponseForm($dateReponseForm);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Enregistrez la réponse du vendeur dans l'entité
+            $dateReponseForm = new \DateTime();
+            $formulaireDemandeProduit->setDateReponseForm($dateReponseForm);
 
-    //         $entityManager->persist($formulaireDemandeProduit);
-    //         $entityManager->flush();
+            $entityManager->persist($formulaireDemandeProduit);
+            $entityManager->flush();
 
-    //         // Redirigez l'utilisateur vers une page de confirmation ou autre
-    //         return $this->redirectToRoute('app_formulaire_demande_produit_index');
-    //     }
+            // Redirigez l'utilisateur vers une page de confirmation ou autre
+            return $this->redirectToRoute('app_formulaire_demande_produit_index');
+        }
 
-    //     return $this->render('formulaire_demande_produit/traiter.html.twig', [
-    //         'formulaire_demande_produit' => $formulaireDemandeProduit,
-    //         'form' => $form,
-    //     ]);
-    // }
+        return $this->render('formulaire_demande_produit/traiter.html.twig', [
+            'formulaire_demande_produit' => $formulaireDemandeProduit,
+            'form' => $form,
+        ]);
+    }
 
     // //Crud pour modifier le formulaire
     // #[Route('/{id}/edit', name: 'app_formulaire_demande_produit_edit', methods: ['GET', 'POST'])]

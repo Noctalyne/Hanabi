@@ -13,6 +13,6 @@
         <button class="btn">{{ button_label|default('Enregistrer') }}</button>
     {{ form_end(form) }} 
 
-    <a href="{{ path('app_contact_log') }}">Retour </a>
+    <a href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">Retour </a>
     
 {% endblock %}

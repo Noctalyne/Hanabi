@@ -3,207 +3,150 @@
 {% endblock %}
 
 <header>
-  <!-- Barre de navigation -->
-{# <nav> #}
-    <div class="header">{# <div class="parent"> #}
     
-      
-      <div class="div1">
-        <a href="{{ path('app_accueil') }}"><img src="{{ asset('images/logo/grp_marque.png') }}" alt="#" /></a>
-      </div>
-      <div class="div2">
-        <div class="navBar">
-          <a href="{{ path('app_accueil') }}">Accueil</a>
-          <a href="{{ path('app_shop')}}">Boutique</a>
+  <nav class="navbar navbar-expand-lg"><!-- Barre de navigation -->
 
-          {% if app.user %} {# si utilisateur connecter #}
-            <a href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">Contact</a> 
-          {% else %}
-            <a href="{{ path('app_contact')}}">Contact</a>{# bloque l accès si utilisateur non connecter #}
+    <div class="container">
+
+      <a href="{{ path('app_accueil') }}"><img src="{{ asset('images/logo/grp_marque.png') }}" alt="Logo Hanabi" /></a>
+
+      {# Crée le menu burger #}
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor03">
+
+        <ul class="navbar-nav me-auto">
+
+          <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_accueil') }}">Accueil</a></li>
+          <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_shop')}}">Boutique</a></li>
+
+          {% if app.user  %} {# si utilisateur connecter #}
+            {% if app.user.clients %}
+              <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">Contact</a></li> 
+            {% endif %}
+          {% else %}{# renvoie sur la page qui informe du besoin de connexion #}
+            <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_contact')}}">Contact</a></li>
           {% endif %}
 
-          {# Modifier la vue celon si le user est admin ou pas #}
+          {# {% if not app.user.vendeurs %} #}
+          <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_administration')}}" style:"text-decoration:none;">Admin</a></li>
+          {# {% endif %} #}
 
-          <a href="{{ path('app_administration')}}">Admin</a>
-        </div>
-      </div>
-
-
-
-      <!-- Ajouter ici les éléments apres la création des utilisateurs -->
-
-      {# Si utilisateur non connecter #}
-
-      <div class="div4">
-        {% if app.user %}
-          <div class="menu_connect">
-            {# <img src={{ app.user.image }} alt="Avatar" class="avatar" /> #}
-            {{ app.user.username }}
-
-            {% if app.user.clients %} {# si user est un client --> affiche profil client #}
-              <a href="{{ path('app_clients_show', { user_id : app.user.id }) }}">Profil client</a>
-
-            {% elseif app.user.vendeurs %} {# si user est un vendeur --> affiche profil du vendeur #}
-              <a href="{{ path('app_vendeurs_show', { user_id : app.user.id }) }}">Profil vendeur</a>
-            {% else %} 
-
-              <a href="{{ path('app_user_show', { id : app.user.id }) }}">Profil user</a>
-            {% endif %}
-
-            <form method="post" action="{{ path('app_logout') }}">
-              <button type="submit" class="logout">Déconnexion</button>
+          <li>{# Barre de recherche #}
+            <form class=" d-flex p-1 "> <!--ici le dflex permet de mettre les 2 éléments cote à cote-->
+              <div class="input-group border rounded texte-color">
+                <input type="text" class="form-control form-control" placeholder="produit, licence...">
+                <div class="input-group-text btn">
+                  <img src="{{ asset('images/icones/search.png') }}" alt="" width="20px" height="20px">
+                </div>
+              </div>
             </form>
-
-          </div>
-
-        {% else %}
-            <div class="menu_connect">
-                <a href="{{ path('app_register') }}">Inscription</a>
-                <a href="{{ path('app_login') }}">Connexion</a>
+          </li>
+            
+          {% if app.user %}
+            <div class="mx-auto my-auto">
+              <li class="p-2">
+                <img src="{{ asset('images/icones/shopping-cart_1.png') }}" alt="Pannier d'achats" class="m-1" width="30px" height="30px">
+              </li>
             </div>
-        {% endif %}
+
+            <div class="mx-auto my-auto">
+              <li class="p-2">
+                <img src="{{ asset('images/icones/heart_1.png') }}" alt="Liste des favoris" class="m-1" width="30px" height="30px">
+              </li>
+            </div>
+
+
+            <div class="dropdown-center d-inline-flex justify-content-center">
+
+              <button id="menuProfil" class="btn btn-sm dropdown-toggle dropdown-toggle-split show" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <img id="img_profil" src="{{ asset('images/icones/user_black_line.png') }}" alt="Logo profil" class="m-1" width="40px"height="40px">
+              </button>
+
+              <div class="dropdown-menu dropdown-menu-end p-0 " aria-labelledby="menuProfil">
+                <h6 class="dropdown-header">Bonjour, {{ app.user.username }}</h6>
+
+                {% if app.user.clients %} {# si user est un client --> affiche profil client #}
+                  <li class="dropdown-item">
+                    <a class="nav-link" href="{{ path('app_clients_show', { user_id : app.user.id }) }}">
+                      <h6>Mon Profil</h6>
+                    </a>
+                  </li>
+                  <hr class="dropdown-divider">
+
+                {% elseif app.user.vendeurs %} {# si user est un vendeur --> affiche profil du vendeur #}
+                  <li class="dropdown-item">
+                    <a class="nav-link" href="{{ path('app_vendeurs_show', { user_id : app.user.id }) }}">
+                      <h6>Profil vendeur</h6>
+                    </a>
+                  </li>
+                  <hr class="dropdown-divider">
+
+                {% else %} {# si user n'as pas d'infos client --> affiche profil user #}
+                  <li class="dropdown-item">
+                    <a class="nav-link" href="{{ path('app_user_show', { id : app.user.id }) }}">
+                      <h6>Mon Profil</h6>
+                    </a>
+                  </li>
+                  <hr class="dropdown-divider">
+
+                {% endif %}
+
+                {% if app.user.clients %}
+                  <li class="dropdown-item mx-auto my-auto">
+                    <a class="nav-link p-1 m-1" href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">
+                      <h6>Mes commandes</h6>
+                    </a>
+                  </li> 
+                  <hr class="dropdown-divider">
+                {% endif %}
+                {# <a class="nav-link p-1 m-1" href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.id}) }}">
+                      <h6>Mes commandes 2</h6>
+                    </a> #}
+
+                <form class="dropdown-item" method="post" action="{{ path('app_logout') }}">
+                  <button type="submit" class="logout nav-link"><h6>Déconnexion</h6></button>
+                </form>
+              </div>
+
+            </div>
+
+          {% else %}
+            <div class="menu_connect">
+              <ul class="navbar-nav me-auto">
+                <li class="nav-link p-1 m-1"><a href="{{ path('app_register') }}">Inscription</a></li>
+                <li class="nav-link p-1 m-1"><a href="{{ path('app_login') }}">Connexion</a></li>
+              </ul>
+            </div>
+
+                {# <li>
+                <button class="btn btn-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                  Connexion
+                </button>
+                </li> #}
+          {% endif %}
+        </ul>
       </div>
-      
+    </div> 
+    
+  </nav>
+
+  {# <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Connexion</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-</nav>
-
-  <!-- trait de séparation -->
-  <div class="trait_x"></div>
-
-
-
-
-
-
-
-
-
-
-  <nav class="navbar navbar-expand-lg">
-
-  <div class="container-fluid">
-
-    <a href="{{ path('app_accueil') }}"><img src="{{ asset('images/logo/grp_marque.png') }}" alt="Logo Hanabi" /></a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="collapse navbar-collapse" id="navbarColor03">
-
-      <ul class="navbar-nav me-auto">
-
-        <li class="nav-link p-1 m-1"><a href="{{ path('app_accueil') }}">Accueil</a></li>
-        <li class="nav-link p-1 m-1"><a href="{{ path('app_shop')}}">Boutique</a></li>
-
-        {% if app.user %} {# si utilisateur connecter #}
-          <li class="nav-link p-1 m-1"><a href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">Contact</a></li> 
-        {% else %}
-          <li class="nav-link p-1 m-1"><a href="{{ path('app_contact')}}">Contact</a></li>{# bloque l accès si utilisateur non connecter #}
-        {% endif %}
-
-        {# {% if not app.user.vendeurs %} #}
-          <li class="nav-link p-1 m-1"><a href="{{ path('app_administration')}}">Admin</a></li>
-        {# {% endif %} #}
-
-      </ul>
-      
-      <form class=" d-flex p-1 "> <!--ici le dflex permet de mettre les 2 éléments cote à cote-->
-        <div class="input-group border rounded texte-color">
-          <input type="text" class="form-control form-control-lg" placeholder="produit, licence...">
-          <div class="input-group-text btn">
-            <img src="{{ asset('images/icones/search.png') }}" alt="" width="20px" height="20px">
-          </div>
-        </div>
-      </form>
-
-      {% if app.user %}
-        <div id="shoppingCart">
-          <img src="{{ asset('images/icones/shopping-cart_1.png') }}" alt="Pannier d'achats" class="m-1" width="30px" height="30px">
-        </div>
-
-        <div id="loveCart">
-          <img src="{{ asset('images/icones/heart_1.png') }}" alt="Liste des favoris" class="m-1" width="30px" height="30px">
-        </div>
-
-        {# <div class="dropdown-center d-inline-flex">
-
-          <button id="menuProfil" class="btn btn-sm dropdown-toggle dropdown-toggle-split" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          
-            <img id="img_profil" src="" alt="#" class="m-1" width="40px"height="40px"><!-- le m-1 sers lors de la responssive-->
-            aa
-          
-          </button>
-
-          <div class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="menuProfil">
-            <a class="dropdown-item" href="#">Profil</a>
-            <hr class="dropdown-divider">
-            <a class="dropdown-item" href="#">Panier</a>
-            <hr class="dropdown-divider">
-            <a id="logoutButton" class="dropdown-item" href="./accueil.html">Deconnexion</a>
-          </div>
-
-        </div> #}
-
-
-        {# <div class="nav-item dropdown">
-          <a class="btn btn-sm dropdown-toggle show" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-          
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </div>
-        </div>       #}
-
-
-          <div class="dropdown-center d-inline-flex">
-
-          <button id="menuProfil" class="btn btn-sm dropdown-toggle dropdown-toggle-split show" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          
-            {# <img id="img_profil" src="" alt="#" class="m-1" width="40px"height="40px">#}
-            aa
-          
-          </button>
-
-          <div class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="menuProfil">
-            <a class="dropdown-item" href="#">Profil</a>
-            <hr class="dropdown-divider">
-            <a class="dropdown-item" href="#">Panier</a>
-            <hr class="dropdown-divider">
-            <a id="logoutButton" class="dropdown-item" href="./accueil.html">Deconnexion</a>
-          </div>
-
-        </div>
-        
-          
-
-
-      {# {% else %} #}
-
-
-      {% endif %}
-      
-
+    <div class="offcanvas-body">
+      <div>
+      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+      </div>
+      <a href="{{ path('app_register') }}" class="text-center"><p>Pas encore inscrit ? Rejoignez nous</p></a>
     </div>
-  </div>
-{# </nav> #}
+  </div> #}
 
 
-    {% block javascripts %}
-      <script src="{{ asset('asset/script/bootstrap.min.js') }}" async></script> {# Import du script de Bootstrap #}
-    {% endblock %}
+  <div class="trait_x"></div><!-- trait de séparation -->
+
 </header>

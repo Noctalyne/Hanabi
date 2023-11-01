@@ -29,6 +29,7 @@ p {
 a {
     font-family: 'Satisfy', cursive;
     font-size: 30px;
+    /* text-decoration: none; */
 }
 
 label {

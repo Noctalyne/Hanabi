@@ -3,18 +3,55 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
 
-    {{ form_errors(registrationForm) }}
+    <section class="container w-75 pt-4 pb-4 ">
+        {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_start(registrationForm) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+            <div class="container text-center">
+                <h1>Inscription</h1>
+                <p>Veuillez remplir les rensseignements suivants</p>
+            </div>
+
+            <!--div principal qui modifie la largeur du formulaire-->
+            <div class="container w-75 d-flex flex-column justify-content-between">
+                                            
+                <div class="p-2">
+                    <div class="p-2">
+                        {{ form_row(registrationForm.email, {
+                            class:"form-control",
+                            label: 'Votre addresse mail :',
+                        }) }}
+                    </div>
+
+                    <div class="p-2">
+                        {{ form_row(registrationForm.username, {
+                            class:"form-control",
+                            label: "Choisissez un nom d'utilisateur :",
+                        }) }}
+                    </div>
+
+                    <div class="p-2">
+                        {{ form_row(registrationForm.plainPassword, {
+                            class:"form-control",
+                            label: 'Mot de passe :',
+                        }) }}
+                    </div>
+
+                    <div class=" d-flex justify-content-around">
+                        {{ form_row(registrationForm.agreeTerms, {
+                            label: 'Accepter les condittions',
+                        }) }}
+                    </div>
+                </div>
+                  
+                <div class="d-flex justify-content-around mt-3">
+                    <button type="submit" class="btn btn-secondary">S'enregistrer</button>
+                </div>
+                            
+            </div>
+        {{ form_end(registrationForm) }}
+    </section>
+
 {% endblock %}

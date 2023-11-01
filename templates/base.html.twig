@@ -7,9 +7,9 @@
     {# Change l icone de l'onglet #}{# <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"> #}
         
     {# Style de police -- API Google #}
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+        {# <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet"> #}
        
     {# Import du style valable sur toute les pages (ex: titre/texte) pour que se soit homogène #}
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
@@ -23,7 +23,11 @@
       
 
     {% block javascripts %}
-      <script src="{{ asset('asset/script/bootstrap.min.js') }}" async></script> {# Import du script de Bootstrap #}
+
+    {# Import du script de Bootstrap #}
+      <script src="{{ asset('asset/script/bootstrap.min.js') }}" async></script> 
+      <script src="{{ asset('asset/script/bootstrap.bundle.min.js') }}" async></script> {# Import le script du dropdown #}
+      
     {% endblock %}
     
 

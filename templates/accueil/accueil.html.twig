@@ -43,10 +43,10 @@
 
     {% for produit in produits %}
       <div class="card m-3 p-2 w-25">
-        <img class="card-img-top" src="{{ asset('images/produits/' ~ produit.imgProduit) }}" alt="photo du produit :" ~ {{produit.nomProduit }}>
+        <img class="card-img-top" src="{{ asset('images/produits/' ~ produit.imgProduit) }}" alt="photo du produit :" ~ {{produit.nomProduit }} style="height:400px;">
         <div class="card-body">
           <h5 class="card-title text-center">{{ produit.nomProduit }}</h5>
-          <div class="card-text">
+          <div class="card-text d-flex justify-content-around">
             <p >{{ produit.prixProduit }}</p>
             <a href="#!" class="btn btn-primary">Voir</a>
           </div>
@@ -61,39 +61,24 @@
   <div class="bloc_vente"> {# Max 3 produits #}
 
     <h1>Nos licences populaires</h1>  
-    
-    {# <div class="mozaic_accueil">
-      {% for produit in produits %}
-        <div class="carte_produit">
-          <img src="{{ asset('images/produits/' ~ produit.imgProduit) }}" alt="photo du produit :" ~ {{produit.nomProduit }}>
-          <div class="carte_corp_produit">
-            <h5 class="carte_nom_produit">{{ produit.nomProduit }}</h5>
-            <div class="carte_foot">
-              <p>{{ produit.prixProduit }}</p>	
-              <button class="acces_prod"> Voir </button>
-            </div>
-          </div>
-        </div>
-      {% endfor %} #}
 
       <div class="d-flex flex-row flex-wrap justify-content-center">
-    {% for produit in produits %}
-    
-      <div class="card m-3 p-2 w-25">
+      {% for produit in produits %}
       
-        <img class="card-img-top" src="{{ asset('images/produits/' ~ produit.imgProduit) }}" alt="photo du produit :" ~ {{produit.nomProduit }}>
-        <div class="card-body">
-          
-          <h5 class="card-title text-center">{{ produit.nomProduit }}</h5>
-          <div class="card-text">
-            <p >{{ produit.prixProduit }}</p>
-            <a href="#!" class="btn btn-primary">Voir</a>
-          </div>
+        <div class="card m-3 p-2 w-25">
+        
+          <img class="card-img-top" src="{{ asset('images/produits/' ~ produit.imgProduit) }}" alt="photo du produit :" ~ {{produit.nomProduit}} style="height:400px;">
+          <div class="card-body">
+            <h5 class="card-title text-center">{{ produit.nomProduit }}</h5>
+            <div class="card-text d-flex c">
+              <p >{{ produit.prixProduit }}</p>
+              <a href="#!" class="btn btn-primary">Voir</a>
+            </div>
 
+          </div>
         </div>
-      </div>
-    
-    {% endfor %}
+      
+      {% endfor %}
   </div>
 
   </div>

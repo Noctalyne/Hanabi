@@ -1,11 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier le formulaire{% endblock %}
+{% block title %}Traiter la demande{% endblock %}
 
 {% block body %}
-    <h1>Modifier le formulaire</h1>
+    <h1>Traiter la demande</h1>
 
-    {{ include('formulaire_demande_produit/_form.html.twig', {'button_label': 'Appliquer modification'}) }}
+    {# {{ include('formulaire_demande_produit/_form.html.twig', {'button_label': 'Appliquer modification'}) }} #}
+
+
+    {{ formulaire_demande_produit.TypeProduit }}
+    {{ formulaire_demande_produit.descriptionProduit }}
+
+
+    {{ form_errors(form) }}
+
+    {# {{ form_start(form) }} #}
+        {# {{ form_row(form.TypeProduit, {
+            label: 'ChoisissSez le type de produit voulue :'
+        }) }}S
+         Voir POUR AJOUTER LE "AUTRES"
+
+        {{ form_row(form.descriptionProduit, {
+            label: 'Veuillez préciser votre recherche :'
+        }) }} #}
+        
+
+        {# {% if app.user.roles is same as(['ROLE_ADMIN']) %} #}
+
+
+            {# {{ form_row(form.reponse_demande, {
+                label: 'Réponse du vendeur :'
+                }) }} #}
+        {# {% endif %} #}
+        <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+    {# {{ form_end(form) }} #}
 
     <a href="{{ path('app_formulaire_demande_produit_index') }}">Retour à la liste</a>
 
