@@ -24,17 +24,21 @@
 
           {% if app.user  %} {# si utilisateur connecter #}
             {% if app.user.clients %}
-              <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">Contact</a></li> 
+              <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">Contact</a></li>
+            {% elseif app.user.vendeurs  %} {# sinon si l utilisateur est un vendeur -> renvoie à la liste pour accepter form #}
+              <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_formulaire_demande_produit_index') }}">Formulaires</a></li>
             {% endif %}
-          {% else %}{# renvoie sur la page qui informe du besoin de connexion #}
+          {% else %} {# renvoie sur la page qui informe du besoin de connexion #}
             <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_contact')}}">Contact</a></li>
           {% endif %}
 
-          {# {% if not app.user.vendeurs %} #}
-          <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_administration')}}" style:"text-decoration:none;">Admin</a></li>
-          {# {% endif %} #}
-
-          <li>{# Barre de recherche #}
+          {% if app.user  %} {# si utilisateur connecter #}
+            {% if app.user.vendeurs %}
+              <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_administration')}}" style:"text-decoration:none;">Admin</a></li>
+            {% endif %}
+          {% endif %}
+          
+          <li class="ps-2">{# Barre de recherche #}
             <form class=" d-flex p-1 "> <!--ici le dflex permet de mettre les 2 éléments cote à cote-->
               <div class="input-group border rounded texte-color">
                 <input type="text" class="form-control form-control" placeholder="produit, licence...">
@@ -46,19 +50,21 @@
           </li>
             
           {% if app.user %}
+          {# Icone Pannier #}
             <div class="mx-auto my-auto">
               <li class="p-2">
                 <img src="{{ asset('images/icones/shopping-cart_1.png') }}" alt="Pannier d'achats" class="m-1" width="30px" height="30px">
               </li>
             </div>
-
+            
+          {# Icone Favoris #}
             <div class="mx-auto my-auto">
               <li class="p-2">
                 <img src="{{ asset('images/icones/heart_1.png') }}" alt="Liste des favoris" class="m-1" width="30px" height="30px">
               </li>
             </div>
 
-
+          {# Dropdown "accès" au compte #}
             <div class="dropdown-center d-inline-flex justify-content-center">
 
               <button id="menuProfil" class="btn btn-sm dropdown-toggle dropdown-toggle-split show" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -112,7 +118,7 @@
               </div>
 
             </div>
-
+          {# Si utilisateur pas connecté #}
           {% else %}
             <div class="menu_connect">
               <ul class="navbar-nav me-auto">
@@ -120,12 +126,6 @@
                 <li class="nav-link p-1 m-1"><a href="{{ path('app_login') }}">Connexion</a></li>
               </ul>
             </div>
-
-                {# <li>
-                <button class="btn btn-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                  Connexion
-                </button>
-                </li> #}
           {% endif %}
         </ul>
       </div>
@@ -133,6 +133,13 @@
     
   </nav>
 
+
+
+                {# <li>
+                <button class="btn btn-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                  Connexion
+                </button>
+                </li> #}
   {# <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasExampleLabel">Connexion</h5>

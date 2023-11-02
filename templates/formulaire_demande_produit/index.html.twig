@@ -3,18 +3,19 @@
 {% block title %}FormulaireDemandeProduit index{% endblock %}
 
 {% block body %}
-    <h1>FormulaireDemandeProduit index</h1>
+<div class=" container pt-5 pb-5">
+    <h1>Liste des formulaires</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>TypeProduit</th>
-                <th>DescriptionProduit</th>
-                <th>DateEnvoieForm</th>
-                <th>DateReponseForm</th>
-
-                <th>actions</th>
+                <th>N° de demande</th>
+                <th>Type de produit</th>
+                <th>Description envoyer</th>
+                <th>Date d'envoie</th>
+                <th>Statut </th>
+                <th>Action</th>
+                <th>Afficher</th>
             </tr>
         </thead>
         <tbody>
@@ -31,14 +32,14 @@
                 {# Renvoie à la page pour accepeter la demande si celle ci est "en attente" #}
                 {% if  formulaire_demande_produit.reponseDemande is same as('attente')  %}
                     <td><p>Demande en attente </p></td>                    
-                    <td><a href="{{ path('app_formulaire_demande_produit_traiter', {'id': formulaire_demande_produit.id}) }}">Accepter</a></td>                    
+                    <td><a href="{{ path('app_formulaire_demande_produit_traiter', {'id': formulaire_demande_produit.id}) }}">Répondre</a></td>                    
                 {% else %}
                     <td>{{ formulaire_demande_produit.dateReponseForm ? formulaire_demande_produit.dateReponseForm|date('d M Y à H:i') : ''}} </td>
                     <td>{{ formulaire_demande_produit.reponseDemande }}</td>
                 {% endif %}
 
                 <td>
-                    <a href="{{ path('app_formulaire_demande_produit_show', {'id': formulaire_demande_produit.id}) }}">
+                    <a class="btn" href="{{ path('app_formulaire_demande_produit_show', {'id': formulaire_demande_produit.id}) }}">
                         <img src="{{ asset('images/icones/voir.png') }}" alt="icone voir" style="width : 40px;">
                     </a>
                 </td>
@@ -61,6 +62,6 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_formulaire_demande_produit_new', {'id' : app.user.clients.id}) }}">Create new</a>
+</div>
+    {# <a href="{{ path('app_formulaire_demande_produit_new', {'id' : app.user.clients.id}) }}">Create new</a> #}
 {% endblock %}

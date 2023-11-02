@@ -35,6 +35,9 @@ class FormulaireDemandeProduit
     #[ORM\JoinColumn(nullable: false)]
     private ?Clients $refClient = null;
 
+    #[ORM\Column(length: 30, nullable: true)]
+    private ?string $autresTypes = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,6 +111,18 @@ class FormulaireDemandeProduit
     public function setRefClient(?Clients $refClient): static
     {
         $this->refClient = $refClient;
+
+        return $this;
+    }
+
+    public function getAutresTypes(): ?string
+    {
+        return $this->autresTypes;
+    }
+
+    public function setAutresTypes(?string $autresTypes): static
+    {
+        $this->autresTypes = $autresTypes;
 
         return $this;
     }

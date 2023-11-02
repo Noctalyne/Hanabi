@@ -89,7 +89,7 @@ class FormulaireDemandeProduitController extends AbstractController
     }
 
     // Permet de donner une réponse à la demande
-    #[Route('/traiter/Formulaire/{id}', name: 'app_formulaire_demande_produit_traiter', methods: ['GET', 'POST'])]
+    #[Route('/traiter/formulaire/{id}', name: 'app_formulaire_demande_produit_traiter', methods: ['GET', 'POST'])]
     public function traiter(Request $request, FormulaireDemandeProduit $formulaireDemandeProduit, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(FormulaireDemandeProduitType::class, $formulaireDemandeProduit);

@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdministrationController extends AbstractController
 {
+    // Cette route est juste ici pour récupérer tout les élément sur la même page
     #[Route('/administration', name: 'app_administration')]
     public function index(): Response
     {
