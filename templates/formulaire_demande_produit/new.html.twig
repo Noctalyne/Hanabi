@@ -8,7 +8,13 @@
     {{ form_start(form) }}
         {{ form_row(form.typeProduit, {label: 'ChoisissSez le type de produit voulue :'}) }}
 
+        {{ form_row(form.autresTypes, {label: '* Autres :'}) }}
+
         {{ form_row(form.descriptionProduit, {label: 'Veuillez préciser votre recherche :'}) }}
+
+        {# <div class='invisible'>
+            {{ form_row(form.reponseDemande) }}
+        </div> #}
 
         <button class="btn">{{ button_label|default('Enregistrer') }}</button>
     {{ form_end(form) }} 

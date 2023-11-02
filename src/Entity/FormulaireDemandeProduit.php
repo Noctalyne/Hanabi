@@ -17,6 +17,9 @@ class FormulaireDemandeProduit
     #[ORM\Column(length: 20)]
     private ?string $typeProduit = null;
 
+    #[ORM\Column(length: 30, nullable: true)]
+    private ?string $autresTypes = null;
+    
     #[ORM\Column(length: 300)]
     private ?string $descriptionProduit = null;
 
@@ -35,8 +38,7 @@ class FormulaireDemandeProduit
     #[ORM\JoinColumn(nullable: false)]
     private ?Clients $refClient = null;
 
-    #[ORM\Column(length: 30, nullable: true)]
-    private ?string $autresTypes = null;
+
 
     public function getId(): ?int
     {
@@ -51,6 +53,18 @@ class FormulaireDemandeProduit
     public function setTypeProduit(string $typeProduit): static
     {
         $this->typeProduit = $typeProduit;
+
+        return $this;
+    }
+
+    public function getAutresTypes(): ?string
+    {
+        return $this->autresTypes;
+    }
+
+    public function setAutresTypes(?string $autresTypes): static
+    {
+        $this->autresTypes = $autresTypes;
 
         return $this;
     }
@@ -115,15 +129,4 @@ class FormulaireDemandeProduit
         return $this;
     }
 
-    public function getAutresTypes(): ?string
-    {
-        return $this->autresTypes;
-    }
-
-    public function setAutresTypes(?string $autresTypes): static
-    {
-        $this->autresTypes = $autresTypes;
-
-        return $this;
-    }
 }

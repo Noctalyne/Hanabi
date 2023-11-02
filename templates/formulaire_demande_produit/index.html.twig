@@ -14,7 +14,7 @@
                 <th>Description envoyer</th>
                 <th>Date d'envoie</th>
                 <th>Statut </th>
-                <th>Action</th>
+                <th>Action / </th>
                 <th>Afficher</th>
             </tr>
         </thead>
@@ -26,16 +26,30 @@
 
 
                 <td>{{ formulaire_demande_produit.typeProduit }}</td>
-                <td>{{ formulaire_demande_produit.descriptionProduit }}</td>
-                <td>{{ formulaire_demande_produit.dateEnvoieForm ? formulaire_demande_produit.dateEnvoieForm|date('Y-m-d H:i:s') : '' }}</td>
+                {# <td>{{ formulaire_demande_produit.descriptionProduit }}</td> #}
+                <td>
+                    <textarea name="descriptionProduit" rows="5" cols="30" disabled>
+                        {{ formulaire_demande_produit.descriptionProduit }}
+                    </textarea>
+                </td>
+
+                <td>{{ formulaire_demande_produit.dateEnvoieForm ? formulaire_demande_produit.dateEnvoieForm|date('d M Y à H:i') : '' }}</td>
 
                 {# Renvoie à la page pour accepeter la demande si celle ci est "en attente" #}
                 {% if  formulaire_demande_produit.reponseDemande is same as('attente')  %}
                     <td><p>Demande en attente </p></td>                    
                     <td><a href="{{ path('app_formulaire_demande_produit_traiter', {'id': formulaire_demande_produit.id}) }}">Répondre</a></td>                    
                 {% else %}
-                    <td>{{ formulaire_demande_produit.dateReponseForm ? formulaire_demande_produit.dateReponseForm|date('d M Y à H:i') : ''}} </td>
-                    <td>{{ formulaire_demande_produit.reponseDemande }}</td>
+                    <td>
+                        {{ formulaire_demande_produit.reponseDemande }}
+                        le {{ formulaire_demande_produit.dateReponseForm ? formulaire_demande_produit.dateReponseForm|date('d M Y à H:i') : ''}}
+                    </td>
+
+                    <td>
+                        <a href="{{ path('app_formulaire_demande_produit_traiter', {'id': formulaire_demande_produit.id}) }}">
+                            <img src="{{ asset('images/icones/user_black_line.png') }}" alt="profil du client" class="m-1" width="20px"height="20px">
+                        </a>
+                    </td>
                 {% endif %}
 
                 <td>

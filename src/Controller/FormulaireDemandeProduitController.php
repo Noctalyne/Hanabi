@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\FormulaireDemandeProduit;
 use App\Form\FormulaireDemandeProduitType;
+use App\Form\ReponseFormulaireType;
 use App\Repository\ClientsRepository;
 use App\Repository\FormulaireDemandeProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -66,15 +67,22 @@ class FormulaireDemandeProduitController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_formulaire_demande_produit_show', methods: ['GET'])]
-    public function show(FormulaireDemandeProduit $formulaireDemandeProduit): Response
+    public function show(int $id, FormulaireDemandeProduit $formulaireDemandeProduit, FormulaireDemandeProduitRepository $formulaireDemandeProduitRepository): Response
     {
+        $desc = $formulaireDemandeProduitRepository->find($id);
+
+        $description = 
+        $desc->setDescriptionProduit(wordwrap($desc->getDescriptionProduit(),20, 10));
+
         return $this->render('formulaire_demande_produit/show.html.twig', [
             'formulaire_demande_produit' => $formulaireDemandeProduit,
         ]);
     }
 
+
+
     #[Route('/{user_id}/liste', name: 'app_formulaire_demande_produit_show_liste', methods: ['GET'])]
-    public function showListe( int $user_id ,FormulaireDemandeProduit $formulaireDemandeProduit,ClientsRepository $clientsRepository,
+    public function showListe( int $user_id ,ClientsRepository $clientsRepository,
                               FormulaireDemandeProduitRepository $formulaireDemandeProduitRepository ): Response
     {
         $listeFormulaires = $formulaireDemandeProduitRepository->findAllFormsByClient($user_id);
@@ -88,17 +96,24 @@ class FormulaireDemandeProduitController extends AbstractController
         ]);
     }
 
+    
+
     // Permet de donner une réponse à la demande
     #[Route('/traiter/formulaire/{id}', name: 'app_formulaire_demande_produit_traiter', methods: ['GET', 'POST'])]
-    public function traiter(Request $request, FormulaireDemandeProduit $formulaireDemandeProduit, EntityManagerInterface $entityManager): Response
+    public function traiter(int $id, Request $request, FormulaireDemandeProduit $formulaireDemandeProduit,
+     FormulaireDemandeProduitRepository $formulaireDemandeProduitRepository, ReponseFormulaireType $reponseFormulaireType, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(FormulaireDemandeProduitType::class, $formulaireDemandeProduit);
+        $form = $this->createForm(ReponseFormulaireType::class, $formulaireDemandeProduit);
         $form->handleRequest($request);
 
+        $formRecup = $formulaireDemandeProduitRepository->find($id);
+
+
+        // dd($form->getData());
         if ($form->isSubmitted() && $form->isValid()) {
             // Enregistrez la réponse du vendeur dans l'entité
             $dateReponseForm = new \DateTime();
-            $formulaireDemandeProduit->setDateReponseForm($dateReponseForm);
+            $formRecup->setDateReponseForm($dateReponseForm);
 
             $entityManager->persist($formulaireDemandeProduit);
             $entityManager->flush();
