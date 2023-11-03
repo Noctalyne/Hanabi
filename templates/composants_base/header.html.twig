@@ -23,11 +23,15 @@
           <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_shop')}}">Boutique</a></li>
 
           {% if app.user  %} {# si utilisateur connecter #}
+
             {% if app.user.clients %}
               <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">Contact</a></li>
             {% elseif app.user.vendeurs  %} {# sinon si l utilisateur est un vendeur -> renvoie à la liste pour accepter form #}
               <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_formulaire_demande_produit_index') }}">Formulaires</a></li>
+            {% else %} {# renvoie sur la page qui informe du besoin de connexion #}
+              <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_contact')}}">Contact</a></li>
             {% endif %}
+
           {% else %} {# renvoie sur la page qui informe du besoin de connexion #}
             <li class="mx-auto my-auto"><a class="nav-link p-1 m-1" href="{{ path('app_contact')}}">Contact</a></li>
           {% endif %}

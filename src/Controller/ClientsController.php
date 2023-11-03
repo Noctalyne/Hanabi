@@ -48,6 +48,8 @@ class ClientsController extends AbstractController
 
         $user = $userRepository->find($user_id);
 
+        $actuel = $clientsRepository->find($user_id);
+
         if ($formClient->isSubmitted() && $formClient->isValid()) {
 
             $client->setUser($user);
@@ -57,13 +59,14 @@ class ClientsController extends AbstractController
 
             $entityManager->flush(); // Envoie en BDD
 
-            return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_clients_show', ['user_id' => $user_id], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('clients/edit.html.twig', [
             'user' => $user,
             'client' => $client,
             'form' => $formClient,
+            'actuel' => $actuel,
         ]);
     }
 

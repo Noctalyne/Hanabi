@@ -25,26 +25,26 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+    // #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
+    // public function new(Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     $user = new User();
+    //     $form = $this->createForm(UserType::class, $user);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+    //     if ($form->isSubmitted() && $form->isValid()) {
             
-            $entityManager->persist($user);
-            $entityManager->flush();
+    //         $entityManager->persist($user);
+    //         $entityManager->flush();
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-        }
+    //         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    //     }
 
-        return $this->render('user/new.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->render('user/new.html.twig', [
+    //         'user' => $user,
+    //         'form' => $form,
+    //     ]);
+    // }
 
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
@@ -54,8 +54,53 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(int $id, Request $request, User $user,  ClientsRepository $clientsRepository, EntityManagerInterface $entityManager): Response
+
+       // Modifie le client existant --> si celui ci pas utilisateur
+       #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+       public function edit(int $id, Request $request, User $user, 
+       UserRepository $userRepository, ClientsRepository $clientsRepository, EntityManagerInterface $entityManager): Response
+       {
+           $form = $this->createForm(UserType::class, $user);
+           $form->handleRequest($request);
+   
+           // $client = $clientsRepository->findClient($id);
+           $user = $userRepository->find($id);
+           $actuel = $userRepository->find($id);
+   
+           if ($form->isSubmitted() && $form->isValid()) {
+   
+               $user = $form ->getData(); // recup les info du form
+   
+               $entityManager->persist($user); // persist client en bdd
+   
+               $entityManager->flush();
+   
+               // dd($client);
+               return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+           }
+   
+           return $this->render('user/edit.html.twig', [
+               'user' => $user,
+               'form' => $form,
+               'actuel' => $actuel,
+           ]);
+       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Permet de modifier la partie user de client
+    #[Route('/{id}/edit', name: 'app_user_edit_of_client', methods: ['GET', 'POST'])]
+    public function editUserOfClient(int $id, Request $request, User $user,  ClientsRepository $clientsRepository, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -79,6 +124,14 @@ class UserController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+
+
+
+
+
+
 
     // permet de crée un client à partir d'un user tous en laissant au user d etre modifier
     #[Route('/{user_id}/create', name: 'app_user_create_client', methods: ['GET', 'POST'])]
@@ -106,7 +159,8 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('clients/edit.html.twig', [
+        // Renvoie sur la page qui crée un nouveau client 
+        return $this->render('clients/new.html.twig', [ 
             'user' => $user,
             'client' => $client,
             'form' => $formClient,
@@ -114,15 +168,22 @@ class UserController extends AbstractController
     }
 
 
-    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
 
-        // return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-        return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
-    }
+    
+        // Voir pour que cela désactive juste le compte --> ajouter booleen a l entity 
+        //  Voir pour aussi faire en sorte qu'un puisse réactiver le compte 
+
+
+
+    // #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
+    // public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    // {
+    //     if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+    //         $entityManager->remove($user);
+    //         $entityManager->flush();
+    //     }
+
+    //     // return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    //     return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+    // }
 }

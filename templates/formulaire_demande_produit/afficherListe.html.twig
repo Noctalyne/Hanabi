@@ -18,6 +18,7 @@
         <thead>
             <tr>
                 <th>Type de produit</th>
+                <th>* Autres :</th>
                 <th>Description</th>
                 <th>Date de la demande</th>
                 <th>Réponse</th>
@@ -28,7 +29,9 @@
         {% for formulaire_demande_produit in formulaire_demande_produits %}
             <tr>
                 <td>{{ formulaire_demande_produit.type_produit }}</td>
-                <td>{{ formulaire_demande_produit.description_produit }}</td>
+                                
+                {# <td>{{ formulaire_demande_produit.autresTypes }}</td> #}
+                <td class="text-break">{{ formulaire_demande_produit.description_produit }}</td>
                 <td>Envoyer le {{ formulaire_demande_produit.date_envoie_form ? formulaire_demande_produit.date_envoie_form|date('d M Y à H:i') : '' }}</td>
 
                 {% if  formulaire_demande_produit.reponse_demande is same as('attente')  %}
