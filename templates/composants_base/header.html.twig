@@ -126,10 +126,17 @@
           {# Si utilisateur pas connecté #}
           {% else %}
             <div class="menu_connect">
-              <ul class="navbar-nav me-auto">
+              {# <ul class="navbar-nav me-auto">
                 <li class="nav-link p-1 m-1"><a href="{{ path('app_register') }}">Inscription</a></li>
                 <li class="nav-link p-1 m-1"><a href="{{ path('app_login') }}">Connexion</a></li>
+              </ul> #}
+
+              <ul class="navbar-nav me-auto ">
+                <li class="nav-link p-1 m-1 p-1">
+                <a class="btn btn-outline-dark p-1 p-0" href="{{ path('app_login') }}">Connexion / Inscription</a>
+                </li>
               </ul>
+
             </div>
           {% endif %}
         </ul>

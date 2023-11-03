@@ -3,11 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Clients;
-use App\Entity\FormulaireDemandeProduit;
-use App\Form\FormulaireDemandeProduitType;
-use App\Repository\ClientsRepository;
-use App\Repository\FormulaireDemandeProduitRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,14 +16,14 @@ class ContactController extends AbstractController
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
         // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
+        // $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+        // $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('contact/contact.html.twig', [
             'controller_name' => 'ContactController',
-            'last_username' => $lastUsername, 
-            'error' => $error
+            // 'last_username' => $lastUsername, 
+            // 'error' => $error
         ]);
     }
 
