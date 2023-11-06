@@ -63,12 +63,14 @@ class UserController extends AbstractController
            $form = $this->createForm(UserType::class, $user);
            $form->handleRequest($request);
    
-           // $client = $clientsRepository->findClient($id);
+           
            $user = $userRepository->find($id);
            $actuel = $userRepository->find($id);
    
            if ($form->isSubmitted() && $form->isValid()) {
-   
+
+                $client = $clientsRepository->findClient($id);
+
                $user = $form ->getData(); // recup les info du form
    
                $entityManager->persist($user); // persist client en bdd
@@ -76,7 +78,14 @@ class UserController extends AbstractController
                $entityManager->flush();
    
                // dd($client);
-               return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+
+                # si il y a un client la modif renvoie à la page profil de client
+               if ($client != null ){  
+                return $this->redirectToRoute('app_clients_show', ['user_id'=> $id], Response::HTTP_SEE_OTHER);
+               }
+
+               # sinon après la modif renvoie à la page profil de client
+               return $this->redirectToRoute('app_user_show', ['id'=> $id], Response::HTTP_SEE_OTHER);
            }
    
            return $this->render('user/edit.html.twig', [
@@ -99,13 +108,13 @@ class UserController extends AbstractController
 
 
     // Permet de modifier la partie user de client
-    #[Route('/{id}/edit', name: 'app_user_edit_of_client', methods: ['GET', 'POST'])]
-    public function editUserOfClient(int $id, Request $request, User $user,  ClientsRepository $clientsRepository, EntityManagerInterface $entityManager): Response
+    #[Route('/{user_id}/edit', name: 'app_user_edit_of_client', methods: ['GET', 'POST'])]
+    public function editUserOfClient(int $user_id, Request $request, User $user,  ClientsRepository $clientsRepository, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
-        $client = $clientsRepository->findClient($id);
+        $client = $clientsRepository->find($user_id);
 
         if ($form->isSubmitted() && $form->isValid()) {
 

@@ -48,7 +48,7 @@ class ClientsController extends AbstractController
 
         $user = $userRepository->find($user_id);
 
-        $actuel = $clientsRepository->find($user_id);
+        $actuel = $clientsRepository->findClient($user->getId());
 
         if ($formClient->isSubmitted() && $formClient->isValid()) {
 
