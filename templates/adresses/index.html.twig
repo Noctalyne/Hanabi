@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adresses index{% endblock %}
+
+{% block body %}
+    <h1>Adresses index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NumAdrss</th>
+                <th>RueAdrss</th>
+                <th>ComplementAdrss</th>
+                <th>VilleAdrss</th>
+                <th>CodePostalAdrss</th>
+                <th>PaysAdrss</th>
+                <th>client</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for adress in adresses %}
+            <tr>
+                <td>{{ adress.id }}</td>
+                <td>{{ adress.numAdrss }}</td>
+                <td>{{ adress.rueAdrss }}</td>
+                <td>{{ adress.complementAdrss }}</td>
+                <td>{{ adress.villeAdrss }}</td>
+                <td>{{ adress.codePostalAdrss }}</td>
+                <td>{{ adress.paysAdrss }}</td>
+                <td>{{ adress.idClientAdresses.nom }}  {{ adress.idClientAdresses.prenom }}</td>
+                {# adress/accède à l'objet/ 
+                    .idClientAdresses /accède à l'objet/ 
+                    .prenom /accède à la colone demandé/ #}
+                <td>
+                    {# <a href="{{ path('app_adresses_show', {'id': adress.id}) }}">show</a>
+                    <a href="{{ path('app_adresses_edit', {'id': adress.id}) }}">edit</a> #}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {# <a href="{{ path('app_adresses_new') }}">Create new</a> #}
+{% endblock %}

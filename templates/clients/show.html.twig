@@ -69,15 +69,28 @@
   <div class="container w-75 mt-4 mb-4 pt-3 pb-3 border rounded  shadow-sm">
     <div class="d-flex flex-row justify-content-between">
       <h4> Mon adresse principal : </h4>
+
+      {% if app.user.clients.adresses != null %}
       <button class="btn btn-outline-dark p-1">
         <a class="btn p-0" href="#">Modifier</a> {# AJOUTER ELEMENT ADRESSES #}
       </button>
     </div>
+    
 
+
+
+      <button class="btn btn-outline-dark p-1">
+        <a class="btn p-0" href="{{ path('app_adresses_new', {'user_id' : app.user.clients.id}) }}">ajouter</a> {# AJOUTER ELEMENT ADRESSES #}
+      </button>
+    {% else %}
+
+    {% endif %}
+
+    {% for adresse in adresses %}
     <table class="table">
       <tbody>    
           <tr>
-              <th></th>
+              <th>{{ adresse.rue }}</th>
               <td></td>
           </tr>
           <tr>
@@ -88,8 +101,15 @@
               <th></th>
               <td></td>
           </tr>
+          <td>{{ adresse.numAdrss }}</td>
+                <td>{{ adresse.rueAdrss }}</td>
+                <td>{{ adresse.complementAdrss }}</td>
+                <td>{{ adresse.villeAdrss }}</td>
+                <td>{{ adresse.codePostalAdrss }}</td>
+                <td>{{ adresse.paysAdrss }}</td>
       </tbody>
     </table>
+    {% endfor %}
 
     <div class="d-flex flex-row"> {# Mettre des CARDS ici pour afficher les addresse via leur nom #}
 

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Clients;
 use App\Form\ClientsType;
+use App\Repository\AdressesRepository;
 use App\Repository\ClientsRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,12 +26,17 @@ class ClientsController extends AbstractController
 
 
     #[Route('/{user_id}', name: 'app_clients_show', methods: ['GET'])]
-    public function show(int $user_id, Clients $client, ClientsRepository $clientsRepository, UserRepository $userRepository): Response
+    public function show(int $user_id, Clients $client, ClientsRepository $clientsRepository, UserRepository $userRepository, AdressesRepository $adressesRepository): Response
     {
         $user = $userRepository->find($user_id);
         $client = $clientsRepository->findClient($user_id);
+        $adresses = $client->getAdresses();
+        // $adresses = $adressesRepository->findBy(array ('idClientAdresse' => $user_id) );
         // dd($client);
+        // dd($adresses);
+
         return $this->render('clients/show.html.twig', [
+            'adresses' => $adresses,
             'client' => $client,
             'user' => $user,
         ]);
