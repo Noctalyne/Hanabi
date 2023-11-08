@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Adresses;
 use App\Entity\Clients;
 use App\Form\ClientsType;
 use App\Repository\AdressesRepository;
@@ -26,11 +27,14 @@ class ClientsController extends AbstractController
 
 
     #[Route('/{user_id}', name: 'app_clients_show', methods: ['GET'])]
-    public function show(int $user_id, Clients $client, ClientsRepository $clientsRepository, UserRepository $userRepository, AdressesRepository $adressesRepository): Response
+    public function show(int $user_id, Clients $client, ClientsRepository $clientsRepository,
+     UserRepository $userRepository, AdressesRepository $adressesRepository): Response
     {
         $user = $userRepository->find($user_id);
         $client = $clientsRepository->findClient($user_id);
-        $adresses = $client->getAdresses();
+        $idClient = $client->getId();
+
+        $adresses = $adressesRepository->findAdresses($user_id);
         // $adresses = $adressesRepository->findBy(array ('idClientAdresse' => $user_id) );
         // dd($client);
         // dd($adresses);

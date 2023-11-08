@@ -103,6 +103,18 @@ class ClientsRepository extends ServiceEntityRepository
         $statement->executeStatement();
     }
 
+
+    // public function findAdresses (Clients $client, int $user_id){
+
+    //     $client= $this ->find($user_id);
+    //     $client->getAdresses();
+
+    //     return $client;
+  
+    // }
+
+
+
     // public function updateClient () {
 
     //     $conn = $this->getEntityManager()->getConnection();

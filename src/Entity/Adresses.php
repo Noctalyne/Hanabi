@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\AdressesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints\Count as Assert;
+
+
 #[ORM\Entity(repositoryClass: AdressesRepository::class)]
 class Adresses
 {
@@ -33,6 +36,7 @@ class Adresses
 
     #[ORM\ManyToOne(inversedBy: 'adresses')]
     #[ORM\JoinColumn(nullable: false, name: 'idClientAdresse')]
+    // #[Assert(max: 3, groups: ['client'])]
     private ?Clients $idClientAdresses = null;
 
     public function getId(): ?int

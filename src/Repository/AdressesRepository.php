@@ -21,6 +21,27 @@ class AdressesRepository extends ServiceEntityRepository
         parent::__construct($registry, Adresses::class);
     }
 
+
+
+
+    // récupère toutes les adresses du clients
+    public function findAdresses($idClientAdresses)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+            SELECT *
+            FROM clients as c
+            INNER JOIN adresses  as a
+            ON c.id = a.idClientAdresse
+            WHERE c.user_id = :user_id
+            ';
+            $params = ['user_id' => $idClientAdresses]; // recupère la valeur de l'url
+
+        $resultSet = $conn->executeQuery($sql,$params);
+
+        return $resultSet->fetchAllAssociative();// returns un tableau de tableau SANS objet
+    }
+
 //    /**
 //     * @return Adresses[] Returns an array of Adresses objects
 //     */

@@ -96,7 +96,7 @@
                   </li>
                   <hr class="dropdown-divider">
 
-                {% else %} {# si user n'as pas d'infos client --> affiche profil user #}
+                {% else %} {# si user n'est pas un vendeur et n'as pas d'infos client enregitrer --> affiche profil user #}
                   <li class="dropdown-item">
                     <a class="nav-link" href="{{ path('app_user_show', { id : app.user.id }) }}">
                       <h6>Mon Profil</h6>
@@ -109,6 +109,13 @@
                 {% if app.user.clients %}
                   <li class="dropdown-item mx-auto my-auto">
                     <a class="nav-link p-1 m-1" href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">
+                      <h6>Mes Formulaires</h6>
+                    </a>
+                  </li> 
+                  <hr class="dropdown-divider">
+                  
+                  <li class="dropdown-item mx-auto my-auto">
+                    <a class="nav-link p-1 m-1" href="{{ path('app_commandes_index') }}">
                       <h6>Mes commandes</h6>
                     </a>
                   </li> 

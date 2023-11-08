@@ -8,6 +8,7 @@ use App\Repository\AdressesRepository;
 use App\Repository\ClientsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,6 +36,12 @@ class AdressesController extends AbstractController
         //(array('user_id' => $user_id));
 
         $form = $this->createForm(AdressesType::class, $adress);
+        
+        // $form->add('validation_groups', ChoiceType::class, [
+        //     'choices' => [
+        //         'client' => 'client',
+        //     ],
+        // ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -56,6 +63,9 @@ class AdressesController extends AbstractController
         ]);
     }
 
+
+
+
     #[Route('/{user_id}', name: 'app_adresses_show', methods: ['GET'])]
     public function show(Adresses $adress): Response
     {
@@ -63,6 +73,9 @@ class AdressesController extends AbstractController
             'adress' => $adress,
         ]);
     }
+
+
+    
 
     #[Route('/{id}/edit', name: 'app_adresses_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Adresses $adress, EntityManagerInterface $entityManager): Response
