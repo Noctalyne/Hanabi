@@ -8,10 +8,6 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ adress.id }}</td>
-            </tr>
-            <tr>
                 <th>NumAdrss</th>
                 <td>{{ adress.numAdrss }}</td>
             </tr>
@@ -38,9 +34,17 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_adresses_index') }}">back to list</a>
+        {% if app.user.clients %} {# si utilisateur est un client renvoie à sa liste personnelle #}
+        <button class="btn btn-outline-dark p-1">
+            <a class="btn p-0" href="{{ path('app_clients_show', {'user_id': app.user.id}) }}">Retour à la liste</a>
+        </button>
+    {% elseif app.user.vendeurs %}{# si utilisateur est un vendeur renvoie à la liste de tous les formulaires #}
+        <button class="btn btn-outline-dark p-1">
+            <a class="btn p-0" href="{{ path('app_formulaire_demande_produit_index') }}">Retour à la liste</a>
+        </button>
+    {% endif %}
 
-    <a href="{{ path('app_adresses_edit', {'id': adress.id}) }}">edit</a>
+    {# <a href="{{ path('app_adresses_edit', {'id': adress.id}) }}">edit</a> #}
 
-    {{ include('adresses/_delete_form.html.twig') }}
+    {# {{ include('adresses/_delete_form.html.twig') }} #}
 {% endblock %}

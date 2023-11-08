@@ -32,11 +32,11 @@ class ClientsController extends AbstractController
     {
         $user = $userRepository->find($user_id);
         $client = $clientsRepository->findClient($user_id);
-        $idClient = $client->getId();
+        // $idClient = $client->getId();
 
         $adresses = $adressesRepository->findAdresses($user_id);
         // $adresses = $adressesRepository->findBy(array ('idClientAdresse' => $user_id) );
-        // dd($client);
+        // dd($user);
         // dd($adresses);
 
         return $this->render('clients/show.html.twig', [

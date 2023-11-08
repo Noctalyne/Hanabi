@@ -26,7 +26,7 @@
                 <td>{{ formulaire_demande_produit.dateEnvoieForm ? formulaire_demande_produit.dateEnvoieForm|date('d M Y à H:i') : '' }}</td>
             </tr>
             <tr>
-                <th>Réponse du vendeur :</th>{# permet d'afficher le état de la demande  #}
+                <th>Réponse du vendeur :</th> {# permet d'afficher le état de la demande  #}
                     <td>
                     {% if  formulaire_demande_produit.reponseDemande is same as('attente')  %}
                         Demande en attente   
@@ -49,7 +49,4 @@
     {% endif %}
 </div>    
 
-    {# <a href="{{ path('app_formulaire_demande_produit_edit', {'id': formulaire_demande_produit.id}) }}">edit</a> #}
-
-    {# {{ include('formulaire_demande_produit/_delete_form.html.twig') }} #}
 {% endblock %}

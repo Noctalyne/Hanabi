@@ -26,15 +26,14 @@ class AdressesController extends AbstractController
         ]);
     }
 
+
+
     // Route pour ajouter les adresse en bdd (voir pour bloquer à max 3 ou -)
-    #[Route('/{user_id}/new', name: 'app_adresses_new', methods: ['GET', 'POST'])]
-    public function new( int $user_id ,Request $request, EntityManagerInterface $entityManager, ClientsRepository $clientsRepository): Response
+    #[Route('/{user_id}/{id_client}/new', name: 'app_adresses_new', methods: ['GET', 'POST'])]
+    public function new(int $id_client, int $user_id, Request $request, EntityManagerInterface $entityManager, ClientsRepository $clientsRepository): Response
     {
         $adress = new Adresses();
-        // $client = $clientsRepository->find($id_client);
         
-        //(array('user_id' => $user_id));
-
         $form = $this->createForm(AdressesType::class, $adress);
         
         // $form->add('validation_groups', ChoiceType::class, [
@@ -43,18 +42,21 @@ class AdressesController extends AbstractController
         //     ],
         // ]);
         $form->handleRequest($request);
+        $client = $clientsRepository->find($id_client);
+
+        // dd($client);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $client = $clientsRepository->find($user_id);
-
             $adress->setIdClientAdresses($client);
             $client->addAdress($adress);
+
             $entityManager->persist($client);
             $entityManager->persist($adress);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_adresses_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_clients_show', ['user_id' => $user_id ,'id_client' => $id_client] , Response::HTTP_SEE_OTHER); 
+             
         }
 
         return $this->render('adresses/new.html.twig', [
@@ -66,7 +68,7 @@ class AdressesController extends AbstractController
 
 
 
-    #[Route('/{user_id}', name: 'app_adresses_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_adresses_show', methods: ['GET'])]
     public function show(Adresses $adress): Response
     {
         return $this->render('adresses/show.html.twig', [

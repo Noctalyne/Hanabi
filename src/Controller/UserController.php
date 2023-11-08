@@ -33,7 +33,7 @@ class UserController extends AbstractController
     //     $form->handleRequest($request);
 
     //     if ($form->isSubmitted() && $form->isValid()) {
-            
+
     //         $entityManager->persist($user);
     //         $entityManager->flush();
 
@@ -55,56 +55,50 @@ class UserController extends AbstractController
     }
 
 
-       // Modifie le client existant --> si celui ci pas utilisateur
-       #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-       public function edit(int $id, Request $request, User $user, 
-       UserRepository $userRepository, ClientsRepository $clientsRepository, EntityManagerInterface $entityManager): Response
-       {
-           $form = $this->createForm(UserType::class, $user);
-           $form->handleRequest($request);
-   
-           
-           $user = $userRepository->find($id);
-           $actuel = $userRepository->find($id);
-   
-           if ($form->isSubmitted() && $form->isValid()) {
-
-                $client = $clientsRepository->findClient($id);
-
-               $user = $form ->getData(); // recup les info du form
-   
-               $entityManager->persist($user); // persist client en bdd
-   
-               $entityManager->flush();
-   
-               // dd($client);
-
-                # si il y a un client la modif renvoie à la page profil de client
-               if ($client != null ){  
-                return $this->redirectToRoute('app_clients_show', ['user_id'=> $id], Response::HTTP_SEE_OTHER);
-               }
-
-               # sinon après la modif renvoie à la page profil de client
-               return $this->redirectToRoute('app_user_show', ['id'=> $id], Response::HTTP_SEE_OTHER);
-           }
-   
-           return $this->render('user/edit.html.twig', [
-               'user' => $user,
-               'form' => $form,
-               'actuel' => $actuel,
-           ]);
-       }
+    //   Modifie user si pas d'info client
+    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    public function edit(
+        int $id,
+        Request $request,
+        User $user,
+        UserRepository $userRepository,
+        ClientsRepository $clientsRepository,
+        EntityManagerInterface $entityManager
+    ): Response {
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
 
 
+        $user = $userRepository->find($id);
+        $actuel = $userRepository->find($id);
 
+        if ($form->isSubmitted() && $form->isValid()) {
 
+            $client = $clientsRepository->findClient($id);
 
+            $user = $form->getData(); // recup les info du form
 
+            $entityManager->persist($user); // persist client en bdd
 
+            $entityManager->flush();
 
+            // dd($client);
 
+            # si il y a un client la modif renvoie à la page profil de client
+            if ($client != null) {
+                return $this->redirectToRoute('app_clients_show', ['user_id' => $id], Response::HTTP_SEE_OTHER);
+            }
 
+            # sinon après la modif renvoie à la page profil de client
+            return $this->redirectToRoute('app_user_show', ['id' => $id], Response::HTTP_SEE_OTHER);
+        }
 
+        return $this->render('user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form,
+            'actuel' => $actuel,
+        ]);
+    }
 
 
     // Permet de modifier la partie user de client
@@ -118,7 +112,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $client = $form ->getData(); // recup les info du form
+            $client = $form->getData(); // recup les info du form
 
             $entityManager->persist($client); // persist client en bdd
 
@@ -142,7 +136,7 @@ class UserController extends AbstractController
 
 
 
-    // permet de crée un client à partir d'un user tous en laissant au user d etre modifier
+    // permet de crée un client à partir d'un user 
     #[Route('/{user_id}/create', name: 'app_user_create_client', methods: ['GET', 'POST'])]
     public function createClient(int $user_id, Request $request, UserRepository $userRepository, Clients $client, EntityManagerInterface $entityManager): Response
     {
@@ -165,11 +159,12 @@ class UserController extends AbstractController
             // dd($client);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+            // return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_clients_show', ['user_id' => $user_id], Response::HTTP_SEE_OTHER);
         }
 
         // Renvoie sur la page qui crée un nouveau client 
-        return $this->render('clients/new.html.twig', [ 
+        return $this->render('clients/new.html.twig', [
             'user' => $user,
             'client' => $client,
             'form' => $formClient,
@@ -178,9 +173,9 @@ class UserController extends AbstractController
 
 
 
-    
-        // Voir pour que cela désactive juste le compte --> ajouter booleen a l entity 
-        //  Voir pour aussi faire en sorte qu'un puisse réactiver le compte 
+
+    // Voir pour que cela désactive juste le compte --> ajouter booleen a l entity 
+    //  Voir pour aussi faire en sorte qu'un puisse réactiver le compte 
 
 
 

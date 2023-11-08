@@ -20,22 +20,24 @@
             </tr>
         </thead>
         <tbody>
-        {% for adress in adresses %}
+        {% for adresse in adresses %}
             <tr>
-                <td>{{ adress.id }}</td>
-                <td>{{ adress.numAdrss }}</td>
-                <td>{{ adress.rueAdrss }}</td>
-                <td>{{ adress.complementAdrss }}</td>
-                <td>{{ adress.villeAdrss }}</td>
-                <td>{{ adress.codePostalAdrss }}</td>
-                <td>{{ adress.paysAdrss }}</td>
-                <td>{{ adress.idClientAdresses.nom }}  {{ adress.idClientAdresses.prenom }}</td>
+                <td>{{ adresse.id }}</td>
+                <td>{{ adresse.numAdrss }}</td>
+                <td>{{ adresse.rueAdrss }}</td>
+                <td>{{ adresse.complementAdrss }}</td>
+                <td>{{ adresse.villeAdrss }}</td>
+                <td>{{ adresse.codePostalAdrss }}</td>
+                <td>{{ adresse.paysAdrss }}</td>
+                <td>{{ adresse.idClientAdresses.nom }}  {{ adresse.idClientAdresses.prenom }}</td>
                 {# adress/accède à l'objet/ 
                     .idClientAdresses /accède à l'objet/ 
                     .prenom /accède à la colone demandé/ #}
                 <td>
                     {# <a href="{{ path('app_adresses_show', {'id': adress.id}) }}">show</a>
                     <a href="{{ path('app_adresses_edit', {'id': adress.id}) }}">edit</a> #}
+                                  <a class="btn p-0" href="{{ path('app_adresses_show', {'id' : adresse.id}) }}">Voir</a>
+              <a class="btn p-0" href="{{ path('app_adresses_edit', {'id' : adresse.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}

@@ -1,0 +1,23 @@
+A faire : 
+
+
+-> ajouter le bouton pour activer le carroussel sur l index des carrousel (max 1)
+
+-> affichage + modif de : 
+    -panier
+    - cmds
+
+    - adrss -->
+        Actuel : Manque liste des adresse du client (à dissocier de l'index (acces qu' au vendeurs)) -> cf liste formulaires
+        Manque mise en forme des pages 
+
+-> Une fois le pannier "valider" et payer lancer la créa du bon de cmd sous form PDF (cf cours sécu -> envoie mails)
+
+-> Mise en forme des entité (surtout pour la page admins)
+
+-> Voir pour bloquer les adresses à 3 max
+
+-> ajouter l'envoie d'un formulaire pour activer le compte (cf cours)
+
+-> ajouter API Paypal pour test
+
