@@ -6,12 +6,15 @@ use App\Entity\Adresses;
 use App\Form\AdressesType;
 use App\Repository\AdressesRepository;
 use App\Repository\ClientsRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
+use Symfony\Component\Validator\Validator\ValidatorInterface; // pour valider le max 3 adrss
 
 #[Route('/adresses')]
 class AdressesController extends AbstractController
@@ -26,27 +29,68 @@ class AdressesController extends AbstractController
         ]);
     }
 
+    #[Route('/{user_id}/{id_client}/liste', name: 'app_adresses_show_liste', methods: ['GET'])]
+    public function showListe(int $id_client, int $user_id, ClientsRepository $clientsRepository, AdressesRepository $adressesRepository): Response
+    {
+        $adresses = $adressesRepository->findAdresses($user_id);
+        $client = $clientsRepository->find($id_client);
+
+        // dd($client);
+        return $this->render('adresses/afficherListeAdresse.html.twig', [
+            'adresses' => $adresses,
+            'client' => $client,
+            // dd($client),
+        ]);
+    }
+
 
 
     // Route pour ajouter les adresse en bdd (voir pour bloquer à max 3 ou -)
     #[Route('/{user_id}/{id_client}/new', name: 'app_adresses_new', methods: ['GET', 'POST'])]
-    public function new(int $id_client, int $user_id, Request $request, EntityManagerInterface $entityManager, ClientsRepository $clientsRepository): Response
-    {
+    public function new(
+        int $id_client,
+        int $user_id,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        ClientsRepository $clientsRepository,
+        UserRepository $userRepository,
+        AdressesRepository $adressesRepository,
+        ValidatorInterface $validator
+    ): Response {
+
+        $msg = '';
         $adress = new Adresses();
-        
+
         $form = $this->createForm(AdressesType::class, $adress);
-        
-        // $form->add('validation_groups', ChoiceType::class, [
-        //     'choices' => [
-        //         'client' => 'client',
-        //     ],
-        // ]);
+
+        $listeAdresses = $adressesRepository->findAdresses($user_id);
+
         $form->handleRequest($request);
         $client = $clientsRepository->find($id_client);
+        $user = $userRepository->find($user_id);
+        // $errors = $validator->validate($adress);
 
-        // dd($client);
+        $limiteAdress = count($listeAdresses);
+
+        // dd($limiteAdress);
+
+        if ($limiteAdress >= 3 ) { // si le client à déja 3 adresses
+
+            $msg = 'Vous ne pouvez pas avoir plus de 3 adresses enregistrer. Veuillez en supprimez une ou  modifier celles existante.';
+            return $this->render('adresses/new.html.twig', [
+                'adress' => $adress,
+                'form' => $form,
+                'msg' => $msg,
+                'client' => $client,
+                'user' => $user,
+                'limite' => $limiteAdress,
+            ]);
+        }
+
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $msg = 'Bravo votre adresse à été mise à jour.';
 
             $adress->setIdClientAdresses($client);
             $client->addAdress($adress);
@@ -55,13 +99,16 @@ class AdressesController extends AbstractController
             $entityManager->persist($adress);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_clients_show', ['user_id' => $user_id ,'id_client' => $id_client] , Response::HTTP_SEE_OTHER); 
-             
+            return $this->redirectToRoute('app_clients_show', ['user_id' => $user_id, 'id_client' => $id_client], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('adresses/new.html.twig', [
             'adress' => $adress,
             'form' => $form,
+            'msg' => $msg,
+            'client' => $client,
+            'user' => $user,
+            'limite' => $limiteAdress,
         ]);
     }
 
@@ -77,10 +124,10 @@ class AdressesController extends AbstractController
     }
 
 
-    
 
-    #[Route('/{id}/edit', name: 'app_adresses_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Adresses $adress, EntityManagerInterface $entityManager): Response
+
+    #[Route('/{user_id}/{id_client}/{id}/edit', name: 'app_adresses_edit', methods: ['GET', 'POST'])]
+    public function edit(int $user_id, int $id_client, Request $request, Adresses $adress, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(AdressesType::class, $adress);
         $form->handleRequest($request);
@@ -88,7 +135,8 @@ class AdressesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_adresses_index', [], Response::HTTP_SEE_OTHER);
+            // return $this->redirectToRoute('app_adresses_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_clients_show', ['user_id' => $user_id, 'id_client' => $id_client], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('adresses/edit.html.twig', [
@@ -100,7 +148,7 @@ class AdressesController extends AbstractController
     #[Route('/{id}', name: 'app_adresses_delete', methods: ['POST'])]
     public function delete(Request $request, Adresses $adress, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$adress->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $adress->getId(), $request->request->get('_token'))) {
             $entityManager->remove($adress);
             $entityManager->flush();
         }

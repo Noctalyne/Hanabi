@@ -7,7 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-use Symfony\Component\Validator\Constraints\Count as Assert;
+// use Symfony\Component\Validator\Constraints\Count as Assert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ClientsRepository::class)]
 class Clients   /* extends User*/
@@ -41,6 +42,7 @@ class Clients   /* extends User*/
 
     #[ORM\OneToMany(mappedBy: 'idClientAdresses', targetEntity: Adresses::class)]
     #[ORM\JoinColumn(nullable: false, name: 'adresse_client')]
+    #[Assert\Count(max : 3)]
     private Collection $adresses;
 
     public function __construct()

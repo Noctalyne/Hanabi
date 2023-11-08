@@ -1,23 +1,34 @@
 A faire : 
 
-
--> ajouter le bouton pour activer le carroussel sur l index des carrousel (max 1)
+-> ajouter le bouton pour activer le carroussel sur l index des carrousel (max 1) 
+    --> cree une méthode qui se lance au click sur le btn 'activer' + ajouter un affichage pour que le vendeurs
+        vois le carrousel actif sur le site  
 
 -> affichage + modif de : 
     -panier
     - cmds
 
     - adrss -->
-        Actuel : Manque liste des adresse du client (à dissocier de l'index (acces qu' au vendeurs)) -> cf liste formulaires
-        Manque mise en forme des pages 
+        Actuel : Manque à dissocier de l'index (acces qu' au vendeurs) + ajouter mise en page
 
 -> Une fois le pannier "valider" et payer lancer la créa du bon de cmd sous form PDF (cf cours sécu -> envoie mails)
 
 -> Mise en forme des entité (surtout pour la page admins)
 
--> Voir pour bloquer les adresses à 3 max
+
 
 -> ajouter l'envoie d'un formulaire pour activer le compte (cf cours)
 
 -> ajouter API Paypal pour test
 
+
+
+
+/#\  Fait  
+
+# -  Voir pour bloquer les adresses à 3 max : 
+    -> fait en ajoutant une propriété dans entité Clients + controle dans le controleur pour afficher ou non le formulaire
+       affiche aussi un message d'erreur en "danger" (boot)
+
+# - affichage + modif de : 
+    - adrss -> Ajout page de liste + controlleur de la liste des adresse du client 

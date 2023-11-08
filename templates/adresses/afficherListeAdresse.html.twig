@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste de mes adresses {% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+    <div class="p-1 text-center">
+        <h1>Liste de mes adresses </h1>
+        <p>Vous trouverez ici la liste de vos adresses</p>
+    </div>
+    
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NumAdrss</th>
+                <th>RueAdrss</th>
+                <th>ComplementAdrss</th>
+                <th>VilleAdrss</th>
+                <th>CodePostalAdrss</th>
+                <th>PaysAdrss</th>
+                <th>client associé</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for adresse in adresses %}
+            <tr>
+                <td>{{ adresse.id }}</td>
+                <td>{{ adresse.num_adrss }}</td>
+                <td>{{ adresse.rue_adrss }}</td>
+                <td>{{ adresse.complement_adrss }}</td>
+                <td>{{ adresse.ville_adrss }}</td>
+                <td>{{ adresse.code_postal_adrss }}</td>
+                <td>{{ adresse.pays_adrss }}</td>
+                <td>{{ client.nom }}  {{ client.prenom }}</td>
+                <td>
+                    <a class="btn p-0" href="{{ path('app_adresses_show', {'id' : adresse.id, 'user_id' : app.user.id ,'id_client' : app.user.clients.id}) }}">Voir</a>
+                    <a class="btn p-0" href="{{ path('app_adresses_edit', {'id' : adresse.id, 'user_id' : app.user.id ,'id_client' : app.user.clients.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">Aucune adresses enregistrées</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if app.user.clients %}
+        <a href="{{ path('app_formulaire_demande_produit_new', {'id' : app.user.clients.id}) }}">Faire une nouvelle demande</a>
+    {% endif %}
+</div>    
+{% endblock %}
