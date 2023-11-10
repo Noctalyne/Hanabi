@@ -1,51 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Banniere index{% endblock %}
+{% block title %}Liste bannières{% endblock %}
 
 {% block body %}
-    <h1>Banniere index</h1>
+    <h1>Liste des bannières</h1>
 
-    <table class="table">
+    <div class='container'>
+
+    <table class="table table-responsive text-center">
         <thead>
-            <tr>
+            <tr >
                 {# <th>Id</th> #}
                 <th>Nom</th>
-                <th>Premiere image</th>
-                <th>Deuxieme image</th>
-                <th>Troisieme image</th>
+                <th>Image 1</th>
+                <th>Image 2</th>
+                <th>Image 3</th>
                 <th>Voir</th>
                 <th>Modifier</th>
+                <th>Statut</th>
             </tr>
         </thead>
 
         <tbody>
         {% for banniere in bannieres %}
+        
             <tr>
-                {# <td>{{ banniere.id }}</td>  peut etre enlever l id #}
                 <td>{{ banniere.nomBanniere }}</td>
                 {# Changer le style en css #}
-                <td><img src="{{ asset('images/banniere/' ~ banniere.premiereImage ) }}" alt="photo du produit :" ~ {{banniere.premiereImage}} style="height : 100px; width : 100%;"></td>
-                <td><img src="{{ asset('images/banniere/' ~ banniere.deuxiemeImage ) }}" alt="photo du produit :" ~ {{banniere.deuxiemeImage}} style="height : 100px; width : 400px;"></td>
-                <td><img src="{{ asset('images/banniere/' ~ banniere.troisiemeImage ) }}" alt="photo du produit :" ~ {{banniere.troisiemeImage}} style="height : 100px; width : 100%;"></td>
+                <td><img class="img-fluid img-thumbnail" src="{{ asset('images/banniere/' ~ banniere.premiereImage ) }}" alt="photo du produit :" ~ {{banniere.premiereImage}}></td>
+                <td><img class="img-fluid img-thumbnail" src="{{ asset('images/banniere/' ~ banniere.deuxiemeImage ) }}" alt="photo du produit :" ~ {{banniere.deuxiemeImage}}></td>
+                <td><img class="img-fluid img-thumbnail" src="{{ asset('images/banniere/' ~ banniere.troisiemeImage ) }}" alt="photo du produit :" ~ {{banniere.troisiemeImage}}></td>
                 <td>
                     <a href="{{ path('app_banniere_show', {'id': banniere.id}) }}">
                         <img src="{{ asset('images/icones/voir.png') }}" alt="icone voir" style="width : 40px;">
                     </a>
                 </td>
+
                 <td>
                     <a href="{{ path('app_banniere_edit', {'id': banniere.id}) }}">
                         <img src="{{ asset('images/icones/modifier.png') }}" alt="icone modifier" style="width : 40px;">
                     </a>
                 </td>
+
+                <td>
+
+                    {% if banniere.activated == 0 %}
+                        <span class="badge rounded-pill bg-danger">Inactif</span>
+                    {% else %}
+                        <span class="badge rounded-pill bg-success">Actif</span>
+                    {% endif %}
+
+                    {{ include('banniere/activated.html.twig') }}
+                
+                </td>
                 
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Aucun carousel n'as encore été crée. </td>
             </tr>
         {% endfor %}
+        
+
         </tbody>
     </table>
+    </div>
+    <a href="{{ path('app_banniere_new') }}">Créer un carousel</a>
 
-    <a href="{{ path('app_banniere_new') }}">Create new</a>
+
+
 {% endblock %}

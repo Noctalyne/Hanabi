@@ -20,7 +20,8 @@ class BanniereController extends AbstractController
     public function index(BanniereRepository $banniereRepository): Response
     {
         return $this->render('banniere/index.html.twig', [
-            'bannieres' => $banniereRepository->findAll(),
+            // 'bannieres' => $banniereRepository->findAll()
+            'bannieres' => $banniereRepository->trieBaniere() // renvoie un liste trier avec celui activer en premier
         ]);
     }
 
@@ -109,10 +110,14 @@ class BanniereController extends AbstractController
     #[Route('/{id}/edit', name: 'app_banniere_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Banniere $banniere, EntityManagerInterface $entityManager, BanniereRepository $banniereRepository, SluggerInterface $slugger): Response
     {
+        $msg = '';
+
         $form = $this->createForm(BanniereType::class, $banniere);
         $form->handleRequest($request);
 
         $banniere = $banniereRepository->find(id: $banniere->getId());
+        $actuelBanniere = $banniere;
+        $id = $banniere->getId();
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -131,6 +136,7 @@ class BanniereController extends AbstractController
                     // Gérer le cas en cas d’exception levée (droits insuffisants, stockage insuffisant, ...)
                 }
                 $banniere->setPremiereImage($newFilename); // On redéfinit l’image de notre objet pour permettre l’enregistrement du bon nom d’image en BDD
+                $msg = "Image modifiée";
             }
 
             $deuxiemeImage = $form->get('deuxiemeImage')->getData(); // On récupère les données qui composent l’image
@@ -147,6 +153,7 @@ class BanniereController extends AbstractController
                     // Gérer le cas en cas d’exception levée (droits insuffisants, stockage insuffisant, ...)
                 }
                 $banniere->setDeuxiemeImage($newFilename); // On redéfinit l’image de notre objet pour permettre l’enregistrement du bon nom d’image en BDD
+                $msg = "Image modifiée";
             }
 
             $troisiemeImage = $form->get('troisiemeImage')->getData(); // On récupère les données qui composent l’image
@@ -163,61 +170,57 @@ class BanniereController extends AbstractController
                     // Gérer le cas en cas d’exception levée (droits insuffisants, stockage insuffisant, ...)
                 }
                 $banniere->setTroisiemeImage($newFilename); // On redéfinit l’image de notre objet pour permettre l’enregistrement du bon nom d’image en BDD
+                $msg = "Image modifiée";
             }
 
             $entityManager->persist($banniere);
             $entityManager->flush();
+            
+            $msg2 ='Super ! Bannière enregistrée.';
 
-            return $this->redirectToRoute('app_banniere_index', [], Response::HTTP_SEE_OTHER);
+            return $this->render('banniere/edit.html.twig', [
+                'banniere' => $banniere,
+                'form' => $form,
+                'actuelBanniere' => $actuelBanniere,
+                'msg' => $msg,
+                'msg2' => $msg2,
+            ]);
+
         }
+        
 
         return $this->render('banniere/edit.html.twig', [
             'banniere' => $banniere,
             'form' => $form,
+            'actuelBanniere' => $actuelBanniere,
+            'msg' => $msg,
+            // 'msg2' => $msg2,
         ]);
     }
 
 
-    // #[Route('/{id}/edit', name: 'app_banniere_edit_premiere_image', methods: ['GET', 'POST'])]
-    // public function editPremiereImage(Request $request, Banniere $banniere, EntityManagerInterface $entityManager, BanniereRepository $banniereRepository, SluggerInterface $slugger): Response
-    // {
-    //     $form = $this->createForm(BanniereType::class, $banniere);
-    //     $form->handleRequest($request);
+    
+    #[Route('/{id}', name: 'app_banniere_activated', methods: ['POST'])]
+    public function activate(Request $request, Banniere $banniere, EntityManagerInterface $entityManager, BanniereRepository $banniereRepository): Response
+    {
+        $listeBanniere = $banniereRepository->findAll();
 
-    //     $banniere = $banniereRepository->find(id: $banniere->getId());
+        if ($this->isCsrfTokenValid('activated'.$banniere->getId(), $request->request->get('_token'))) {
 
-    //     if ($form->isSubmitted() && $form->isValid()) {
+            // ici ça modifie tous les autres carousel -> évite les pbs de doublons
+            foreach ($listeBanniere as $ban ) {
+                $ban->setActivated(false);
+                $entityManager->persist( $ban ); //persist tous les carousel après maj
+            } 
 
-    //         $premiereImage = $form->get('premiereImage')->getData(); // On récupère les données qui composent l’image
+            $banniere->setActivated(true); // modifie le carrousel selectionner pour n'activer que lui
+            $entityManager->persist($banniere); //persist le carousel après maj
 
-    //         if ($premiereImage) { // Si une image a bien été insérée 
-    //             $originalFilename = pathinfo($premiereImage->getClientOriginalName(), PATHINFO_FILENAME); // On prend le nom de base du fichier
-    //             $safeFilename = $slugger->slug($originalFilename);// this is needed to safely include the file name as part of the URL
-    //             $newFilename = $safeFilename.'-'.uniqid().'.'.$premiereImage->guessExtension(); // Tente de déplacer le fichier vers le répertoire définit plus tôt
-    //             try {
-    //                 $premiereImage->move(
-    //                 $this->getParameter('banniere_directory'),
-    //                 $newFilename
-    //                 );
-    //             } catch (FileException $e) {
-    //                 // Gérer le cas en cas d’exception levée (droits insuffisants, stockage insuffisant, ...)
-    //             }
-    //             $banniere->setPremiereImage($newFilename); // On redéfinit l’image de notre objet pour permettre l’enregistrement du bon nom d’image en BDD
-    //         }
+            $entityManager->flush(); // MAJ de la BDD
+        }
 
-    //         $entityManager->persist($banniere);
-    //         $entityManager->flush();
-
-    //         return $this->redirectToRoute('app_banniere_index', [], Response::HTTP_SEE_OTHER);
-    //     }
-
-    //     return $this->render('banniere/editPremiereImage.html.twig', [
-    //         'banniere' => $banniere,
-    //         'form' => $form,
-    //     ]);
-    // }
-
-
+        return $this->redirectToRoute('app_banniere_index', [], Response::HTTP_SEE_OTHER);
+    }
 
 
 

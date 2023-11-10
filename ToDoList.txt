@@ -1,12 +1,11 @@
 A faire : 
 
--> ajouter le bouton pour activer le carroussel sur l index des carrousel (max 1) 
-    --> cree une méthode qui se lance au click sur le btn 'activer' + ajouter un affichage pour que le vendeurs
-        vois le carrousel actif sur le site  
+ 
 
 -> affichage + modif de : 
     -panier
     - cmds
+    - banniere 
 
     - adrss -->
         Actuel : Manque à dissocier de l'index (acces qu' au vendeurs) + ajouter mise en page
@@ -21,6 +20,7 @@ A faire :
 
 -> ajouter API Paypal pour test
 
+-> Ajouter + Modifier les "alert" pour les evenement 
 
 
 
@@ -32,3 +32,10 @@ A faire :
 
 # - affichage + modif de : 
     - adrss -> Ajout page de liste + controlleur de la liste des adresse du client 
+
+
+# - ajouter le bouton pour activer le carroussel sur l index des carrousel (max 1) :
+    - cree une méthode qui se lance au click sur le btn 'activer' + ajouter un affichage pour que le vendeurs
+        vois le carrousel actif sur le site 
+        --> Bouton "activer" ajouter si le vendeur active un carousel celui ci désactive tous les autres -> évite les conflit pour l'affichage
+        --> Ajouter tri pour voir carousel actif -> méthode ajouter pour trier par "activated" -> résultat le carousel activer se met en haut de liste
