@@ -82,8 +82,9 @@ class ClientsRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();// returns un tableau de tableau SANS objet
     }
 
-    // force la maj des éléments sans recharger les infos client --> evite les doublons
-    public function forceUpdate(Clients $client, int $user_id){
+    // exécute la maj des éléments sans recharger les infos client 
+    //     --> evite les doublons/erreur de foreignKey
+    public function UpdateInfos(Clients $client, int $user_id){
         // Obtient la connexion à la base de données
         $connection = $this->getEntityManager()->getConnection();
 

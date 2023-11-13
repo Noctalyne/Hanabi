@@ -20,7 +20,6 @@ class BanniereController extends AbstractController
     public function index(BanniereRepository $banniereRepository): Response
     {
         return $this->render('banniere/index.html.twig', [
-            // 'bannieres' => $banniereRepository->findAll()
             'bannieres' => $banniereRepository->trieBaniere() // renvoie un liste trier avec celui activer en premier
         ]);
     }
@@ -199,7 +198,7 @@ class BanniereController extends AbstractController
     }
 
 
-    
+    // "bouton" qui active le carousel pour qu'il s'affiche
     #[Route('/{id}', name: 'app_banniere_activated', methods: ['POST'])]
     public function activate(Request $request, Banniere $banniere, EntityManagerInterface $entityManager, BanniereRepository $banniereRepository): Response
     {

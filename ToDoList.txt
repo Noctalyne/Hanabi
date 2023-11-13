@@ -5,7 +5,8 @@ A faire :
 -> affichage + modif de : 
     -panier
     - cmds
-    - banniere 
+    - banniere --> modifier pour la suppression 
+                -->  ajouter contrainte taille img -> 740 x 180 px -> cf entité client
 
     - adrss -->
         Actuel : Manque à dissocier de l'index (acces qu' au vendeurs) + ajouter mise en page

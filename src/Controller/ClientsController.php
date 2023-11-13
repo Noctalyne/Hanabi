@@ -57,7 +57,6 @@ class ClientsController extends AbstractController
         $formClient->handleRequest($request);
 
         $user = $userRepository->find($user_id);
-
         $actuel = $clientsRepository->findClient($user->getId());
 
         if ($formClient->isSubmitted() && $formClient->isValid()) {
@@ -65,7 +64,7 @@ class ClientsController extends AbstractController
             $client->setUser($user);
 
             // force la maj des informations sans forcément modifier les autres -> évite la contrainte de foreign key
-            $clientsRepository->forceUpdate($client, $user_id); 
+            $clientsRepository->UpdateInfos($client, $user_id); 
 
             $entityManager->flush(); // Envoie en BDD
 
@@ -97,7 +96,7 @@ class ClientsController extends AbstractController
             $newClient->setNom($formClient->get('nom')->getData());
             $newClient->setPrenom($formClient->get('prenom')->getData());
             $newClient->setTelephone($formClient->get('telephone')->getData());
-            // $clientsRepository->forceUpdate($client, $user_id); // force la maj des informations sans forcément modifier les autres -> évite la contrainte de foreign key
+            // $clientsRepository->UpdateInfos($client, $user_id); // force la maj des informations sans forcément modifier les autres -> évite la contrainte de foreign key
 
             $entityManager->persist($newClient);
 
