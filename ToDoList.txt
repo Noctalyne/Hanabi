@@ -1,5 +1,6 @@
 A faire : 
 
+-> REVOIR toutes les pages --> verifier fautes + syntaxe + données afficher
  
 
 -> affichage + modif de : 

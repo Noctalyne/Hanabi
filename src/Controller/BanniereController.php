@@ -20,7 +20,8 @@ class BanniereController extends AbstractController
     public function index(BanniereRepository $banniereRepository): Response
     {
         return $this->render('banniere/index.html.twig', [
-            'bannieres' => $banniereRepository->trieBaniere() // renvoie un liste trier avec celui activer en premier
+            'bannieres' => $banniereRepository->trieBaniere() 
+            // renvoie un liste trier avec celui activer en premier
         ]);
     }
 
