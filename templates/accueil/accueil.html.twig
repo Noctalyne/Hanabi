@@ -48,7 +48,7 @@
           <h5 class="card-title text-center">{{ produit.nomProduit }}</h5>
           <div class="card-text d-flex justify-content-around">
             <p >{{ produit.prixProduit }}</p>
-            <a href="#!" class="btn btn-primary">Voir</a>
+            <a href="{{ path('app_produits_show', {'client_id' : app.user.clients.id,'id': produit.id}) }}" class="btn btn-primary">Voir</a> {#  #}
           </div>
         </div>
       </div>

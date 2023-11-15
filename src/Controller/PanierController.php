@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Panier;
+use App\Entity\Produits;
 use App\Form\PanierType;
+use App\Repository\ClientsRepository;
 use App\Repository\PanierRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,13 +44,43 @@ class PanierController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_panier_show', methods: ['GET'])]
-    public function show(Panier $panier): Response
+    #[Route('/{user_id}', name: 'app_panier_show', methods: ['GET'])]  ///{id}
+    public function show(int $user_id ,Panier $panier, PanierRepository $panierRepository, Produits $produits): Response
     {
+        $quantite = 0 ;
+        // 
+        $panier = $panierRepository->findOneBy(['idClient' => $user_id])  ;
+        $liste = $panier->getListeProduits();
+
+
+        $listeArray = $liste->toArray();
+
+        // $idProduit = 0;
+
+        // foreach ($liste as $prod) {
+            
+            $nbApparitions = count(array_filter($listeArray, function ($produit) {
+                foreach($produit as $prod ) {
+                   $idProduit = $produit->getId();
+                return $produit->getId() == $idProduit; 
+                }
+                
+            }));
+
+            // $msg = " 'Le'. $prod . 'est present' . $nbApparitions ";
+
+            // return $msg  ;
+
+        // } 
+
+
         return $this->render('panier/show.html.twig', [
             'panier' => $panier,
+            'quantite' => $quantite,
+            // dd($nbApparitions)
         ]);
     }
+
 
     #[Route('/{id}/edit', name: 'app_panier_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Panier $panier, EntityManagerInterface $entityManager): Response
