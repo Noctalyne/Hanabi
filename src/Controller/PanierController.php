@@ -24,60 +24,48 @@ class PanierController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_panier_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $panier = new Panier();
-        $form = $this->createForm(PanierType::class, $panier);
-        $form->handleRequest($request);
+    // #[Route('/new', name: 'app_panier_new', methods: ['GET', 'POST'])]
+    // public function new(Request $request, EntityManagerInterface $entityManager): Response
+    // {
+    //     $panier = new Panier();
+    //     $form = $this->createForm(PanierType::class, $panier);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($panier);
-            $entityManager->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $entityManager->persist($panier);
+    //         $entityManager->flush();
 
-            return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
-        }
+    //         return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+    //     }
 
-        return $this->render('panier/new.html.twig', [
-            'panier' => $panier,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->render('panier/new.html.twig', [
+    //         'panier' => $panier,
+    //         'form' => $form,
+    //     ]);
+    // }
 
     #[Route('/{user_id}', name: 'app_panier_show', methods: ['GET'])]  ///{id}
     public function show(int $user_id ,Panier $panier, PanierRepository $panierRepository, Produits $produits): Response
     {
         $quantite = 0 ;
-        // 
         $panier = $panierRepository->findOneBy(['idClient' => $user_id])  ;
-        $liste = $panier->getListeProduits();
 
-
-        $listeArray = $liste->toArray();
-
-        // $idProduit = 0;
-
-        // foreach ($liste as $prod) {
+        if ($panier != null) {
+            $liste = $panier->getListeProduits();
             
-            $nbApparitions = count(array_filter($listeArray, function ($produit) {
-                foreach($produit as $prod ) {
-                   $idProduit = $produit->getId();
-                return $produit->getId() == $idProduit; 
-                }
-                
-            }));
+            $listeArray = $liste->toArray();     
+            
+            $nbApparitions = count($listeArray);
 
-            // $msg = " 'Le'. $prod . 'est present' . $nbApparitions ";
+            dd($listeArray);        
+        };
 
-            // return $msg  ;
-
-        // } 
+        
 
 
         return $this->render('panier/show.html.twig', [
             'panier' => $panier,
             'quantite' => $quantite,
-            // dd($nbApparitions)
         ]);
     }
 

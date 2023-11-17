@@ -125,7 +125,6 @@ class ProduitsController extends AbstractController
         $panier = $panierRepository->findOneBy(['idClient' => $client_id]);
         $client = $clientsRepository->find($client_id);
         
-        // 
         $quantite = 0 ;
         $id = $produits->getId();
 
@@ -133,7 +132,7 @@ class ProduitsController extends AbstractController
 
             if ($panier === null ) {
                 $panier = new Panier();
-                $montant = $panier->getPrixTotal();
+                // $montant = $panier->getPrixTotal();
 
                 $panier->setIdClient($client);
                 $panier->addListeProduit($produits);
@@ -141,7 +140,6 @@ class ProduitsController extends AbstractController
                 $quantite = + 1;
                 $entityManager->persist($panier);
                 $entityManager->flush();
-                // dd($panier);
             }
             // elseif (  ) {
             //     $quantite = + 1;

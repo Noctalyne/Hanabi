@@ -3,30 +3,40 @@
 {% block title %}Panier{% endblock %}
 
 {% block body %}
-    <h1>Panier</h1>
+    <div class="text-center">
+        <h1 class="mt-3 mb-3" >Panier</h1>
+    </div>
+    <div class="container mt-5 mb-5 p-3 border rounded shadow-sm">
 
-    <div class="container p-3 border rounded shadow-sm">
+        {% if app.user.clients.panier != null %}
 
-        {% for produit in app.user.clients.panier.listeProduits  %}
+            {% for produit in app.user.clients.panier.listeProduits  %}
 
-        <div class="d-flex flex-row m-3 p-1 justify-content-around shadow-sm">
-                <p>{{ produit.nomProduit }}</p>
-                <img src="{{ asset('images/produits/' ~ produit.imgProduit) }}" alt="photo du produit :" ~ {{produit.nomProduit }} style="height:150px; "> {# style="height:100%; width:200px;" #}
-                <p class="text-break" style="width:200px;">{{ produit.descriptionProduit }}</p>
-                <p>{{ produit.prixProduit }} $</p>
-        </div>
+                <div class="d-flex flex-row m-3 p-1 justify-content-around shadow-sm">
+                        <p>{{ produit.nomProduit }}</p>
+                        <img src="{{ asset('images/produits/' ~ produit.imgProduit) }}" alt="photo du produit :" ~ {{produit.nomProduit }} style="height:150px; "> {# style="height:100%; width:200px;" #}
+                        <p class="text-break" style="width:200px;">{{ produit.descriptionProduit }}</p>
+                        <p>{{ produit.prixProduit }} $</p>
+                </div>
 
-        {% endfor %}
+            {% endfor %}
 
-        <div class="d-flex flex-row justify-content-around">
+            <div class="d-flex flex-row justify-content-around">
 
-            <div>PrixTotal</div>
-            <div>{{ panier.prixTotal }}</div>
-        
-        </div>
+                <div>PrixTotal</div>
+                <div>{{ panier.prixTotal }}</div>
+            
+            </div>
 
-        <div>{{ quantite }}</div>
+            <div>{{ quantite }}</div>
 
+        {% else  %}
+
+            <div class="text-center">
+                <p> Votre panier est vide. </p>
+            </div>
+
+        {% endif %}
 
     </div>
 
