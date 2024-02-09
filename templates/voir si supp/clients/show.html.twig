@@ -1,0 +1,144 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+
+<div class="container w-75 d-flex flex-column pt-3 pb-3">
+
+  <h3>Mes information personnels (Clients)</h3>
+
+  Bloc qui contient les informations correspondante de l'entité "User"
+  <div class="container w-75 mt-4 mb-3 pt-3 pb-3 border rounded  shadow-sm">
+    <div class="d-flex flex-row justify-content-between">
+      <h4> Mes information de connexion : </h4>
+      <button class="btn btn-sm btn-outline-dark p-1" >
+        <a class="btn p-0" href="{{ path('app_user_edit', {'id': app.user.id }) }}">Modifier</a>
+      </button>
+    </div>
+
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>Email : </th>
+          <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+          <th>Username</th>
+          <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+          <th>Password</th>
+          <td>{{ user.password }}</td>
+          <td>**********</td>
+
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>
+
+  Bloc qui contient les informations correspondante de l'entité "Clients"
+  <div class="container w-75 mt-4 mb-4 pt-3 pb-3 border rounded  shadow-sm">
+
+    <div class="d-flex flex-row justify-content-between">
+      <h4> Mes information personnels : </h4>
+      <button class="btn btn-outline-dark p-1">
+        <a class="btn p-0" href="{{ path('app_clients_edit', {'user_id': app.user.id }) }}">Modifier</a>
+      </button>
+    </div>
+
+    <table class="table">
+      <tbody>    
+          <tr>
+              <th>Nom</th>
+              <td>{{ client.nom }}</td>
+          </tr>
+          <tr>
+              <th>Prenom</th>
+              <td>{{ client.prenom }}</td>
+          </tr>
+          <tr>
+              <th>Telephone</th>
+              <td>{{ client.telephone }}</td>
+          </tr>
+      </tbody>
+    </table>
+    
+  </div>
+
+  Bloc qui contient les adresses du client sous forme de card
+  <div class="container w-75 mt-4 mb-4 pt-3 pb-3 border rounded  shadow-sm">
+
+    <div class="d-flex flex-row justify-content-between">
+      <h4> Mes adresses : </h4>
+
+      {% if app.user.clients.adresses != null %}
+        <button class="btn btn-outline-dark p-1">
+          <a href="{{ path('app_adresses_show_liste', {'user_id' : app.user.id, 'id_client' : app.user.clients.id  }) }}">Liste</a>
+        </button>
+      {% else %}
+        <button class="btn btn-outline-dark p-1">
+          <a class="btn p-0" href="{{ path('app_adresses_new', {'user_id' : app.user.id}) }}">Ajouter</a> {# AJOUTER ELEMENT ADRESSES #}
+        </button>
+      {% endif %}
+    </div>
+
+
+    <div class="d-flex flex-row justify-content-between p-3">
+
+      <div class="container d-flex flex-row justify-content-between">
+
+        {% for adresse in adresses %}
+          <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header">Adresse {{ adresse.id }}</div>
+            <div class="card-body">
+              <h4 class="card-title">Primary card title</h4>
+              <p class="card-text">       
+                  {{ adresse.num_adrss }} {{ adresse.rue_adrss }} <br>
+                  {{ adresse.complement_adrss }}<br>
+                  {{ adresse.code_postal_adrss }} {{ adresse.ville_adrss }}<br>
+                  {{ adresse.pays_adrss }}
+                </p>
+            </div>
+            <div class="card-footer">
+              <a class="btn p-0" href="{{ path('app_adresses_show', {'id' : adresse.id, 'user_id' : app.user.id ,'id_client' : app.user.clients.id}) }}">Voir</a>
+              <a class="btn p-0" href="{{ path('app_adresses_edit', {'id' : adresse.id, 'user_id' : app.user.id ,'id_client' : app.user.clients.id}) }}">Modifier</a>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+      {% if msg != "" %}
+        <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>{{ msg }}</strong>
+        </div>
+      {% endif %}
+    </div>
+            <button>
+          <a class="btn p-0" href="{{ path('app_adresses_new', {'user_id' : app.user.id ,'id_client' : app.user.clients.id }) }}">Ajouter</a>
+        </button>
+
+  </div>
+
+
+  Block qui contient les boutons de gestions
+  <div class="container w-75 mt-4 mb-4 pt-3 pb-3 ">
+
+    <div class="d-flex flex-row justify-content-around">
+      MODIFIER VERS LIENS DE SUPPRESSION + ajout méthode pour activer/desact compte 
+      <button class="btn btn-sm btn-outline-dark p-1" >
+        <a class="btn p-0" href="{{ path('app_accueil') }}">Supprimer</a> 
+      </button>  
+
+      <button class="btn btn-sm btn-outline-dark p-1" >
+        <a class="btn p-0" href="{{ path('app_accueil') }}">Retour</a>
+      </button>  
+    </div>
+
+  </div>
+
+</div>
+  
+{% endblock %} #}

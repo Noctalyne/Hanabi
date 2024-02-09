@@ -1,9 +1,1 @@
 
-.mozaic_produits {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    /* Gère les espacement du "conteneur des cards" */
-    margin: 5% 10% 5% 10%; /* haut - droit - bas - gauche */
-}

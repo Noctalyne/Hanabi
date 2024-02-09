@@ -3,82 +3,77 @@
 {% block title %}FormulaireDemandeProduit index{% endblock %}
 
 {% block body %}
-<div class=" container pt-5 pb-5">
-    <h1>Liste des formulaires</h1>
+    {# <div class=" container pt-5 pb-5"> #}
+    <div class=" container bloc">
 
-<div class="">
-    <table class="table table-responsive">
-        <thead>
-            <tr>
-                <th>N° de demande</th>
-                <th>Type de produit</th>
-                <th>Description envoyer</th>
-                <th>Date d'envoie</th>
-                <th>Statut </th>
-                <th>Action / </th>
-                <th>Afficher</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for formulaire_demande_produit in formulaire_demande_produits %}
-            <tr class="">
-                <td>{{ formulaire_demande_produit.id }}</td>
-                {# <td>{{ client.nom }}</td> #}
+        <h1>Liste des formulaires</h1>
 
+        <div class="">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>N° de demande</th>
+                        <th>Type de produit</th>
+                        <th>Description envoyer</th>
+                        <th>Date d'envoie</th>
+                        <th>Statut </th>
+                        <th>Action / </th>
+                        <th>Afficher</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for formulaire_demande_produit in formulaire_demande_produits %}
+                        <tr>
+                            <td>{{ formulaire_demande_produit.id }}</td>
 
-                <td>{{ formulaire_demande_produit.typeProduit }}</td>
-                {# <td>{{ formulaire_demande_produit.descriptionProduit }}</td> #}
-                <td class="text-break">
-                        {{ formulaire_demande_produit.descriptionProduit }}
-                </td>
+                            <td>{{ formulaire_demande_produit.typeProduit }}</td>
 
-                <td>{{ formulaire_demande_produit.dateEnvoieForm ? formulaire_demande_produit.dateEnvoieForm|date('d M Y à H:i') : '' }}</td>
+                            <td class="text-break">
+                            {{ formulaire_demande_produit.descriptionProduit }}
+                            </td>
 
-                {# Renvoie à la page pour accepeter la demande si celle ci est "en attente" #}
-                {% if  formulaire_demande_produit.reponseDemande is same as('attente')  %}
-                    <td><p>Demande en attente </p></td>                    
-                    <td>
-                        <a class="btn btn-outline-secondary" href="{{ path('app_formulaire_demande_produit_traiter', {'id': formulaire_demande_produit.id}) }}">Répondre</a>
-                    </td>                    
-                {% else %}
-                    <td>
-                        {{ formulaire_demande_produit.reponseDemande }}
-                        le {{ formulaire_demande_produit.dateReponseForm ? formulaire_demande_produit.dateReponseForm|date('d M Y à H:i') : ''}}
-                    </td>
+                            <td>{{ formulaire_demande_produit.dateEnvoieForm ? formulaire_demande_produit.dateEnvoieForm|date('d M Y à H:i') : '' }}</td>
 
-                    <td class="">
-                        <a href="{{ path('app_formulaire_demande_produit_traiter', {'id': formulaire_demande_produit.id}) }}">
-                            <img src="{{ asset('images/icones/user_black_line.png') }}" alt="profil du client" class="m-1" width="40px"height="40px">
-                        </a>
-                    </td>
-                {% endif %}
+                            {# Renvoie à la page pour accepeter la demande si celle ci est "en attente" #}
+                            {% if  formulaire_demande_produit.reponseDemande is same as('attente')  %}
+                                <td>
+                                    <p>Demande en attente </p>
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-secondary" href="{{ path('app_formulaire_demande_produit_traiter', {'id': formulaire_demande_produit.id}) }}">Répondre</a>
+                                </td>
+                            {% else %}
+                                <td>
+                                    {{ formulaire_demande_produit.reponseDemande }}
+                                    le {{ formulaire_demande_produit.dateReponseForm ? formulaire_demande_produit.dateReponseForm|date('d M Y à H:i') : ''}}
+                                </td>
 
-                <td>
-                    <a class="btn" href="{{ path('app_formulaire_demande_produit_show', {'id': formulaire_demande_produit.id}) }}">
-                        <img src="{{ asset('images/icones/voir.png') }}" alt="icone voir" style="width : 40px;">
-                    </a>
-                </td>
-            </tr>
+                                <td class="">
+                                    <a href="{{ path('app_formulaire_demande_produit_traiter', {'id': formulaire_demande_produit.id}) }}">
+                                        <img src="{{ asset('images/icones/user_black_line.png') }}" alt="profil du client" class="m-1" width="40px"height="40px">
+                                    </a>
+                                </td>
+                            {% endif %}
 
+                            <td>
+                                <a class="btn" href="{{ path('app_formulaire_demande_produit_show', {'id': formulaire_demande_produit.id}) }}">
+                                    <img src="{{ asset('images/icones/voir.png') }}" alt="icone voir" style="width : 40px;">
+                                </a>
+                            </td>
+                        </tr>
+
+                    {% else %}
+
+                        <tr>
+                            <td colspan="6">Aucun formulaires trouvés</td>
+                        </tr>
                         
-                {# <td>
-                    <a href="{{ path('app_banniere_edit', {'id': banniere.id}) }}">
-                        <img src="{{ asset('images/icones/modifier.png') }}" alt="icone modifier" style="width : 40px;">
-                    </a>
-                </td> #}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
+    </div>
 
-
-            
-        {% else %}
-            <tr>
-                <td colspan="6">Aucun formulaires trouvés</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
-
-</div>
-    {# <a href="{{ path('app_formulaire_demande_produit_new', {'id' : app.user.clients.id}) }}">Create new</a> #}
+{# <a href="{{ path('app_formulaire_demande_produit_new', {'id' : app.user.clients.id}) }}">Create new</a> #}
 {% endblock %}

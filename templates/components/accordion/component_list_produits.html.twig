@@ -1,0 +1,55 @@
+<div class="accordion-item">
+  <h2 class="accordion-header" id="headingOne">
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+      Liste des produits
+    </button>
+  </h2>
+
+  <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionAdmin">
+    <div class="accordion-body">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nom du produit</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Prix</th>
+            <th>Stock</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for produit in produits %}
+            <tr>
+              <td>{{ produit.nomProduit }}</td>
+              <td>{{ produit.descriptionProduit }}</td>
+              <td>{{ produit.imgProduit }}</td>
+              <td>{{ produit.prixProduit }}</td>
+              <td>{{ produit.quantStock }}</td>
+              <td>
+                <a href="{{ path('app_produits_show', {'id': produit.id}) }}">Voir</a>
+                <a href="{{ path('app_produits_edit', {'id': produit.id}) }}">Modifier</a>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="7">Aucun produits trouver</td>
+            </tr>
+          {% endfor %}
+
+        </tbody>
+
+      </table>
+
+      <div class="d-flex justify-content-center">
+        <button>
+          <a href="{{ path('app_produits_index') }}">Accéder à la liste</a>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+  
+</div>

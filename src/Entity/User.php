@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -15,7 +17,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column (name:'user_id')]
+    #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
@@ -33,14 +35,45 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(length: 30, nullable: true)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 30, nullable: true)]
+    private ?string $prenom = null;
+
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?string $telephone = null;
+
+    #[ORM\Column]
+    private ?bool $account_activate = null;
+
+    #[ORM\Column]
+    private ?bool $client_activate = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: FormulaireDemandeProduit::class)]
+    private Collection $liste_formulaires;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Adresses::class)]
+    private Collection $list_adresses;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Commandes::class)]
+    private Collection $list_commandes;
+
+    public function __construct()
+    {
+        $this->liste_formulaires = new ArrayCollection();
+        $this->list_adresses = new ArrayCollection();
+        $this->list_commandes = new ArrayCollection();
+    }
 
 
-    #[ORM\OneToOne(targetEntity : "Clients", mappedBy: 'user', cascade: ['persist', 'remove'])]
+
+    // #[ORM\OneToOne(targetEntity : "Clients", mappedBy: 'user', cascade: ['persist', 'remove'])]
     
-    protected ?Clients $clients = null;
+    // protected ?Clients $clients = null;
 
-    #[ORM\OneToOne(targetEntity : "Vendeurs", mappedBy: 'userVendeur', cascade: ['persist', 'remove'])]
-    private ?Vendeurs $vendeurs = null;
+    // #[ORM\OneToOne(targetEntity : "Vendeurs", mappedBy: 'userVendeur', cascade: ['persist', 'remove'])]
+    // private ?Vendeurs $vendeurs = null;
 
     public function getId(): ?int
     {
@@ -124,37 +157,188 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getClients(): ?Clients
+    // public function getClients(): ?Clients
+    // {
+    //     return $this->clients;
+    // }
+
+    // public function setClients(Clients $clients): static
+    // {
+    //     // set the owning side of the relation if necessary
+    //     if ($clients->getUser() !== $this) {
+    //         $clients->setUser($this);
+    //     }
+
+    //     $this->clients = $clients;
+
+    //     return $this;
+    // }
+
+    // public function getVendeurs(): ?Vendeurs
+    // {
+    //     return $this->vendeurs;
+    // }
+
+    // public function setVendeurs(Vendeurs $vendeurs): static
+    // {
+    //     // set the owning side of the relation if necessary
+    //     if ($vendeurs->getUserVendeur() !== $this) {
+    //         $vendeurs->setUserVendeur($this);
+    //     }
+
+    //     $this->vendeurs = $vendeurs;
+
+    //     return $this;
+    // }
+
+    public function getNom(): ?string
     {
-        return $this->clients;
+        return $this->nom;
     }
 
-    public function setClients(Clients $clients): static
+    public function setNom(?string $nom): static
     {
-        // set the owning side of the relation if necessary
-        if ($clients->getUser() !== $this) {
-            $clients->setUser($this);
-        }
-
-        $this->clients = $clients;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getVendeurs(): ?Vendeurs
+    public function getPrenom(): ?string
     {
-        return $this->vendeurs;
+        return $this->prenom;
     }
 
-    public function setVendeurs(Vendeurs $vendeurs): static
+    public function setPrenom(?string $prenom): static
     {
-        // set the owning side of the relation if necessary
-        if ($vendeurs->getUserVendeur() !== $this) {
-            $vendeurs->setUserVendeur($this);
-        }
-
-        $this->vendeurs = $vendeurs;
+        $this->prenom = $prenom;
 
         return $this;
     }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): static
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function isAccountActivate(): ?bool
+    {
+        return $this->account_activate;
+    }
+
+    public function setAccountActivate(bool $account_activate): static
+    {
+        $this->account_activate = $account_activate;
+
+        return $this;
+    }
+
+    public function isClientActivate(): ?bool
+    {
+        return $this->client_activate;
+    }
+
+    public function setClientActivate(bool $client_activate): static
+    {
+        $this->client_activate = $client_activate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FormulaireDemandeProduit>
+     */
+    public function getListeFormulaires(): Collection
+    {
+        return $this->liste_formulaires;
+    }
+
+    public function addListeFormulaire(FormulaireDemandeProduit $listeFormulaire): static
+    {
+        if (!$this->liste_formulaires->contains($listeFormulaire)) {
+            $this->liste_formulaires->add($listeFormulaire);
+            $listeFormulaire->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeListeFormulaire(FormulaireDemandeProduit $listeFormulaire): static
+    {
+        if ($this->liste_formulaires->removeElement($listeFormulaire)) {
+            // set the owning side to null (unless already changed)
+            if ($listeFormulaire->getUser() === $this) {
+                $listeFormulaire->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Adresses>
+     */
+    public function getListAdresses(): Collection
+    {
+        return $this->list_adresses;
+    }
+
+    public function addListAdress(Adresses $listAdress): static
+    {
+        if (!$this->list_adresses->contains($listAdress)) {
+            $this->list_adresses->add($listAdress);
+            $listAdress->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeListAdress(Adresses $listAdress): static
+    {
+        if ($this->list_adresses->removeElement($listAdress)) {
+            // set the owning side to null (unless already changed)
+            if ($listAdress->getUser() === $this) {
+                $listAdress->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commandes>
+     */
+    public function getListCommandes(): Collection
+    {
+        return $this->list_commandes;
+    }
+
+    public function addListCommande(Commandes $listCommande): static
+    {
+        if (!$this->list_commandes->contains($listCommande)) {
+            $this->list_commandes->add($listCommande);
+            $listCommande->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeListCommande(Commandes $listCommande): static
+    {
+        if ($this->list_commandes->removeElement($listCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($listCommande->getUser() === $this) {
+                $listCommande->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

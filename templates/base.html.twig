@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hanabi ~{% block title %}{% endblock %}</title>
       
     {# Change l icone de l'onglet #}{# <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"> #}
@@ -12,36 +13,66 @@
         <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet"> #}
        
     {# Import du style valable sur toute les pages (ex: titre/texte) pour que se soit homogène #}
-        <link rel="stylesheet" href="{{asset('css/style.css')}}">
+        {# <link rel="stylesheet" href="{{asset('css/style.css')}}"> #}
 
     {# Import du css de Bootstrap #}
         <link rel="stylesheet" href="{{ asset('asset/style/bootstrap.min.css') }}">
+
+      <link rel="stylesheet" href="{{asset('./rework_css/BISstyle.css')}}">
+
 
     {% block stylesheets %}
       
     {% endblock %}
       
 
-    {% block javascripts %}
 
-    {# Import du script de Bootstrap #}
-      <script src="{{ asset('asset/script/bootstrap.min.js') }}" async></script> 
-      <script src="{{ asset('asset/script/bootstrap.bundle.min.js') }}" async></script> {# Import le script du dropdown #}
-    {% endblock %}
     
 
   </head>
 
   <body>
-    {% include './composants_base/header.html.twig' %} {# Inclus le header sur chaque page #}
+    {#{% include './composants_base/header.html.twig' %}  Inclus le header sur chaque page #}
+
+    
+
+
+
+
+  <header>
+    <div class="windows_resp">
+      {% include './components/navbar/navbar.html.twig' %}
+    </div>
+      
+    <div class="phone_resp">
+      {% include './components/navbar/mobile_navbar.html.twig' %}
+    </div>
+
+  </header>
+
 
     {% block body %}
 
     {% endblock %}
 
     <footer>
-      {% include './composants_base/footer.html.twig' %}
+      {% include './components/base/footer.html.twig' %}
     </footer>
+
+
+    {% block javascripts %}
+    
+      {# Test import bootstrap with link  #}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
+
+    {# Import du script de Bootstrap #}
+      {# <script src="{{ asset('assets/script/bootstrap.min.js') }}" async></script> #}
+      {# <script src="{{ asset('asset/script/bootstrap.bundle.min.js') }}" async></script> Import le script du dropdown #}
+    {% endblock %}
+
 
   </body>
 </html>

@@ -1,0 +1,25 @@
+
+/* Bloc avec les liens vers les index des pages indiquer */
+
+.index_admin {
+
+    margin-top:30px;
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    justify-content: space-around;
+
+}
+
+.index_admin div button {
+    height: 100px;
+    width: 200px;
+    margin: 30px;
+}
+
+/* 
+.index_admin div button a {
+    font-size: 20px;
+    color: #000000;
+    text-decoration: none;
+} */

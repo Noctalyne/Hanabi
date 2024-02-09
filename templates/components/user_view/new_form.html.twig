@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Faire une demande{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h1>Faire une demande personalisé</h1>
+
+        <form>
+        {{ form_start(form) }}
+
+            <div class="form-group row">
+            {{ form_row(form.typeProduit, {label: 'ChoisissSez le type de produit voulue :'}) }}
+
+            {{ form_row(form.autresTypes, {label: '* Autres :'}) }}
+            </div>
+
+            {{ form_row(form.descriptionProduit, {label: 'Veuillez préciser votre recherche :'}) }}
+
+
+
+            <button class="btn">{{ button_label|default('Enregistrer') }}</button>
+
+        {{ form_end(form) }} 
+        </form>
+
+        <div class="d-flex justify-content-center">
+            <button>
+                <a href="{{ path('app_formulaire_demande_produit_show_liste', {'id': app.user.id}) }}">Retour </a>
+            </button>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Contact
+{% endblock %}
+
+{% block body %}
+
+
+		<h1> Contact</h1>
+
+
+	<a href="{{ path('app_contact_log_cree_form', {'id' : app.user.clients.id}) }}"> Crée un nouveau formulaire </a>
+
+	<table class="table">
+        <thead>
+            <tr>
+                <th>Id produit</th>
+                <th>Type de produit</th>
+                <th>Description produit</th>
+                <th>Date d'envoie du formulaire</th>                
+                <th>Date reponse vendeur </th>
+                <th>Afficher</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for formulaireDemande in formulaire_demande_produits %}
+            <tr>
+                <td>{{ formulaireDemande.id }}</td>
+                <td>{{ formulaireDemande.typeProduit }}</td>
+                <td>{{ formulaireDemande.descriptionProduit }}</td>
+				Voir pour modifier le fuseau horraire en utc+2 --> pas trouvé la syntaxe pour le moment
+                <td>{{ formulaireDemande.dateEnvoieForm ? formulaireDemande.dateEnvoieForm|date('d M Y à H:i') : '' }}</td> 
+
+				le if permet d'afficher le statut du formulaire
+                {% if  formulaireDemande.reponseDemande is same as('attente')  %}
+                    <td><p>Demande en attente </p></td>                    
+                {% else %}
+                    <td>{{ formulaireDemande.dateReponseForm ? formulaireDemande.dateReponseForm|date('d M Y à H:i') : ''}} </td>
+                    <td>{{ formulaireDemande.reponseDemande }}</td>
+                {% endif %}
+              
+                <td>
+                    <a href="{{ path('app_formulaire_show', {'id': formulaireDemande.id}) }}">Afficher</a>
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun formulaire à afficher</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+	{{ include('formulaire_demande_produit/new.html.twig') }}
+
+	{% include "./contact/composant_contact/formulaire_contact.html.twig" %}
+
+{% endblock %} #}

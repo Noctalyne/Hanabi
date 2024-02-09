@@ -34,10 +34,14 @@ class Adresses
     #[ORM\Column(length: 30)]
     private ?string $paysAdrss = null;
 
-    #[ORM\ManyToOne(inversedBy: 'adresses')]
-    #[ORM\JoinColumn(nullable: false, name: 'idClientAdresse')]
-    // #[Assert(max: 3, groups: ['client'])]
-    private ?Clients $idClientAdresses = null;
+    // #[ORM\ManyToOne(inversedBy: 'adresses')]
+    // #[ORM\JoinColumn(nullable: false, name: 'idClientAdresse')]
+    // // #[Assert(max: 3, groups: ['client'])]
+    // private ?Clients $idClientAdresses = null;
+
+    #[ORM\ManyToOne(inversedBy: 'list_adresses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -116,14 +120,26 @@ class Adresses
         return $this;
     }
 
-    public function getIdClientAdresses(): ?Clients
+    // public function getIdClientAdresses(): ?Clients
+    // {
+    //     return $this->idClientAdresses;
+    // }
+
+    // public function setIdClientAdresses(?Clients $idClientAdresses): static
+    // {
+    //     $this->idClientAdresses = $idClientAdresses;
+
+    //     return $this;
+    // }
+
+    public function getUser(): ?User
     {
-        return $this->idClientAdresses;
+        return $this->user;
     }
 
-    public function setIdClientAdresses(?Clients $idClientAdresses): static
+    public function setUser(?User $user): static
     {
-        $this->idClientAdresses = $idClientAdresses;
+        $this->user = $user;
 
         return $this;
     }

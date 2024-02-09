@@ -25,13 +25,17 @@ class Commandes
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
     private ?string $prixTotal = null;
 
-    #[ORM\ManyToMany(targetEntity: Clients::class, inversedBy: 'idClientCommande')]
-    private Collection $client;
+    // #[ORM\ManyToMany(targetEntity: Clients::class, inversedBy: 'idClientCommande')]
+    // private Collection $client;
 
-    public function __construct()
-    {
-        $this->client = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'list_commandes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    // public function __construct()
+    // {
+    //     $this->client = new ArrayCollection();
+    // }
 
     public function getId(): ?int
     {
@@ -74,26 +78,38 @@ class Commandes
         return $this;
     }
 
-    /**
-     * @return Collection<int, Clients>
-     */
-    public function getClient(): Collection
+    // /**
+    //  * @return Collection<int, Clients>
+    //  */
+    // public function getClient(): Collection
+    // {
+    //     return $this->client;
+    // }
+
+    // public function addClient(Clients $client): static
+    // {
+    //     if (!$this->client->contains($client)) {
+    //         $this->client->add($client);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeClient(Clients $client): static
+    // {
+    //     $this->client->removeElement($client);
+
+    //     return $this;
+    // }
+
+    public function getUser(): ?User
     {
-        return $this->client;
+        return $this->user;
     }
 
-    public function addClient(Clients $client): static
+    public function setUser(?User $user): static
     {
-        if (!$this->client->contains($client)) {
-            $this->client->add($client);
-        }
-
-        return $this;
-    }
-
-    public function removeClient(Clients $client): static
-    {
-        $this->client->removeElement($client);
+        $this->user = $user;
 
         return $this;
     }

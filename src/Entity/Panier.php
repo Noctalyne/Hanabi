@@ -20,8 +20,8 @@ class Panier
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2, nullable: true)]
     private ?string $prixTotal = null;
 
-    #[ORM\OneToOne(inversedBy: 'panier', cascade: ['persist', 'remove'])]
-    private ?Clients $idClient = null;
+    // #[ORM\OneToOne(inversedBy: 'panier', cascade: ['persist', 'remove'])]
+    // private ?Clients $idClient = null;
 
     #[ORM\ManyToMany(targetEntity: Produits::class)]
     private Collection $listeProduits;
@@ -50,17 +50,17 @@ class Panier
         return $this;
     }
 
-    public function getIdClient(): ?Clients
-    {
-        return $this->idClient;
-    }
+    // public function getIdClient(): ?Clients
+    // {
+    //     return $this->idClient;
+    // }
 
-    public function setIdClient(?Clients $idClient): static
-    {
-        $this->idClient = $idClient;
+    // public function setIdClient(?Clients $idClient): static
+    // {
+    //     $this->idClient = $idClient;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection<int, Produits>

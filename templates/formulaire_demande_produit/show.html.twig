@@ -39,11 +39,11 @@
         </tbody>
     </table>
     {% if app.user.clients %} {# si utilisateur est un client renvoie à sa liste personnelle #}
-        <button class="btn btn-outline-dark p-1">
+        <button>
             <a class="btn p-0" href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">Retour à la liste</a>
         </button>
     {% elseif app.user.vendeurs %}{# si utilisateur est un vendeur renvoie à la liste de tous les formulaires #}
-        <button class="btn btn-outline-dark p-1">
+        <button>
             <a class="btn p-0" href="{{ path('app_formulaire_demande_produit_index') }}">Retour à la liste</a>
         </button>
     {% endif %}

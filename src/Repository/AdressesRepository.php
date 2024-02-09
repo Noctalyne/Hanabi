@@ -25,17 +25,16 @@ class AdressesRepository extends ServiceEntityRepository
 
 
     // récupère toutes les adresses du clients
-    public function findAdresses($idClientAdresses)
+    public function findAdresses($id)
     {
         $conn = $this->getEntityManager()->getConnection();
         $sql = '
             SELECT *
-            FROM clients as c
+            FROM user as u
             INNER JOIN adresses  as a
-            ON c.id = a.idClientAdresse
-            WHERE c.user_id = :user_id
+            WHERE u.id = :id
             ';
-            $params = ['user_id' => $idClientAdresses]; // recupère la valeur de l'url
+            $params = ['id' => $id]; // recupère la valeur de l'url
 
         $resultSet = $conn->executeQuery($sql,$params);
 

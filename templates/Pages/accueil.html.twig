@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+
+  {# <link rel="stylesheet" href="{{asset('css/accueil.css')}}">
+  <link rel="stylesheet" href="{{asset('css/mozaic_accueil.css')}}"> #}
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('asset/style/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('./rework_css/BISstyle.css') }}">
+{% endblock %}
+
+
+{% block body %}
+
+<div>
+
+  {% include "./components/base/banner.html.twig" %}
+
+</div>
+
+
+  {# Mozaic produits le plus vendue #}
+  <div class="container bloc"> {# Max 3 produits #}
+
+    <h1>Nos produits populaires</h1>
+
+    <div class="mozaic_produits">
+
+      {% for produit in produits %}
+        {% include "./components/produits/card_produit.html.twig" %}
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+
+  {# Mozaic produit populaire #}
+  <div class="container bloc"> {# Max 3 produits #}
+
+    <h1>Nos licences populaires</h1>
+     
+    <div class="mozaic_produits">
+
+      {% for produit in produits %}
+        {% include "./components/produits/card_produit.html.twig" %}
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+
+{% endblock %}

@@ -16,7 +16,7 @@ class AccueilController extends AbstractController
         $produit=$produitsRepository->findAll(); // permet de récupérer les info produits
         $carrousel = $banniereRepository->findOneBy(['activated' => 'true']);
         
-        return $this->render('accueil/accueil.html.twig', [
+        return $this->render('Pages/accueil.html.twig', [
             'controller_name' => 'AccueilController',
             'carrousels' => $carrousel,
             'produits' => $produit,

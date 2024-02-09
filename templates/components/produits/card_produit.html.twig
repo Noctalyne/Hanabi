@@ -1,0 +1,19 @@
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('./rework_css/component_card_produits.css') }}">
+{% endblock %}
+
+<div class="card">
+
+  <img class="card-img-top img_produit" src="{{ asset('images/produits/' ~ produit.imgProduit) }}" alt="photo du produit :" ~ {{produit.nomProduit}}>
+
+  <div class="card-body">
+
+    <h5 class="card-title text-center">{{ produit.nomProduit }}</h5>
+    <div class="card-text">
+      <p >{{ produit.prixProduit }}</p>
+      <a href="#!" class="">Voir</a>
+    </div>
+
+  </div>
+  
+</div>

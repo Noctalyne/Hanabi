@@ -35,24 +35,22 @@ class AdressesController extends AbstractController
         $adresses = $adressesRepository->findAdresses($user_id);
         $client = $clientsRepository->find($id_client);
 
-        // dd($client);
         return $this->render('adresses/afficherListeAdresse.html.twig', [
             'adresses' => $adresses,
             'client' => $client,
-            // dd($client),
         ]);
     }
 
 
 
     // Route pour ajouter les adresse en bdd (voir pour bloquer à max 3 ou -)
-    #[Route('/{user_id}/{id_client}/new', name: 'app_adresses_new', methods: ['GET', 'POST'])]
+    #[Route('/{id}/new', name: 'app_adresses_new', methods: ['GET', 'POST'])]
     public function new(
-        int $id_client,
-        int $user_id,
+        int $id,
+        // int $user_id,
         Request $request,
         EntityManagerInterface $entityManager,
-        ClientsRepository $clientsRepository,
+        // ClientsRepository $clientsRepository,
         UserRepository $userRepository,
         AdressesRepository $adressesRepository,
         ValidatorInterface $validator
@@ -63,16 +61,14 @@ class AdressesController extends AbstractController
 
         $form = $this->createForm(AdressesType::class, $adress);
 
-        $listeAdresses = $adressesRepository->findAdresses($user_id);
+        $listeAdresses = $adressesRepository->findAdresses($id);
 
         $form->handleRequest($request);
-        $client = $clientsRepository->find($id_client);
-        $user = $userRepository->find($user_id);
-        // $errors = $validator->validate($adress);
+        // $client = $clientsRepository->find($id_client);
+        $user = $userRepository->find($id);
 
         $limiteAdress = count($listeAdresses);
 
-        // dd($limiteAdress);
 
         if ($limiteAdress >= 3 ) { // si le client à déja 3 adresses
 
@@ -81,7 +77,7 @@ class AdressesController extends AbstractController
                 'adress' => $adress,
                 'form' => $form,
                 'msg' => $msg,
-                'client' => $client,
+                // 'client' => $client,
                 'user' => $user,
                 'limite' => $limiteAdress,
             ]);
@@ -92,21 +88,22 @@ class AdressesController extends AbstractController
 
             $msg = 'Bravo votre adresse à été mise à jour.';
 
-            $adress->setIdClientAdresses($client);
-            $client->addAdress($adress);
+            // $adress->setIdClientAdresses($client);
+            // $client->addAdress($adress);
+            $user->addListAdress($adress);
 
-            $entityManager->persist($client);
+            $entityManager->persist($user);
             $entityManager->persist($adress);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_clients_show', ['user_id' => $user_id, 'id_client' => $id_client], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_user_show', ['id' => $id ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('adresses/new.html.twig', [
             'adress' => $adress,
             'form' => $form,
             'msg' => $msg,
-            'client' => $client,
+            // 'client' => $client,
             'user' => $user,
             'limite' => $limiteAdress,
         ]);

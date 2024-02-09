@@ -7,6 +7,7 @@ use App\Form\FormulaireDemandeProduitType;
 use App\Form\ReponseFormulaireType;
 use App\Repository\ClientsRepository;
 use App\Repository\FormulaireDemandeProduitRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,13 +34,13 @@ class FormulaireDemandeProduitController extends AbstractController
         $form = $this->createForm(FormulaireDemandeProduitType::class, $formulaireDemandeProduit);
         $form->handleRequest($request);
 
-        $client = $clientsRepository ->find($id);
+        // $client = $clientsRepository ->find($id);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $newFormulaire = new FormulaireDemandeProduit();
 
-            $newFormulaire->setRefClient($client);
+            // $newFormulaire->setRefClient($client);
             $newFormulaire->setTypeProduit($form->get('typeProduit')->getData());
             $newFormulaire->setDescriptionProduit($form->get('descriptionProduit')->getData());
 
@@ -59,8 +60,8 @@ class FormulaireDemandeProduitController extends AbstractController
             return $this->redirectToRoute('app_formulaire_demande_produit_show_liste', ['user_id'=> $id], Response::HTTP_SEE_OTHER);  
         }
 
-        return $this->render('formulaire_demande_produit/new.html.twig', [
-            'client' => $client,
+        return $this->render('components/user_view/new_form.html.twig', [
+    
             'formulaire_demande_produit' => $formulaireDemandeProduit,
             'form' => $form,
         ]);
@@ -81,17 +82,21 @@ class FormulaireDemandeProduitController extends AbstractController
 
 
 
-    #[Route('/{user_id}/liste', name: 'app_formulaire_demande_produit_show_liste', methods: ['GET'])]
-    public function showListe( int $user_id ,ClientsRepository $clientsRepository,
+    #[Route('/{id}/liste', name: 'app_formulaire_demande_produit_show_liste', methods: ['GET'])]
+    public function showListe( int $id ,ClientsRepository $clientsRepository,
+    UserRepository $userRepository,
                               FormulaireDemandeProduitRepository $formulaireDemandeProduitRepository ): Response
     {
-        $listeFormulaires = $formulaireDemandeProduitRepository->findAllFormsByClient($user_id);
-        $client = $clientsRepository->find($user_id);
+        // $listeFormulaires = $formulaireDemandeProduitRepository->findAllFormsByClient($user_id);
+        $listeFormulaires = $formulaireDemandeProduitRepository->findAllForms($id);
+        // $client = $clientsRepository->find($user_id);
+        $user = $userRepository->find($id);
         
         // dd($client);
-        return $this->render('formulaire_demande_produit/afficherListe.html.twig', [
+        return $this->render('components/user_view/form_list.html.twig', [
             'formulaire_demande_produits' => $listeFormulaires,
-            'client' => $client,
+            'user' => $user 
+            // 'client' => $client,
             // dd($client),
         ]);
     }

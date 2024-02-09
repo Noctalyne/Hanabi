@@ -1,8 +1,8 @@
   
   {# <li class="nav-item dropdown"> #}
-  <div class="dropdown ">
+  {# <div class="dropdown ">
 
-    <button id='panier' class="btn dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"  aria-expanded="false"> {# #}
+    <button id='panier' class="btn dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"  aria-expanded="false">
         <img src="{{ asset('images/icones/shopping-cart_1.png') }}" alt="Panier" class="m-1" width="30px" height="30px">
     </button>
 
@@ -17,46 +17,46 @@
                     <th>Prix</th>
                 </tr>
             </thead>
-            <tbody>
-                {% if app.user.clients.panier %}
+            <tbody> #}
+                {# {% if app.user.clients.panier %} #}
 
-                    {% for produit in app.user.clients.panier.listeProduits %}
-                    <tr class='dropdown-item'>
+                    {# {% for produit in app.user.clients.panier.listeProduits %} #}
+                    {# <tr class='dropdown-item'>
                         <td>{{ produit.nomProduit }}</td>
-                        {# <td>{{ produit. }}</td> #}
+                        <td>{{ produit. }}</td>
                         <td>{{ produit.prixProduit }}  $</td>
-                        <td>
+                        <td> #}
                             {# <a href="{{ path('app_panier_show', {'id': panier.id}) }}">show</a>
                             <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">edit</a> #}
-                        </td>
-                    </tr>
-                                    <tr>
-                    <th>Total : </th>
-                    <td>{{ app.user.clients.panier.prixTotal }} $</td>
+                        {# </td>
+                    </tr> #}
+                                    {# <tr> #}
+                    {# <th>Total : </th> #}
+                    {# <td>{{ app.user.clients.panier.prixTotal }} $</td>
                 </tr>
                     {% endfor %}
                 {% else %}
                     <tr>
                         <td colspan="3">Panier vide </td>
                     </tr>
-                {% endif %}
+                {% endif %} #}
                 {# <tr>
                     <th>Total : </th>
                     <td>{{ app.user.clients.panier.prixTotal }} $</td>
                 </tr> #}
-                <tr>
+                {# <tr>
                     <td><a class="dropdown-item" href="{{ path('app_panier_show', {'user_id': app.user.clients.id}) }}">Afficher</a></td>
                 </tr>
             </tbody>
-        </table>
+        </table> #}
 
       {# <div class="dropdown-divider"></div> #}
 
       
 
 
-    </div>
+    {# </div>
     
-</div>
+</div> #}
 
   {# </li> #}

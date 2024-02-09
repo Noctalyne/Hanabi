@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Clients;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,9 +21,12 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        $client = new Clients();
+        // $client = new Clients();
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+
             // encode the plain password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
@@ -32,6 +34,9 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+
+            $user->setAccountActivate(false);
+            $user->setClientActivate(false);
 
             $entityManager->persist($user);
 

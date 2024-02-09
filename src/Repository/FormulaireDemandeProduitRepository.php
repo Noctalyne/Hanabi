@@ -57,7 +57,21 @@ class FormulaireDemandeProduitRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();// returns un tableau de tableau SANS objet
     }
 
+    public function findAllForms($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+            SELECT *
+            FROM user as u
+            INNER JOIN formulaire_demande_produit  as FD
+            WHERE u.id = :id
+            ';
+            $params = ['id' => $id]; // recupère la valeur de l'url
 
+        $resultSet = $conn->executeQuery($sql,$params);
+
+        return $resultSet->fetchAllAssociative();// returns un tableau de tableau SANS objet
+    }
 
 
     //    /**

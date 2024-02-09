@@ -19,7 +19,7 @@ class BanniereController extends AbstractController
     #[Route('/', name: 'app_banniere_index', methods: ['GET'])]
     public function index(BanniereRepository $banniereRepository): Response
     {
-        return $this->render('banniere/index.html.twig', [
+        return $this->render('banniere/list_ban.html.twig', [
             'bannieres' => $banniereRepository->trieBaniere() 
             // renvoie un liste trier avec celui activer en premier
         ]);
@@ -203,6 +203,7 @@ class BanniereController extends AbstractController
     #[Route('/{id}', name: 'app_banniere_activated', methods: ['POST'])]
     public function activate(Request $request, Banniere $banniere, EntityManagerInterface $entityManager, BanniereRepository $banniereRepository): Response
     {
+        // Récupère toutes les bannières en BDD
         $listeBanniere = $banniereRepository->findAll();
 
         if ($this->isCsrfTokenValid('activated'.$banniere->getId(), $request->request->get('_token'))) {
@@ -220,6 +221,7 @@ class BanniereController extends AbstractController
         }
 
         return $this->redirectToRoute('app_banniere_index', [], Response::HTTP_SEE_OTHER);
+        // Renvoie sur la page qui affiche la liste des bannières
     }
 
 

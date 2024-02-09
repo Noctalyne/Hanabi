@@ -70,7 +70,8 @@ class ProduitsController extends AbstractController
         ]);
     }
 
-    #[Route('/{client_id}/{id}', name: 'app_produits_show', methods: ['GET'])] //, 
+    // #[Route('/{client_id}/{id}', name: 'app_produits_show', methods: ['GET'])] //, 
+    #[Route('/{id}', name: 'app_produits_show', methods: ['GET'])]
     public function show(int $client_id, Produits $produit, PanierRepository $panierRepository): Response
     {   
         $panier = $panierRepository->findOneBy(['idClient' => $client_id]);
@@ -134,7 +135,7 @@ class ProduitsController extends AbstractController
                 $panier = new Panier();
                 // $montant = $panier->getPrixTotal();
 
-                $panier->setIdClient($client);
+                // $panier->setIdClient($client);
                 $panier->addListeProduit($produits);
                 $panier->setPrixTotal($produits->getPrixProduit());
                 $quantite = + 1;
@@ -150,7 +151,8 @@ class ProduitsController extends AbstractController
                 $total = $panier->getPrixTotal();
 
                 if ($liste->contains($produits) ){
-                    $quantite = $quantite + 1;
+                    // $quantite = $quantite + 1;
+                    
                 }
 
                 $panier->addListeProduit($produits);

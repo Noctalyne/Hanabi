@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Adresses index{% endblock %}
 
@@ -30,12 +30,12 @@
                 <td>{{ adresse.codePostalAdrss }}</td>
                 <td>{{ adresse.paysAdrss }}</td>
                 <td>{{ adresse.idClientAdresses.nom }}  {{ adresse.idClientAdresses.prenom }}</td>
-                {# adress/accède à l'objet/ 
+                adress/accède à l'objet/ 
                     .idClientAdresses /accède à l'objet/ 
-                    .prenom /accède à la colone demandé/ #}
+                    .prenom /accède à la colone demandé/
                 <td>
-                    {# <a href="{{ path('app_adresses_show', {'id': adress.id}) }}">show</a>
-                    <a href="{{ path('app_adresses_edit', {'id': adress.id}) }}">edit</a> #}
+                    <a href="{{ path('app_adresses_show', {'id': adress.id}) }}">show</a>
+                    <a href="{{ path('app_adresses_edit', {'id': adress.id}) }}">edit</a>
                                   <a class="btn p-0" href="{{ path('app_adresses_show', {'id' : adresse.id}) }}">Voir</a>
               <a class="btn p-0" href="{{ path('app_adresses_edit', {'id' : adresse.id}) }}">Modifier</a>
                 </td>
@@ -48,5 +48,5 @@
         </tbody>
     </table>
 
-    {# <a href="{{ path('app_adresses_new') }}">Create new</a> #}
-{% endblock %}
+    <a href="{{ path('app_adresses_new') }}">Create new</a>
+{% endblock %} #}

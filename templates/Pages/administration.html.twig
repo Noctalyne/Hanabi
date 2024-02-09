@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'administration {% endblock %}
+
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('./rework_css/page_admin.css') }}">
+{% endblock %}
+
+
+{% block body %}
+
+{# <div class="container index_admin" style=""> #}
+
+
+
+
+
+
+
+    {# <div>
+        <button>
+            <a href="{{ path('app_formulaire_demande_produit_index') }}">Liste des formulaires </a>
+        </button>
+    </div> #}
+
+{# 
+    <div>
+        <button>
+            <a href="{{ path('app_produits_index') }}">Liste produits</a>
+        </button>
+    </div> #}
+
+
+    {# <div>
+        <button>
+            <a href="{{ path('app_banniere_index') }}">Gestion de la bannière</a>
+        </button>
+    </div> #}
+
+
+    {# <div>
+        <button>
+            <a href="{{ path('app_commandes_index') }}">Liste des commandes</a>
+        </button>
+    </div> #}
+
+
+
+
+    {# <div>
+        <button>
+            <a href="{{ path('app_adresses_index') }}">Liste des adresses  (voir pour supp)</a>
+        </button>
+    </div>
+
+    <div>
+        <button>
+            <a href="{{ path('app_panier_index') }}">Liste des panier (voir pour supp)</a>
+        </button>
+    </div>  #}
+
+{# </div> #}
+
+<div class="container w-75">
+    <h2>"VISION RAPIDE</h2>
+    <div class="accordion" id="accordionAdmin">
+            
+            
+            {% include "./components/accordion/component_list_produits.html.twig" %}
+            {% include "./components/accordion/component_list_formulaires.html.twig" %}
+
+            {% include "./components/accordion/component_list_commandes.html.twig" %}
+
+    </div> 
+    
+</div>
+
+
+
+<div class="container index_admin" style="">
+
+    <div>
+        <button>
+            <a href="{{ path('app_user_index') }}">Liste des "User"</a>
+        </button>
+    </div>
+
+    <div>
+        <button>
+            <a href="{{ path('app_banniere_index') }}">Gestion de la bannière</a>
+        </button>
+    </div>
+
+
+</div>
+
+
+
+{# <div class="container w-75">
+    <h2></h2>
+    <div class="accordion" id="accordionExample">
+            
+            {% include "./administration/accordion/component_list_user.html.twig" %} 
+            {% include "./administration/accordion/component_list_produits.html.twig" %} 
+            {% include "./administration/accordion/component_list_formulaires.html.twig" %}
+
+    </div> 
+    
+</div> #}
+
+
+{% endblock %}
+
+
+
+
+
+
+  {# <div class="accordion-item">
+    <h2 class="accordion-header" id="headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        Accordion Item #3
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>#}
