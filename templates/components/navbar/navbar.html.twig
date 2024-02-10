@@ -49,7 +49,9 @@
                 {% include './components/navbar/dropdown_account.html.twig' %}
             {% else %}
                 <div class="menu_connect">
+                {# <button> #}
                     <a class="btn btn-sm btn-outline-dark rounded p-1 p-0" href="{{ path('app_login') }}">Connexion / Inscription</a>
+                {# </button>     #}
                 </div>
             {% endif %}
 

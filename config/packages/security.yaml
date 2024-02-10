@@ -38,8 +38,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/administration, roles: ROLE_ADMIN } # voir comment ça fonctionne
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/administration, roles: ROLE_ADMIN } 
+        - { path: ^/contact, roles: ROLE_USER } # si la personne clique sur contact elle seras inviter à se connecter
 
 when@test:
     security:

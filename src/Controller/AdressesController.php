@@ -19,41 +19,39 @@ use Symfony\Component\Validator\Validator\ValidatorInterface; // pour valider le
 #[Route('/adresses')]
 class AdressesController extends AbstractController
 {
-    #[Route('/', name: 'app_adresses_index', methods: ['GET'])]
-    public function index(AdressesRepository $adressesRepository, ClientsRepository $clientsRepository): Response
-    {
-        $client = $clientsRepository->findAll();
-        return $this->render('adresses/index.html.twig', [
-            'adresses' => $adressesRepository->findAll(),
-            'client' => $client,
-        ]);
-    }
+    // #[Route('/', name: 'app_adresses_index', methods: ['GET'])]
+    // public function index(AdressesRepository $adressesRepository, ClientsRepository $clientsRepository): Response
+    // {
+    //     $client = $clientsRepository->findAll();
+    //     return $this->render('adresses/index.html.twig', [
+    //         'adresses' => $adressesRepository->findAll(),
+    //         'client' => $client,
+    //     ]);
+    // }
 
-    #[Route('/{user_id}/{id_client}/liste', name: 'app_adresses_show_liste', methods: ['GET'])]
-    public function showListe(int $id_client, int $user_id, ClientsRepository $clientsRepository, AdressesRepository $adressesRepository): Response
-    {
-        $adresses = $adressesRepository->findAdresses($user_id);
-        $client = $clientsRepository->find($id_client);
+    // #[Route('/{user_id}/{id_client}/liste', name: 'app_adresses_show_liste', methods: ['GET'])]
+    // public function showListe(int $id_client, int $user_id, ClientsRepository $clientsRepository, AdressesRepository $adressesRepository): Response
+    // {
+    //     $adresses = $adressesRepository->findAdresses($user_id);
+    //     $client = $clientsRepository->find($id_client);
 
-        return $this->render('adresses/afficherListeAdresse.html.twig', [
-            'adresses' => $adresses,
-            'client' => $client,
-        ]);
-    }
+    //     return $this->render('adresses/afficherListeAdresse.html.twig', [
+    //         'adresses' => $adresses,
+    //         'client' => $client,
+    //     ]);
+    // }
 
 
+    
 
     // Route pour ajouter les adresse en bdd (voir pour bloquer à max 3 ou -)
     #[Route('/{id}/new', name: 'app_adresses_new', methods: ['GET', 'POST'])]
-    public function new(
+    public function new (
         int $id,
-        // int $user_id,
         Request $request,
         EntityManagerInterface $entityManager,
-        // ClientsRepository $clientsRepository,
         UserRepository $userRepository,
         AdressesRepository $adressesRepository,
-        ValidatorInterface $validator
     ): Response {
 
         $msg = '';
@@ -64,7 +62,6 @@ class AdressesController extends AbstractController
         $listeAdresses = $adressesRepository->findAdresses($id);
 
         $form->handleRequest($request);
-        // $client = $clientsRepository->find($id_client);
         $user = $userRepository->find($id);
 
         $limiteAdress = count($listeAdresses);
@@ -77,7 +74,6 @@ class AdressesController extends AbstractController
                 'adress' => $adress,
                 'form' => $form,
                 'msg' => $msg,
-                // 'client' => $client,
                 'user' => $user,
                 'limite' => $limiteAdress,
             ]);
@@ -88,8 +84,6 @@ class AdressesController extends AbstractController
 
             $msg = 'Bravo votre adresse à été mise à jour.';
 
-            // $adress->setIdClientAdresses($client);
-            // $client->addAdress($adress);
             $user->addListAdress($adress);
 
             $entityManager->persist($user);
@@ -99,11 +93,10 @@ class AdressesController extends AbstractController
             return $this->redirectToRoute('app_user_show', ['id' => $id ], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('adresses/new.html.twig', [
+        return $this->render('adresses/new_adresse.html.twig', [
             'adress' => $adress,
             'form' => $form,
             'msg' => $msg,
-            // 'client' => $client,
             'user' => $user,
             'limite' => $limiteAdress,
         ]);
@@ -112,11 +105,11 @@ class AdressesController extends AbstractController
 
 
 
-    #[Route('/{id}', name: 'app_adresses_show', methods: ['GET'])]
-    public function show(Adresses $adress): Response
+    #[Route('/{id}/{id_adrss}/show', name: 'app_adresses_show', methods: ['GET'])]
+    public function show(int $id_adrss, Adresses $adresses, AdressesRepository $adressesRepository): Response
     {
         return $this->render('adresses/show.html.twig', [
-            'adress' => $adress,
+            'adress' => $adresses,
         ]);
     }
 

@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Adresses;
 use App\Entity\Clients;
 use App\Entity\User;
+use App\Form\AdressesType;
 use App\Form\ClientsType;
 use App\Form\UserType;
 use App\Repository\AdressesRepository;
@@ -53,8 +55,14 @@ class UserController extends AbstractController
 
         $adresses = $adressesRepository->findAdresses($id);
 
+
+        // $listeAdresses = $adressesRepository->findAdresses($id);
+
+        $limiteAdress = count($adresses);
+
         return $this->render('user/show_user.html.twig', [
             'adresses' => $adresses,
+            'limiteAdress' => $limiteAdress,
             'user' => $user,
         ]);
     }
@@ -180,24 +188,34 @@ class UserController extends AbstractController
 
     // permet de crée un client à partir d'un user 
     #[Route('/{id}/add/infos', name: 'app_user_add_infos', methods: ['GET', 'POST'])]
-    public function addInfos(int $id, Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    public function addInfos(int $id, Request $request, UserRepository $userRepository, AdressesRepository $adressesRepository, EntityManagerInterface $entityManager): Response
     {
 
-        $actuel = $userRepository->find($id);
+        // $actuel = $userRepository->find($id);
         $user = $userRepository->find($id);
 
         $formClient = $this->createForm(ClientsType::class, $user);
         $formClient->handleRequest($request);
 
+
+        // $adresse = new Adresses();
+        // $formAdresse = $this->createForm(AdressesType::class, $adresse);
         
 
         if ($formClient->isSubmitted() && $formClient->isValid()) {
 
-            // $newClient = new Clients();
+        //  && $formAdresse->isSubmitted() && $formAdresse->isValid() 
 
             $user->setNom($formClient->get('nom')->getData());
             $user->setPrenom($formClient->get('prenom')->getData());
             $user->setTelephone($formClient->get('telephone')->getData());
+
+
+            // $user->addListAdress($formAdresse->getData());
+
+
+
+            $user->setClientActivate(true);
 
             $entityManager->persist($user);
 
@@ -212,10 +230,10 @@ class UserController extends AbstractController
         // return $this->render('user/new.html.twig', [
             return $this->render('user/add_infos.html.twig', [
 
-            
-            'user' => $user,
-            'form' => $formClient,
-            'actuel' => $actuel,
+                'user' => $user,
+                'form' => $formClient,
+                // 'formAdresse' =>$formAdresse,
+            // 'actuel' => $actuel,
         ]);
     }
 

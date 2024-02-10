@@ -20,7 +20,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('email', TextType::class, [
                 'attr' => [
-                    'label' => 'ail : ',
+                    'label' => 'email : ',
                     'class' =>'form-control',
                     'placeholder' => "Entrez votre email.."
                 ]

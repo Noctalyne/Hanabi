@@ -1,8 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Adresses{% endblock %}
+{% block title %}Mes adresses{% endblock %}
 
 {% block body %}
+
+
+
     <h1>Adresses</h1>
 
     <table class="table">
@@ -46,5 +49,5 @@
 
     {# <a href="{{ path('app_adresses_edit', {'id': adress.id}) }}">edit</a> #}
 
-    {# {{ include('adresses/_delete_form.html.twig') }} #}
+    {{ include('adresses/_delete_addresse.html.twig') }}
 {% endblock %}

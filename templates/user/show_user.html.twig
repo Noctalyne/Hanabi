@@ -1,132 +1,122 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Mon Compte{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('./rework_css/account.css') }}">
+{% endblock %}
 
 {% block body %}
 
-<div class="container w-75 d-flex flex-column pt-3 pb-3">
+    <div class="container bloc">
 
-    <h3>Mon compte</h3>
+        <h1> Mon compte </h1>
 
-    {# Infos de connexion #}
-    <div class="container w-75 mt-4 mb-3 pt-3 pb-3 border rounded  shadow-sm">
+        {# Informations de connexion #}
+        <div class="bloc_card">
 
-        <div class="d-flex flex-row justify-content-between">
-            <h4> Mes information de connexion </h4>
-            <button class="btn btn-sm btn-outline-dark p-1" >
-                <a class="btn p-0" href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
-            </button> 
-        </div>
+            <div class="bloc_card_header">
+                <h4> Mes information de connexion </h4>
+                <button class="" >
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a>
+                </button>             
+            </div>
 
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th>Email : </th>
-                    <td>{{ user.email }}</td>
-                </tr>
-                <tr>
-                    <th>Username</th>
-                    <td>{{ user.username }}</td>
-                </tr>
-                <tr>
-                    <th>Password</th>
-                    {# <td>{{ user.password }}</td> #}
-                    <td>**********</td>
-                </tr>
-            </tbody>
-        </table>
+            <div class="bloc_card_body">
+                <p>Email : {{ user.email }}</p>
+                <p>Nom d'utilisateur : {{ user.username }}</p>
+                <p>Mot de passe : **********</p> {# voir pour modifier le mot de passe #}            
+            </div>
         
-        <div class="d-flex justify-content-end">
-
-        </div>
-    </div>
-
-
-    <div class="container w-75 mt-4 mb-4 pt-3 pb-3 border rounded  shadow-sm">
-
-        <div class="d-flex flex-row justify-content-between">
-            <h4> Mes information personnels : </h4>
         </div>
 
-        <div class="d-flex justify-content-center">
-            <button>
-                {# <a class="btn p-0" href="{{ path('app_user_create_client' , {'user_id': app.user.id }) }}">Ajouter mes infos perso</a> #}
+
+        <div class="bloc_card">
+
+
+            {% if user.ClientActivate == true  %}
+
+                {# BLOC INFOS PERSO #}
+                <div class="bloc_card_header">
+                    <h4> Mes information personnels </h4>
+                    <button>
+                        <a href="#">Modifier</a>
+                    </button>
+                </div>
+
+
+                <div class="bloc_card_body">
+                    <p> Nom : {{ user.nom }}</p>
+                    <p> Prénom : {{ user.prenom }}</p>
+                    <p> Téléphone : {{ user.telephone }}</p>
+                </div>
+
+
+                {# BLOC ADRESSES #}
+                <div class="bloc_card_header">
+                    <h4> Mes adresse </h4>
+                </div>
+
+                <div class="bloc_card_body_center">
+                    
+                    {% for adresse in adresses %}
+                        <div class="address_card">
+                            <p>{{ adresse.num_adrss }} {{ adresse.rue_adrss }}</p>
+                            <p>{{ adresse.complement_adrss }}</p>
+                            <p>{{ adresse.code_postal_adrss }} {{ adresse.ville_adrss }}</p>
+                            <p>{{ adresse.pays_adrss }}</p>
+                            <button>
+                                <a href="{{ path('app_adresses_show' , {'id': app.user.id , 'id_adrss' : adresse.id }) }}"> Voir </a>
+                            </button>  
+
+                        </div>
+                        
+
+                        
+                    {% endfor %}
+
+                    {% if limiteAdress < 3 %} {# si la limite est inférieur à 3 #}
+                         <button>
+                            <a href="{{ path('app_adresses_new' , {'id': app.user.id }) }}"> Ajouter une adresse </a>
+                        </button>      
+                    {% endif %}
                 
-                <a class="btn p-0" href="{{ path('app_user_add_infos' , {'id': app.user.id }) }}">Ajouter mes infos personnels</a>
-            </button>
-        </div>
-    </div>
+                </div>
 
-    <div class="container w-75 mt-4 mb-4 pt-3 pb-3 border rounded  shadow-sm">
-        <div class="d-flex flex-row justify-content-between">
+            {% else %}
+
+                <div class="bloc_card_header">
+                    <h4> Mes information personnels </h4>
+                </div>
+
+
+                <div class="bloc_card_body_center">
+                    <button>
+                        <a href="{{ path('app_user_add_infos' , {'id': app.user.id }) }}">Ajouter mes infos personnels</a>
+                    </button>   
+                </div>
+
+
+
+            {% endif %}
+
+           
         
-            <div class="d-flex align-items-center text-center p-2">
-                <h4> Mes adresse: </h4>
-            </div>
-
-            {# VOIR POUR MODIFIER #}
-            <button>
-                <a class="btn p-0" href="{{ path('app_adresses_new' , {'id': app.user.id }) }}">
-                    Ajouter une adresse
-                </a>
-            </button>
-
-            {# {{ path('app_user_add_infos' , {'id': app.user.id }) }} #}
-
-            <div class="d-flex flex-row"> {# Mettre des CARDS ici pour afficher les addresse via leur nom #}
-
-            {% for adresse in adresses %}
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <th>Num_adrss</th>
-                            <td>{{ adresse.num_adrss }}</td>
-                        </tr>
-                        <tr>
-                            <th>Rue_adrss</th>
-                            <td>{{ adresse.rue_adrss }}</td>
-                        </tr>
-                        <tr>
-                            <th>Complement_adrss</th>
-                            <td>{{ adresse.complement_adrss }}</td>
-                        </tr>
-                        <tr>
-                            <th>Ville_adrss</th>
-                            <td>{{ adresse.ville_adrss }}</td>
-                        </tr>
-                        <tr>
-                            <th>CodePostal_adrss</th>
-                            <td>{{ adresse.code_postal_adrss }}</td>
-                        </tr>
-                        <tr>
-                            <th>Pays_adrss</th>
-                            <td>{{ adresse.pays_adrss }}</td>
-                        </tr>
-                    </tbody>
-                </table>               
-
-            {% endfor %}
-
-            </div>
         </div>
 
+        {# Modifier le booléen de la validation d inscription #}
+        {# <button>
+            <a href="{{ path('app_accueil') }}">Désactiver le compte</a>  
+        </button>   #}
+
+
+        <button>
+            <a href="{{ path('app_accueil') }}">Retour</a>
+        </button>  
+
+
     </div>
-
-
-
-  <div class="d-flex flex-row justify-content-around">
-  
-    {# Modifier le booléen de la validation d inscription #}
-    {# <button class="btn btn-sm btn-outline-dark p-1" >
-      <a class="btn p-0" href="{{ path('app_accueil') }}">Désactiver le compte</a>  
-    </button>   #}
-
-    <button class="btn btn-sm btn-outline-dark p-1" >
-      <a class="btn p-0" href="{{ path('app_accueil') }}">Retour</a>
-    </button>  
-  </div>
-
-</div>
+    
 
 
 {% endblock %}

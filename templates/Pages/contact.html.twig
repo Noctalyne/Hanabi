@@ -26,11 +26,12 @@
 					{% endif %} #}
 
 					{% if app.user %}
-						{% if app.user.clients == null %}
-							<div class="mb-3">
+						{# {% if app.user.clients == null %} #}
+						{% if app.user.ClientActivate == true %}
+							{# <div class="mb-3">
 								Encore quelques étapes avant d'accéder à se services, vous devez rensseigner vos
 							<a class="" href="{{ path('app_user_create_client' , {'user_id': app.user.id }) }}">infos perso</a>
-							</div>
+							</div> #}
 						{% endif %}
 						
 					{% else %}

@@ -1,95 +1,87 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier mes information personnels{% endblock %}
+{% block title %}Ajouter mes information personnels{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('./rework_css/account.css') }}">
+{% endblock %}
+
 
 {% block body %}
-<div class="container w-75 d-flex flex-column pt-3 pb-3">
 
-    <h3>Modifier mes informations personnels</h3>
+    <div class="container bloc">
+    
+        <h1>Ajouter mes informations personnels</h1>
 
-    <div class="container w-75 mt-4 mb-3 pt-3 pb-3 border rounded  shadow-sm">
-        <div class="d-flex flex-row justify-content-between">
+        {# Informations de connexion #}
+        {# <div class="bloc_card">
 
-            <div class="d-flex align-items-center text-center p-2">
-                <h4> Mes information de connexion </h4>
+            <div class="bloc_card_header">
+                <h4> Mes information de connexion </h4>      
             </div>
 
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <th>Email : </th>
-                        <td>{{ user.email }}</td>
-                    </tr>
-                    <tr>
-                        <th>Username</th>
-                        <td>{{ user.username }}</td>
-                    </tr>
-                    <tr>
-                        <th>Password</th>
-                        {# <td>{{ user.password }}</td> #}
-                        <td>**********</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+            <div class="bloc_card_body">
+                <p>Email : {{ user.email }}</p>
+                <p>Nom d'utilisateur : {{ user.username }}</p>
+                <p>Mot de passe : **********</p>            
+            </div>
+        
+        </div> #}
 
 
-    <div class="container w-75 mt-4 mb-4 pt-3 pb-3 border rounded  shadow-sm">
-        <div class="d-flex flex-row justify-content-between">
-            
-            <div class="d-flex align-items-center text-center p-2">
+        <div class="bloc_card">
+
+            <div class="bloc_card_header">
+                {# <h4> Mes information de connexion </h4> #}
                 <h4> Mes information personnels </h4>
             </div>
 
-            {{ form_errors(form) }}
+            <div class="bloc_card_body">
+                {{ form_errors(form) }}
 
-            {{ form_start(form) }}
-        
-            <table class="table">
-                    <tbody>
-                        <tr >
-                            <th>Nom: </th>
-                            <th>{{ actuel.nom }}</th>
-                            <th>{{ form_row( form.nom, {label: ' '} ) }}</th> {# #}
-                        </tr>
-                        <tr>
-                            <th>Prénom</th>
-                            <th>{{ actuel.prenom }}</th>
-                            <th>{{ form_row( form.prenom, {label: ' '} )}}</th>{# ,{label: 'Prénom:'} #}
-                        </tr>
-                        <tr>
-                            <th>téléphone</th>
-                            <th>{{ actuel.telephone }}</th>
-                            <th>{{ form_row( form.telephone, {label: ' '} )}}</th>{# ,{label: 'N° de téléphone :'} #}
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="d-flex justify-content-end">
-                    <button class="btn btn-outline-secondary">{{ button_label|default('Enregistrer') }}</button>
-                </div>
+                {{ form_start(form) }}
+
+                    <div class="bloc_card_add">
+                        <p>Nom : </p>
+                        {# <p>{{ actuel.nom }}</p> #}
+                        {{ form_row( form.nom, {label: ' '} ) }}    
+                    </div>
+
+
+                    <div class="bloc_card_add">
+                        <p>Prénom : </p>
+                        {# <p>{{ actuel.prenom }}</p> #}
+                        {{ form_row( form.prenom, {label: ' '} )}}    
+                    </div>
+
+
+                    <div class="bloc_card_add">
+                        <p>Téléphone : </p>
+                        {# <p>{{ actuel.telephone }}</p> #}
+                        {{ form_row( form.telephone, {label: ' '} )}}    
+                    </div>
+
+                    <div class="bloc_card_edit_footer">
+
+                        <button>
+                            <a href="{{ path('app_user_show', {'id': app.user.id }) }}">Retour</a>
+                        </button>  
+
+                        <button>
+                            {{ button_label|default('Enregistrer') }}
+                        </button>
+                    </div>
                 
-            {{ form_end(form) }}
+                {{ form_end(form) }}
+
+            </div>
+
         </div>
+
+                
+
+    
     </div>
-
-
-
-
-    <div class="d-flex flex-row justify-content-around">
-
-        {# MODIFIER VERS LIENS DE SUPPRESSION + ajout méthode pour activer/desact compte  #}
-        {#     {{ include('user/_delete_form.html.twig') }} #}
-        {# <button class="btn btn-sm btn-outline-dark p-1" >
-            <a class="btn p-0" href="{{ path('app_accueil') }}">Supprimer</a> 
-        </button>   #}
-
-        <button class="btn btn-sm btn-outline-dark p-1" >
-            <a class="btn p-0" href="{{ path('app_user_show', {'id': app.user.id }) }}">Retour</a>
-        </button>  
-    </div>
-
-</div>
 
     {# {{ include('clients/_delete_form.html.twig',{'id': client.id} ) }} #}
 

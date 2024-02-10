@@ -1,73 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Modifier compte{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('./rework_css/account.css') }}">
+{% endblock %}
 
 {% block body %}
 
-    <div class="container w-75 d-flex flex-column pt-3 pb-3">
+    <div class="container bloc">
 
-    <h3>Modifier mes informations de connexion </h3>
+        <h1>Modifier mes informations de connexion </h1>
 
-    <div class="container  mt-4 mb-3 pt-3 pb-3 border rounded  shadow-sm">
-        <div class="d-flex flex-row justify-content-between">
+        <div class="bloc_card">
 
-            <div class="d-flex align-items-center text-center col-4 ">
+            <div class="bloc_card_header">
                 <h4> Mes informations de connexion </h4>
             </div>
 
-            {{ form_errors(form) }}
+            <div class="bloc_card_body">
+                {{ form_errors(form) }}
 
-            {{ form_start(form) }}
+                {{ form_start(form) }}
+
+                    <div class="bloc_card_edit">
+                        <p>Votre email : </p>
+                        <p>{{ actuel.email }}</p>
+                        {{ form_row( form.email, {label: ' '} ) }}
+                    </div>
+
+                    <div class="bloc_card_edit">
+                        <p>Nom d'utilisateur : </p>
+                        <p>{{ actuel.username }}</p>
+                        {{ form_row( form.username, {label: ' '} )}}
+                    </div>
+
+                    <div class="bloc_card_edit">
+                        <p>Mot de passe : </p>
+                        <p>**********</p>
+                        {{ form_row( form.password, {label: ' '} )}}             
+                    </div>
+
+
+                    <div class="bloc_card_edit_footer">
+                        <button>
+                            <a  href="{{ path('app_user_show', {'id': user.id }) }}">Retour</a>
+                        </button> 
+
+                        <button>
+                            {{ button_label|default('Enregistrer') }}
+                        </button>
+                    </div>
+                    
+                {{ form_end(form) }}
+
+            </div>
         
-                <table class="table">
-                    <tbody>
-                        <tr >
-                            <th>Votre email  </th>
-                            <td>{{ actuel.email }}</td>
-                            <td>{{ form_row( form.email, {label: ' '} ) }}</td>
-                        </tr>
-                        <tr>
-                            <th>Nom d'utilisateur </th>
-                            <td>{{ actuel.username }}</td>
-                            <td>{{ form_row( form.username, {label: ' '} )}}</td>
-                        </tr>
-                        <tr>
-                            <th>Mot de passe </th>
-                            <td>**********</td>
-                            <td>{{ form_row( form.password, {label: ' '} )}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="d-flex justify-content-end">
-                    <button class="btn btn-outline-secondary">{{ button_label|default('Enregistrer') }}</button>
-                </div>
-                
-            {{ form_end(form) }}
-
-        </div>
+        </div> 
+    
     </div>
 
-    <div class="d-flex flex-row justify-content-around">
-
-        {# MODIFIER VERS LIENS DE SUPPRESSION + ajout méthode pour activer/desact compte  #}
-        {#     {{ include('user/_delete_form.html.twig') }} #}
-        {# <button class="btn btn-sm btn-outline-dark p-1" >
-        <a class="btn p-0" href="{{ path('app_accueil') }}">Supprimer</a> 
-        </button>  #}
-
-        {# {% if (app.user.clients) %}
-            <button class="btn btn-sm btn-outline-dark p-1" >
-                <a class="btn p-0" href="{{ path('app_clients_show', {'user_id': app.user.id }) }}">Retour</a>
-            </button>  
-        {% else %} #}
-            <button class="btn btn-sm btn-outline-dark p-1" >
-                <a class="btn p-0" href="{{ path('app_user_show', {'id': user.id }) }}">Retour</a>
-            </button> 
-        {# {% endif %} #}
-
- 
-    </div>
-
-</div>
 {% endblock %}

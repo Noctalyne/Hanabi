@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Adresses;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,13 +14,45 @@ class AdressesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('numAdrss')
-            ->add('rueAdrss')
-            ->add('complementAdrss')
-            ->add('villeAdrss')
-            ->add('codePostalAdrss')
-            ->add('paysAdrss')
-            // ->add('idClientAdresses')
+            ->add('numAdrss', TextType::class, [
+                'attr' => [
+                    // 'class' =>'form-control',
+                    // 'placeholder' => "Entrez votre email.."
+                ]
+            ])
+
+            ->add('rueAdrss', TextType::class, [
+                'attr' => [
+                    // 'class' =>'form-control',
+                    // 'placeholder' => "Entrez votre email.."
+                ]
+            ])
+
+            ->add('complementAdrss', TextType::class, [
+                'required' => false,
+            ])
+
+            ->add('villeAdrss', TextType::class, [
+                'attr' => [
+                    // 'class' =>'form-control',
+                    // 'placeholder' => "Entrez votre email.."
+                ]
+            ])
+
+            ->add('codePostalAdrss', TextType::class, [
+                'attr' => [
+                    // 'class' =>'form-control',
+                    // 'placeholder' => "Entrez votre email.."
+                ]
+            ])
+
+            ->add('paysAdrss', TextType::class, [
+                'attr' => [
+                    // 'class' =>'form-control',
+                    // 'placeholder' => "Entrez votre email.."
+                ]
+            ])
+
         ;
     }
 

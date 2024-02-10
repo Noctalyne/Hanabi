@@ -25,7 +25,7 @@ class AdressesRepository extends ServiceEntityRepository
 
 
     // récupère toutes les adresses du clients
-    public function findAdresses($id)
+    public function findAdresses(int $id)
     {
         $conn = $this->getEntityManager()->getConnection();
         $sql = '
@@ -34,35 +34,53 @@ class AdressesRepository extends ServiceEntityRepository
             INNER JOIN adresses  as a
             WHERE u.id = :id
             ';
-            $params = ['id' => $id]; // recupère la valeur de l'url
+        $params = ['id' => $id]; // recupère la valeur de l'url
 
-        $resultSet = $conn->executeQuery($sql,$params);
+        $resultSet = $conn->executeQuery($sql, $params);
 
-        return $resultSet->fetchAllAssociative();// returns un tableau de tableau SANS objet
+        return $resultSet->fetchAllAssociative(); // returns un tableau de tableau SANS objet
     }
 
-//    /**
-//     * @return Adresses[] Returns an array of Adresses objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
-//    public function findOneBySomeField($value): ?Adresses
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    // récupère UNE adresse de l'utilisateur
+    public function findOneAdresses(int $id_adrss)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+                SELECT *
+                FROM user as u
+                INNER JOIN adresses  as a
+                WHERE a.id = :id_adrss
+                ';
+        $params = ['id_adrss' => $id_adrss]; // recupère la valeur de l'url
+
+        $resultSet = $conn->executeQuery($sql, $params);
+
+        return $resultSet->fetchAllAssociative(); // returns un tableau de tableau SANS objet
+    }
+
+    //    /**
+    //     * @return Adresses[] Returns an array of Adresses objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('a.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Adresses
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
