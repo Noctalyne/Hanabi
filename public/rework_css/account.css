@@ -11,6 +11,10 @@
     border-radius: 10px;
 }
 
+.bloc_card h1 ,.bloc_card h4 {
+    text-align: center;
+}
+
 .bloc_card_header {
     display: flex;
     flex-direction: row;
@@ -19,6 +23,10 @@
     margin: 10px;
     border-bottom: 1px solid #AD0011;
 }
+
+/* .bloc_card_header h4  {
+    
+} */
 
 .bloc_card_body {
     padding: 10px;
@@ -88,4 +96,11 @@
 .bloc_card_add p {
     margin: 20px;
     width: 30%;
+}
+
+.modal_footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
 }

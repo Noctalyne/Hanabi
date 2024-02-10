@@ -10,6 +10,7 @@ use App\Form\ClientsType;
 use App\Form\UserType;
 use App\Repository\AdressesRepository;
 use App\Repository\ClientsRepository;
+use App\Repository\FormulaireDemandeProduitRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,10 +51,11 @@ class UserController extends AbstractController
     // }
 
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(int $id, User $user, AdressesRepository $adressesRepository): Response
+    public function show(int $id, User $user, AdressesRepository $adressesRepository, FormulaireDemandeProduitRepository $formDemande): Response
     {
 
         $adresses = $adressesRepository->findAdresses($id);
+        $formulaires = $formDemande->findAllForms($id);
 
 
         // $listeAdresses = $adressesRepository->findAdresses($id);
@@ -61,9 +63,10 @@ class UserController extends AbstractController
         $limiteAdress = count($adresses);
 
         return $this->render('user/show_user.html.twig', [
+            'user' => $user,            
             'adresses' => $adresses,
             'limiteAdress' => $limiteAdress,
-            'user' => $user,
+            'formulaires' => $formulaires,
         ]);
     }
 

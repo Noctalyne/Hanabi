@@ -1,0 +1,36 @@
+{# MODAL AFFICHER ADRESSE #}
+
+<!-- Button trigger modal -->
+<button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> Voir </button>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Mon adresse</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            
+            <div class="modal-body">
+                <div class="bloc_card_body">
+                    <p>{{ adresse.num_adrss }}{{ adresse.rue_adrss }} </p>
+                    <p>{{ adresse.complement_adrss }}</p>
+                    <p>{{ adresse.code_postal_adrss }} - {{ adresse.ville_adrss }}</p>
+                    <p>{{ adresse.pays_adrss }}</p>
+                </div>
+            </div>
+            
+            <div class="modal-footer bloc_card_edit_footer">
+                <button type="button" data-bs-dismiss="modal">Retour</button>
+                <button type="button" >
+                    <a href="{{ path('app_adresses_edit', {'id': user.id, 'id_adrss': adresse.id}) }}">Modifier</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

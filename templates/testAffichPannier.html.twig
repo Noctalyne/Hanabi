@@ -1,0 +1,12 @@
+
+
+<div class="container">
+<h2>Contenu du panier :</h2>
+<ul>
+    {% for produit in panier %}
+        <li>{{ produit.nomProduit }} - Prix: {{ produit.prixProduit }} EUR</li>
+    {% endfor %}
+</ul>
+
+</div>
+

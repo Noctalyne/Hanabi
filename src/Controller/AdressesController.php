@@ -106,31 +106,36 @@ class AdressesController extends AbstractController
 
 
     #[Route('/{id}/{id_adrss}/show', name: 'app_adresses_show', methods: ['GET'])]
-    public function show(int $id_adrss, Adresses $adresses, AdressesRepository $adressesRepository): Response
+    public function show(int $id_adrss, AdressesRepository $adressesRepository): Response
     {
-        return $this->render('adresses/show.html.twig', [
-            'adress' => $adresses,
+        return $this->render('components/adresses/modal_show_one_adresse.html.twig', [
+            'adresse' => $adressesRepository->findOneBy(['id' => $id_adrss]),
         ]);
     }
 
 
 
 
-    #[Route('/{user_id}/{id_client}/{id}/edit', name: 'app_adresses_edit', methods: ['GET', 'POST'])]
-    public function edit(int $user_id, int $id_client, Request $request, Adresses $adress, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/{id_adrss}/edit', name: 'app_adresses_edit', methods: ['GET', 'POST'])]
+    public function edit(int $id_adrss, int $id, Request $request, AdressesRepository $adressesRepository, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(AdressesType::class, $adress);
+
+        $adresse = $adressesRepository->findOneBy(['id' => $id_adrss]);
+
+        $form = $this->createForm(AdressesType::class, $adresse);
         $form->handleRequest($request);
+
+        // $add = $adressesRepository->findOneBy
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
             // return $this->redirectToRoute('app_adresses_index', [], Response::HTTP_SEE_OTHER);
-            return $this->redirectToRoute('app_clients_show', ['user_id' => $user_id, 'id_client' => $id_client], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_clients_show', ['id' => $id, 'id_adrss' => $id_adrss], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('adresses/edit.html.twig', [
-            'adress' => $adress,
+            'adresse' => $adresse ,
             'form' => $form,
         ]);
     }

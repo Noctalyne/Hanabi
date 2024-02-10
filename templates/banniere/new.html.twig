@@ -1,11 +1,92 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Banniere{% endblock %}
+{% block title %}Crée une bannière{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('./rework_css/account.css')}}">
+{% endblock %}
+
 
 {% block body %}
-    <h1>Create new Banniere</h1>
 
-    {{ include('banniere/_form.html.twig') }}
 
-    <a href="{{ path('app_banniere_index') }}">back to list</a>
+    <div class="container bloc">
+
+        {# {% if msg  %}
+            <div class='container text-center '>
+                <div class="alert alert-sm alert-success p-1">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>{{ msg2 }}</strong>
+                    <p class='mb-0'> {{ msg }} </p>
+                </div>
+            </div> 
+        {% endif %}
+        {{ include('components/bannieres/_delete_ban.html.twig') }} #}
+
+        <h1>Nouvelle bannière</h1>
+
+        <div class="bloc_card">
+
+            {# <div class="bloc_card_header">
+                <h4>Banniere {{ actuelBanniere.id}} </h4>      
+            </div> #}
+
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+
+                
+                <div class="bloc_card_add">
+                    <p>Nom :</p>
+                    {{ form_row( form.nomBanniere, {label: ' '} )}}
+                </div>
+
+
+                <div class="bloc_card_add">
+                    <p>1</p>
+                    {{ form_row( form.premiereImage, {label: ' '})}}
+                </div>
+
+
+                <div class="bloc_card_add">
+                    <p>2</p>
+                    {{ form_row( form.deuxiemeImage, {label: ' '})}}
+                </div>
+
+
+
+                <div class="bloc_card_add">
+                    <p>3</p>
+                    {{ form_row( form.troisiemeImage, {label: ' '})}}
+                </div>
+
+                <div class="bloc_card_edit_footer">
+                    <button>
+                        {{ button_label|default('Enregistrer') }}
+                    </button>
+                </div>         
+            
+            {{ form_end(form) }}
+
+            
+            <button>
+                <a href="{{ path('app_banniere_index') }}">Retour</a>
+            </button>
+    </div>
+
+
+    
+
+    
+
+
+        <div class='d-flex flex-row justify-content-center '>
+            
+
+        </div>
+
+    </div>
+
+
+
+
 {% endblock %}

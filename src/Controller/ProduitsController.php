@@ -72,9 +72,9 @@ class ProduitsController extends AbstractController
 
     // #[Route('/{client_id}/{id}', name: 'app_produits_show', methods: ['GET'])] //, 
     #[Route('/{id}', name: 'app_produits_show', methods: ['GET'])]
-    public function show(int $client_id, Produits $produit, PanierRepository $panierRepository): Response
+    public function show(Produits $produit, PanierRepository $panierRepository): Response
     {   
-        $panier = $panierRepository->findOneBy(['idClient' => $client_id]);
+        // $panier = $panierRepository->findOneBy(['idClient' => $client_id]);
 
         // $liste = $panier->getListeProduits();
         // $quantite = 0;
@@ -86,7 +86,7 @@ class ProduitsController extends AbstractController
     //     dd($panier);
         return $this->render('produits/show.html.twig', [
             'produit' => $produit,
-            'panier' => $panier,
+            // 'panier' => $panier,
         ]);
     }
 
@@ -119,50 +119,50 @@ class ProduitsController extends AbstractController
         return $this->redirectToRoute('app_produits_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{client_id}/{id}', name: 'app_ajout_panier', methods: ['POST'])]
-    public function ajouterProduit( Request $request, EntityManagerInterface $entityManager, Produits $produits,
-    int $client_id, PanierRepository $panierRepository, ClientsRepository $clientsRepository ): Response
-    {
-        $panier = $panierRepository->findOneBy(['idClient' => $client_id]);
-        $client = $clientsRepository->find($client_id);
+    // #[Route('/{client_id}/{id}', name: 'app_ajout_panier', methods: ['POST'])]
+    // public function ajouterProduit( Request $request, EntityManagerInterface $entityManager, Produits $produits,
+    // int $client_id, PanierRepository $panierRepository, ClientsRepository $clientsRepository ): Response
+    // {
+    //     $panier = $panierRepository->findOneBy(['idClient' => $client_id]);
+    //     $client = $clientsRepository->find($client_id);
         
-        $quantite = 0 ;
-        $id = $produits->getId();
+    //     $quantite = 0 ;
+    //     $id = $produits->getId();
 
-        if ($this->isCsrfTokenValid('ajouter'.$produits->getId(), $request->request->get('_token'))) {
+    //     if ($this->isCsrfTokenValid('ajouter'.$produits->getId(), $request->request->get('_token'))) {
 
-            if ($panier === null ) {
-                $panier = new Panier();
-                // $montant = $panier->getPrixTotal();
+    //         if ($panier === null ) {
+    //             $panier = new Panier();
+    //             // $montant = $panier->getPrixTotal();
 
-                // $panier->setIdClient($client);
-                $panier->addListeProduit($produits);
-                $panier->setPrixTotal($produits->getPrixProduit());
-                $quantite = + 1;
-                $entityManager->persist($panier);
-                $entityManager->flush();
-            }
-            // elseif (  ) {
-            //     $quantite = + 1;
-            // }
-            else {
-                $liste = $panier->getListeProduits();
+    //             // $panier->setIdClient($client);
+    //             $panier->addListeProduit($produits);
+    //             $panier->setPrixTotal($produits->getPrixProduit());
+    //             $quantite = + 1;
+    //             $entityManager->persist($panier);
+    //             $entityManager->flush();
+    //         }
+    //         // elseif (  ) {
+    //         //     $quantite = + 1;
+    //         // }
+    //         else {
+    //             $liste = $panier->getListeProduits();
 
-                $total = $panier->getPrixTotal();
+    //             $total = $panier->getPrixTotal();
 
-                if ($liste->contains($produits) ){
-                    // $quantite = $quantite + 1;
+    //             if ($liste->contains($produits) ){
+    //                 // $quantite = $quantite + 1;
                     
-                }
+    //             }
 
-                $panier->addListeProduit($produits);
-                $panier->setPrixTotal($total + $produits->getPrixProduit());
-                $entityManager->persist($panier);
-                $entityManager->flush(); // MAJ de la BDD
-            }
+    //             $panier->addListeProduit($produits);
+    //             $panier->setPrixTotal($total + $produits->getPrixProduit());
+    //             $entityManager->persist($panier);
+    //             $entityManager->flush(); // MAJ de la BDD
+    //         }
 
-        }
+    //     }
 
-        return $this->redirectToRoute("app_produits_show", ['client_id'=> $client_id ,'id'=> $id , 'quantite' => $quantite], Response::HTTP_SEE_OTHER);
-    }
+    //     return $this->redirectToRoute("app_produits_show", ['client_id'=> $client_id ,'id'=> $id , 'quantite' => $quantite], Response::HTTP_SEE_OTHER);
+    // }
 }

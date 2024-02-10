@@ -4,22 +4,29 @@ namespace App\Controller;
 
 use App\Repository\BanniereRepository;
 use App\Repository\ProduitsRepository;
+use SessionIdInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AccueilController extends AbstractController
 {
     #[Route('/', name: 'app_accueil')]
-    public function index(ProduitsRepository $produitsRepository, BanniereRepository $banniereRepository): Response
+    public function index(ProduitsRepository $produitsRepository, BanniereRepository $banniereRepository, SessionInterface $session): Response
     {
         $produit=$produitsRepository->findAll(); // permet de récupérer les info produits
         $carrousel = $banniereRepository->findOneBy(['activated' => 'true']);
+
+        $panier = $session->get('panier');
+        
+        // $this->get('session')->get('panier');
         
         return $this->render('Pages/accueil.html.twig', [
             'controller_name' => 'AccueilController',
             'carrousels' => $carrousel,
             'produits' => $produit,
+            'panier' => $panier,
         ]);
     }
 }

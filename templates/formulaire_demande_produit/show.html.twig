@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}FormulaireDemandeProduit{% endblock %}
 
@@ -26,7 +26,7 @@
                 <td>{{ formulaire_demande_produit.dateEnvoieForm ? formulaire_demande_produit.dateEnvoieForm|date('d M Y à H:i') : '' }}</td>
             </tr>
             <tr>
-                <th>Réponse du vendeur :</th> {# permet d'afficher le état de la demande  #}
+                <th>Réponse du vendeur :</th> permet d'afficher le état de la demande 
                     <td>
                     {% if  formulaire_demande_produit.reponseDemande is same as('attente')  %}
                         Demande en attente   
@@ -38,15 +38,15 @@
             </tr>
         </tbody>
     </table>
-    {% if app.user.clients %} {# si utilisateur est un client renvoie à sa liste personnelle #}
+    {% if app.user.clients %} si utilisateur est un client renvoie à sa liste personnelle
         <button>
             <a class="btn p-0" href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">Retour à la liste</a>
         </button>
-    {% elseif app.user.vendeurs %}{# si utilisateur est un vendeur renvoie à la liste de tous les formulaires #}
+    {% elseif app.user.vendeurs %}si utilisateur est un vendeur renvoie à la liste de tous les formulaires
         <button>
             <a class="btn p-0" href="{{ path('app_formulaire_demande_produit_index') }}">Retour à la liste</a>
         </button>
     {% endif %}
 </div>    
 
-{% endblock %}
+{% endblock %} #}

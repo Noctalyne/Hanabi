@@ -14,14 +14,13 @@
 
         <div class="dropdown-divider"></div>
 
-        {# <a class="dropdown-item" href="{{ path('app_user_show', { id : app.user.id }) }}">Mon Profil</a> #}
-        <a class="dropdown-item" href="{{ path('app_user_show', { id : app.user.id }) }}">Mon Profil</a>
+        <a class="dropdown-item" href="{{ path('app_user_show', { id : app.user.id }) }}">Mon compte</a>
 
         <div class="dropdown-divider"></div>
 
-        {# <a href="{{ path('app_formulaire_demande_produit_show_liste', {'id': app.user.clients.id}) }}">"PANNIER"</a>
+        {# <a href="{{ path('app_formulaire_demande_produit_show_liste', {'id': app.user..id}) }}">Mes formulaires</a> #}
 
-        <div class="dropdown-divider"></div> #}
+        <div class="dropdown-divider"></div>
 
         {# <a href="{{ path('app_formulaire_demande_produit_show_liste', {'id': app.user.clients.id}) }}"> #}
             <img src="{{ asset('images/icones/heart_1.png') }}" alt="Liste des favoris" class="m-1" width="30px" height="30px">
@@ -31,11 +30,11 @@
 
         <div class="dropdown-divider"></div>
 
-        {# <a href="{{ path('app_formulaire_demande_produit_show_liste', {'id': app.user.clients.id}) }}">Mes Formulaires</a> #}
+        <a href="{{ path('app_formulaire_demande_produit_show_liste', {'id': app.user.id}) }}">Mes Formulaires</a>
 
         <div class="dropdown-divider"></div>
 
-        {# <a class="dropdown-item" href="{{ path('app_commandes_index') }}">Mes commandes</a> #}
+        <a class="dropdown-item" href="{{ path('app_commandes_index') }}">Mes commandes</a>
 
         <div class="dropdown-divider"></div>
 

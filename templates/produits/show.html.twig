@@ -22,7 +22,12 @@
                 <p>{{ produit.prixProduit }} $</p>
 
                 {% if app.user %}
-                    {{ include('panier/_ajouter_produit.html.twig') }}
+                    {# {{ include('panier/_ajouter_produit.html.twig') }} #}
+                    {# <button onclick="ajouterAuPanier ('{{ produit.nomProduit }}', {{ produit.prixProduit }})"> #}
+                    <button class="ajouter-au-panier" data-nom="{{ produit.nomProduit }}" data-prix="{{ produit.prixProduit }}">Ajouter au panier</button>
+                    {# ajouter pannier
+                    </button> #}
+
                     {# {% if app.user.clients %}
                         {{ include('panier/_ajouter_produit.html.twig') }}
                     {% elseif app.user.vendeurs %}

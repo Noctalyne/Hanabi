@@ -14,15 +14,15 @@
             <a href="{{ path('app_accueil') }}">Accueil</a>
             <a href="{{ path('app_shop')}}">Boutique</a>
             
-            {% if app.user %}
+            {# {% if app.user %}
                 <a href="{{ path('app_formulaire_demande_produit_show_liste', {'id': app.user.id}) }}">
                     Contact
                 </a>
-            {% else %} {# renvoie sur la page qui informe du besoin de connexion #}
+            {% else %} renvoie sur la page qui informe du besoin de connexion #}
                 <a  href="{{ path('app_contact')}}">
                     Contact
                 </a>
-            {% endif %}
+            {# {% endif %} #}
         
             {# {% if app.user.roles == 'ROLE_ADMIN'  %} #}
                 <a href="{{ path('app_administration')}}">
@@ -42,6 +42,9 @@
 
             {# Icone Pannier #}
             <div class="mx-auto my-auto">
+
+                <a href="{{ path('app_panier_show', {'id' : app.user.id })}}">panier</a>
+
               {{ include('panier/_pannier_dd.html.twig') }}
             </div>
 
@@ -49,9 +52,9 @@
                 {% include './components/navbar/dropdown_account.html.twig' %}
             {% else %}
                 <div class="menu_connect">
-                {# <button> #}
-                    <a class="btn btn-sm btn-outline-dark rounded p-1 p-0" href="{{ path('app_login') }}">Connexion / Inscription</a>
-                {# </button>     #}
+                    <button>
+                        <a style="font-size:15px;" href="{{ path('app_login') }}">Connexion / Inscription</a>
+                    </button>    
                 </div>
             {% endif %}
 

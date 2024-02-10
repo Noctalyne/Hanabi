@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('app_banniere_activated', {'id': banniere.id}) }}" onsubmit="return confirm('Voulez vous activer cette banière ?');">
     <input type="hidden" name="_token" value="{{ csrf_token('activated' ~ banniere.id) }}">
-    <button class="btn btn-sm btn-outline-dark rounded p-0 m-1">Activer</button>
+    <button class="">Activer</button>
 </form>

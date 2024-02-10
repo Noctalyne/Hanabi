@@ -19,7 +19,7 @@ class BanniereController extends AbstractController
     #[Route('/', name: 'app_banniere_index', methods: ['GET'])]
     public function index(BanniereRepository $banniereRepository): Response
     {
-        return $this->render('banniere/list_ban.html.twig', [
+        return $this->render('Pages/admin_view/list_ban.html.twig', [
             'bannieres' => $banniereRepository->trieBaniere() 
             // renvoie un liste trier avec celui activer en premier
         ]);
@@ -100,7 +100,7 @@ class BanniereController extends AbstractController
     #[Route('/{id}', name: 'app_banniere_show', methods: ['GET'])]
     public function show(Banniere $banniere): Response
     {
-        return $this->render('banniere/show.html.twig', [
+        return $this->render('Pages/admin_view/show_banner.html.twig', [
             'banniere' => $banniere,
         ]);
     }

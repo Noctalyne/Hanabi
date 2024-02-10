@@ -9,9 +9,10 @@
   <div class="card-body">
 
     <h5 class="card-title text-center">{{ produit.nomProduit }}</h5>
+    
     <div class="card-text">
       <p >{{ produit.prixProduit }}</p>
-      <a href="#!" class="">Voir</a>
+      <a href="{{ path('app_produits_show', {'id': produit.id}) }}" class="">Voir</a>
     </div>
 
   </div>

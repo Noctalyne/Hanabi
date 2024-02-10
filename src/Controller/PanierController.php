@@ -44,28 +44,28 @@ class PanierController extends AbstractController
     //     ]);
     // }
 
-    #[Route('/{user_id}', name: 'app_panier_show', methods: ['GET'])]  ///{id}
-    public function show(int $user_id ,Panier $panier, PanierRepository $panierRepository, Produits $produits): Response
+    #[Route('/{id}', name: 'app_panier_show', methods: ['GET'])]  ///{id}
+    public function show(int $id ,Panier $panier, PanierRepository $panierRepository, Produits $produits): Response
     {
-        $quantite = 0 ;
-        $panier = $panierRepository->findOneBy(['idClient' => $user_id])  ;
+        // $quantite = 0 ;
+        $panier = $panierRepository->findBy(['user_id' => $id])  ;
 
-        if ($panier != null) {
-            $liste = $panier->getListeProduits();
+        // if ($panier != null) {
+        //     $liste = $panier->getListeProduits();
             
-            $listeArray = $liste->toArray();     
+        //     $listeArray = $liste->toArray();     
             
-            $nbApparitions = count($listeArray);
+        //     $nbApparitions = count($listeArray);
 
-            dd($listeArray);        
-        };
+        //     // dd($listeArray);        
+        // };
 
         
 
 
         return $this->render('panier/show.html.twig', [
             'panier' => $panier,
-            'quantite' => $quantite,
+            // 'quantite' => $quantite,
         ]);
     }
 

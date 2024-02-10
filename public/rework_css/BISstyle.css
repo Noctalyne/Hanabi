@@ -59,6 +59,13 @@ thead tr th {
 }
 
 
+/* .modal_footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+} */
+
 
 /**********     Navbar Responssive CSS  **********/
 
