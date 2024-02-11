@@ -12,7 +12,17 @@
     
     <div class="card-text">
       <p >{{ produit.prixProduit }}</p>
-      <a href="{{ path('app_produits_show', {'id': produit.id}) }}" class="">Voir</a>
+
+
+      {# <a href="{{ path('app_produits_show', { 'user_id': app.user.id , 'id': produit.id}) }}" class="">Voir</a> #}
+
+      {# {{ include('panier/ajouter.html.twig') }} #}
+
+      <form method="post" action="{{ path('add_cart', {'id': produit.id , 'user_id': app.user.id }) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('addCart' ~ produit.id) }}">
+    <button>Add</button>
+</form>
+
     </div>
 
   </div>

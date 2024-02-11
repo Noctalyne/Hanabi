@@ -8,10 +8,12 @@ use App\Form\ProduitsType;
 use App\Repository\ClientsRepository;
 use App\Repository\PanierRepository;
 use App\Repository\ProduitsRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -71,9 +73,10 @@ class ProduitsController extends AbstractController
     }
 
     // #[Route('/{client_id}/{id}', name: 'app_produits_show', methods: ['GET'])] //, 
-    #[Route('/{id}', name: 'app_produits_show', methods: ['GET'])]
-    public function show(Produits $produit, PanierRepository $panierRepository): Response
+    #[Route('/{user_id}/show/{id}', name: 'app_produits_show', methods: ['GET'])]
+    public function show(int $user_id, Produits $produit, PanierRepository $panierRepository): Response
     {   
+        // $user = 
         // $panier = $panierRepository->findOneBy(['idClient' => $client_id]);
 
         // $liste = $panier->getListeProduits();
@@ -165,4 +168,83 @@ class ProduitsController extends AbstractController
 
     //     return $this->redirectToRoute("app_produits_show", ['client_id'=> $client_id ,'id'=> $id , 'quantite' => $quantite], Response::HTTP_SEE_OTHER);
     // }
+
+
+
+
+    // #[Route('/{id}/add', name: 'add_cart', methods: ['GET', 'POST'])]
+    // public function add_item_to_cart(Request $request, EntityManagerInterface $entityManager) :JsonResponse
+    // {
+        // $panier = new Panier();
+        // $form = $this->createForm(PanierType::class, $panier);
+        // $form->handleRequest($request);
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $entityManager->persist($panier);
+        //     $entityManager->flush();
+
+        //     return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+        // }
+
+        // return $this->render('panier/new.html.twig', [
+        //     'panier' => $panier,
+        //     'form' => $form,
+        // ]);
+
+    //     $session =$request->getSession();
+
+
+    //     if (!$session->has('panier')) {
+    //         $session->set('panier', array());
+    //     }
+
+    //     $panier = $session->get('panier');
+
+    //     return $this->json(json_encode($panier));
+    // }
+
+
+    // #[Route('{id}/show/cart', name: 'show_cart', methods: ['GET', 'POST'])]
+    // public function show_cart(int $id, Request $request, UserRepository $userRepository , EntityManagerInterface $entityManager) : Response
+    // {
+    //     // $panier = new Panier();
+    //     // $form = $this->createForm(PanierType::class, $panier);
+    //     // $form->handleRequest($request);
+
+    //     // if ($form->isSubmitted() && $form->isValid()) {
+    //     //     $entityManager->persist($panier);
+    //     //     $entityManager->flush();
+
+    //     //     return $this->redirectToRoute('app_panier_index', [], Response::HTTP_SEE_OTHER);
+    //     // }
+
+    //     // return $this->render('panier/new.html.twig', [
+    //     //     'panier' => $panier,
+    //     //     'form' => $form,
+    //     // ]);
+    //     $user = $userRepository->findBy(['id' => $id ]);
+    //     $session =$request->getSession();
+
+
+    //     // if (!$session->has('panier')) {
+    //     //     $session->set('panier', array());
+    //     // }
+
+    //     $panier = $session->get('panier');
+    //     var_dump($panier);
+
+    //     // return $this->json(json_encode($panier));
+    //     // return $this->redirectToRoute('app_panier_show', [
+    //     //     'panier' => $panier,
+    //     // ], Response::HTTP_SEE_OTHER);
+
+    //     // return $this->redirectToRoute('app_panier_show', ['id' => $id ], Response::HTTP_SEE_OTHER);
+
+    //     return $this->render('panier/_pannier_dd.html.twig', [
+    //         'panier' => $panier,
+    //     ]);
+    // }
+
+
+
 }

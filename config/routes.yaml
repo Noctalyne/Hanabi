@@ -3,3 +3,12 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+# ajouter_au_panier:
+#   path: /produits/{id}/add
+#   controller: App\Controller\PanierController::ajouterProduit
+#   methods: ['POST']
+  
+# panier_show:
+#   path: /panier/show/cart/{user}
+#   controller: App\Controller\PanierController::afficherPanier

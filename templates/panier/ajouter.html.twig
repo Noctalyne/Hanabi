@@ -1,0 +1,4 @@
+{# <form method="post" action="{{ path('add_cart', {'id': produit.id , 'user_id': app.user.id }) }}">
+    <input type="hidden" name="_token" value="{{ csrf_token('addCart' ~ produit.id) }}">
+    <button>Add</button>
+</form> #}

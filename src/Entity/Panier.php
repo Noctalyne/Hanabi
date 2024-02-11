@@ -20,11 +20,12 @@ class Panier
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2, nullable: true)]
     private ?string $prixTotal = null;
 
-    // #[ORM\OneToOne(inversedBy: 'panier', cascade: ['persist', 'remove'])]
-    // private ?Clients $idClient = null;
 
     #[ORM\ManyToMany(targetEntity: Produits::class)]
     private Collection $listeProduits;
+
+    #[ORM\OneToOne(mappedBy: 'panier', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -50,17 +51,6 @@ class Panier
         return $this;
     }
 
-    // public function getIdClient(): ?Clients
-    // {
-    //     return $this->idClient;
-    // }
-
-    // public function setIdClient(?Clients $idClient): static
-    // {
-    //     $this->idClient = $idClient;
-
-    //     return $this;
-    // }
 
     /**
      * @return Collection<int, Produits>
@@ -82,6 +72,28 @@ class Panier
     public function removeListeProduit(Produits $listeProduit): static
     {
         $this->listeProduits->removeElement($listeProduit);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setPanier(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getPanier() !== $this) {
+            $user->setPanier($this);
+        }
+
+        $this->user = $user;
 
         return $this;
     }

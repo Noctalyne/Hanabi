@@ -29,7 +29,7 @@
                     <td>{{ produit.prixProduit }}</td>
                     <td>{{ produit.quantStock }}</td>
                     <td>
-                        <a href="{{ path('app_produits_show', {'id': produit.id}) }}">Voir</a>
+                        <a href="{{ path('app_produits_show', { 'user_id': app.user.id , 'id': produit.id}) }}">Voir</a>
                         <a href="{{ path('app_produits_edit', {'id': produit.id}) }}">Modifier</a>
                     </td>
                 </tr>

@@ -8,9 +8,9 @@
     </div>
     <div class="container mt-5 mb-5 p-3 border rounded shadow-sm">
 
-        {% if app.user.clients.panier != null %}
+        {% if app.user.panier != null %}
 
-            {% for produit in app.user.clients.panier.listeProduits  %}
+            {% for produit in app.user.panier.listeProduits  %}
 
                 <div class="d-flex flex-row m-3 p-1 justify-content-around shadow-sm">
                         <p>{{ produit.nomProduit }}</p>
@@ -28,8 +28,10 @@
             
             </div>
 
-            <div>{{ quantite }}</div>
+            {# <div>{{ panier.quantite }}</div> #}
+            {{ include('panier/_delete_form.html.twig') }}
 
+            
         {% else  %}
 
             <div class="text-center">
@@ -37,6 +39,12 @@
             </div>
 
         {% endif %}
+
+        {# <div id="panier"></div> #}
+
+        {# {% for resp in response %}
+        <p>  {{ resp }} </p>
+        {% endfor %} #}
 
     </div>
 
@@ -47,5 +55,5 @@
 
     {# <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">edit</a> #}
 
-    {# {{ include('panier/_delete_form.html.twig') }} #}
+    
 {% endblock %}

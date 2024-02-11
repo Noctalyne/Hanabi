@@ -24,7 +24,10 @@
                 {% if app.user %}
                     {# {{ include('panier/_ajouter_produit.html.twig') }} #}
                     {# <button onclick="ajouterAuPanier ('{{ produit.nomProduit }}', {{ produit.prixProduit }})"> #}
-                    <button class="ajouter-au-panier" data-nom="{{ produit.nomProduit }}" data-prix="{{ produit.prixProduit }}">Ajouter au panier</button>
+                    <button class="ajouter-au-panier" data-id={{produit.id}}  data-user={{ app.user.id }}  data-nom="{{ produit.nomProduit }}" data-prix="{{ produit.prixProduit }}">Ajouter au panier</button>
+                    
+                     {# data-user="{{ app.user.id }}" #}
+                    
                     {# ajouter pannier
                     </button> #}
 

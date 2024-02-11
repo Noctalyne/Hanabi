@@ -59,6 +59,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Commandes::class)]
     private Collection $list_commandes;
 
+    #[ORM\OneToOne(inversedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Panier $panier = null;
+
     public function __construct()
     {
         $this->liste_formulaires = new ArrayCollection();
@@ -69,7 +72,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     // #[ORM\OneToOne(targetEntity : "Clients", mappedBy: 'user', cascade: ['persist', 'remove'])]
-    
+
     // protected ?Clients $clients = null;
 
     // #[ORM\OneToOne(targetEntity : "Vendeurs", mappedBy: 'userVendeur', cascade: ['persist', 'remove'])]
@@ -157,39 +160,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    // public function getClients(): ?Clients
-    // {
-    //     return $this->clients;
-    // }
 
-    // public function setClients(Clients $clients): static
-    // {
-    //     // set the owning side of the relation if necessary
-    //     if ($clients->getUser() !== $this) {
-    //         $clients->setUser($this);
-    //     }
-
-    //     $this->clients = $clients;
-
-    //     return $this;
-    // }
-
-    // public function getVendeurs(): ?Vendeurs
-    // {
-    //     return $this->vendeurs;
-    // }
-
-    // public function setVendeurs(Vendeurs $vendeurs): static
-    // {
-    //     // set the owning side of the relation if necessary
-    //     if ($vendeurs->getUserVendeur() !== $this) {
-    //         $vendeurs->setUserVendeur($this);
-    //     }
-
-    //     $this->vendeurs = $vendeurs;
-
-    //     return $this;
-    // }
 
     public function getNom(): ?string
     {
@@ -341,4 +312,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getPanier(): ?Panier
+    {
+        return $this->panier;
+    }
+
+    public function setPanier(?Panier $panier): static
+    {
+        $this->panier = $panier;
+
+        return $this;
+    }
+
+    // public function removePanier(?Panier $panier): static
+    // {
+
+    //     // if ($this->panier->removeElement($panier)) {
+    //     //     // set the owning side to null (unless already changed)
+    //     //     if ($panier->getUser() === $this) {
+    //     //         $panier->setUser(null);
+    //     //     }
+
+    //         return $this;
+    //     }
+    // }
 }
