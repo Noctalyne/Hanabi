@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Panier index{% endblock %}
 
@@ -19,7 +19,6 @@
                 <td>{{ panier.id }}</td>
                 <td>{{ panier.prixTotal }}</td>
                 <td>
-                    {# <a href="{{ path('app_panier_show', {'id': panier.id}) }}">show</a> #}
                     <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">edit</a>
                 </td>
             </tr>
@@ -32,4 +31,4 @@
     </table>
 
     <a href="{{ path('app_panier_new') }}">Create new</a>
-{% endblock %}
+{% endblock %} #}

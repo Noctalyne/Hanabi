@@ -19,15 +19,11 @@
                     Contact
                 </a>
             {% else %} renvoie sur la page qui informe du besoin de connexion #}
-                <a  href="{{ path('app_contact')}}">
-                    Contact
-                </a>
+                <a  href="{{ path('app_contact')}}">Contact</a>
             {# {% endif %} #}
         
             {# {% if app.user.roles == 'ROLE_ADMIN'  %} #}
-                <a href="{{ path('app_administration')}}">
-                    Admin
-                </a>
+                <a href="{{ path('app_administration')}}">Admin</a>
             {# {% endif %} #}
 
 
@@ -42,15 +38,7 @@
 
             {# Icone Pannier #}
             <div class="mx-auto my-auto">
-
-                {# <a href="{{ path('app_panier_show', {'id' : app.user.id })}}">panier</a> #}
-                {# <a href="{{ path('show_cart', {'user_id' : app.user.id })}}">panier</a> #}
-                {# <a href="./testAffichPannier.html.twig" >panier</a> #}
                 <a href="{{ path('app_panier_show',{'user_id' : app.user.id } )}}">panier</a>
-                
-
-              {# {{ include('panier/_pannier_dd.html.twig') }} #}
-              {{ include('panier/pan.html.twig') }}
             </div>
 
             {% if app.user %}

@@ -16,53 +16,42 @@
             <a href="{{ path('app_adresses_index') }}">Liste des adresses  (voir pour supp)</a>
         </button>
     </div>
+ #}
 
-    <div>
-        <button>
-            <a href="{{ path('app_panier_index') }}">Liste des panier (voir pour supp)</a>
-        </button>
-    </div>  #}
+  <div class="container bloc">
 
+    <h1>"VISION RAPIDE</h1>
 
-    <div class="container bloc">
-
-        <h1>"VISION RAPIDE</h1>
-
-        <div class="accordion w-100" id="accordionAdmin">
+    <div class="accordion w-100" id="accordionAdmin">
                 
-            {% include "./components/accordion/component_list_produits.html.twig" %}
-            {% include "./components/accordion/component_list_formulaires.html.twig" %}
-            {% include "./components/accordion/component_list_commandes.html.twig" %}
+      {% include "./components/accordion/component_list_produits.html.twig" %}
+      {% include "./components/accordion/component_list_formulaires.html.twig" %}
+      {% include "./components/accordion/component_list_commandes.html.twig" %}
 
-        </div> 
-
-
-
-        <div class="container index_admin">
-
-            <div>
-                <button>
-                    <a href="{{ path('app_user_index') }}">Liste des "User"</a>
-                </button>
-            </div>
-
-            <div>
-                <button>
-                    <a href="{{ path('app_banniere_index') }}">Gestion de la bannière</a>
-                </button>
-            </div>
+    </div> 
 
 
-        </div>
+
+    <div class="container index_admin">
+
+      <div>
+        <button>
+            <a href="{{ path('app_user_index') }}">Liste des "User"</a>
+          </button>
+      </div>
+
+      <div>
+        <button>
+          <a href="{{ path('app_banniere_index') }}">Gestion de la bannière</a>
+        </button>
+      </div>
 
 
-        
     </div>
 
 
-
-
-
+        
+  </div>
 
 {% endblock %}
 
