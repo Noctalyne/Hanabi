@@ -25,8 +25,8 @@
                   <td>{{ commande.listeProduits ? commande.listeProduits|json_encode : '' }}</td>
                   <td>{{ commande.prixTotal }}</td>
                   <td>
-                      <a href="{{ path('app_commandes_show', {'id': commande.id}) }}">show</a>
-                      <a href="{{ path('app_commandes_edit', {'id': commande.id}) }}">edit</a>
+                      <a href="{{ path('app_commandes_show_one', {'cmd_id': commande.id}) }}">show</a>
+                      {# <a href="{{ path('app_commandes_edit', {'id': commande.id}) }}">edit</a> #}
                   </td>
               </tr>
             {% else %}

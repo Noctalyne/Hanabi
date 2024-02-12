@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Modifer mon adresse {% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('./rework_css/component_temp_edit.css')}}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container bloc">
+
+        {# {% if msg  %}
+            <div class='container text-center '>
+                <div class="alert alert-sm alert-success p-1">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>{{ msg2 }}</strong>
+                    <p class='mb-0'> {{ msg }} </p>
+                </div>
+            </div> 
+        {% endif %} #}
+
+        <div class="bloc_edit">
+
+            <div class="bloc_edit_header">
+                <h1> Modifer mon adresse </h1>
+            </div>
+
+            <div class="bloc_edit_content">
+
+                <div class="edit_content_row_adrss">
+                    <p></p>
+                    <h5>Actuel</h5>
+                    <h5>Nouveau</h5>
+                </div>
+
+                {{ form_start(form) }}
+                {{ form_errors(form) }}            
+                
+                    <div class="edit_content_row_adrss">
+                        <p>Numéros</p>
+                        <p> {{ adresse.numAdrss }} </p>
+                        {{ form_row( form.numAdrss, {label: ' '} ) }}  
+                    </div>
+
+                    
+                    <div class="edit_content_row_adrss">
+                        <p>Rue</p>
+                        <p> {{ adresse.rueAdrss }} </p>
+                        {{ form_widget( form.rueAdrss ) }} 
+                    </div>
+
+
+                    <div class="edit_content_row_adrss">
+                        <p>Complément d'addresse <br>
+                            <small>(Résidence, Batiment, Appartement)</small>
+                        </p>
+                        <p> {{ adresse.complementAdrss }} </p>
+                        {{ form_widget( form.complementAdrss ) }} 
+                    </div>
+
+
+                    <div class="edit_content_row_adrss">
+                        <p>Ville</p>
+                        <p> {{ adresse.villeAdrss }} </p>
+                        {{ form_widget( form.villeAdrss ) }} 
+                    </div>
+
+
+
+                    
+                    <div class="edit_content_row_adrss">
+                        <p>Code postal</p>
+                        <p> {{ adresse.codePostalAdrss }} </p>
+                        {{ form_widget( form.codePostalAdrss ) }} 
+                    </div>
+
+
+                    <div class="edit_content_row_adrss">
+                        <p>Pays</p>
+                        <p> {{ adresse.paysAdrss }} </p>
+                        {{ form_widget( form.paysAdrss ) }} 
+                    </div>
+
+
+
+                    <div class="edit_content_footer" >
+
+                        <button class="bloc_edit_footer">
+                            <a href="{{ path('app_user_show', {'id': app.user.id }) }}">Retour</a>
+                        </button>                        
+
+                        <button class="bloc_edit_footer">
+                            {{ button_label|default('Mettre à jour') }}
+                        </button>
+                    </div>           
+                
+                {{ form_end(form) }}
+
+            </div>
+        
+        </div>
+
+    </div>
+{# {{ include('components/adresses/_delete_addresse.html.twig') }} #}
+
+{% endblock %}
+
+

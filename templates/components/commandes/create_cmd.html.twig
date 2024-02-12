@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_create_commandes', {'id' : app.user.id ,'id_panier': panier.id}) }}" onsubmit="">
+    <input type="hidden" name="_token" value="{{ csrf_token('ajouter' ~ panier.id) }}">
+    <button class="">Payer</button>
+</form>

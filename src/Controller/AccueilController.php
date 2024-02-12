@@ -22,7 +22,7 @@ class AccueilController extends AbstractController
         
         // $this->get('session')->get('panier');
         
-        return $this->render('Pages/accueil.html.twig', [
+        return $this->render('pages/accueil.html.twig', [
             'controller_name' => 'AccueilController',
             'carrousels' => $carrousel,
             'produits' => $produit,

@@ -1,0 +1,64 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('./rework_css/component_dd_panier.css') }}">
+{% endblock %}
+  
+  
+  {% if app.user %}
+
+
+    <div class="dropdown dropdown-center">
+
+        <button id='panier' class="btn dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"  aria-expanded="false">
+            <img src="{{ asset('images/icones/shopping-cart_1.png') }}" alt="Panier" class="m-1" width="30px" height="30px">
+        </button>
+
+        <div class="dropdown-menu" aria-labelledby='panier'>
+
+            <h6 class="dropdown-header">Mon panier</h6>
+
+            {% if app.user.panier != null %}
+
+                <div class="dropdown-item dropdown_panier_row">
+                    <p>Produit</p>
+                    <p>Action</p>
+                    <p>Prix</p>
+                </div>
+
+                {% for produit in app.user.panier.listeProduits %}
+
+                    <div class='dropdown-item dropdown_panier_row'>
+                        <p>{{ produit.nomProduit }}</p>
+                        <a href="{{ path('app_panier_show', {'user_id': app.user.id}) }}">voir</a>
+                        <p>{{ produit.prixProduit }}  &#8364; </p>
+                        
+                        {# <a href="{{ path('app_panier_edit', {'id': panier.id}) }}">edit</a>  #}
+                    </div>
+
+                {% endfor %}
+
+                <div class="dropdown-item dropdown_panier_row">
+                    <p>Total : </p>
+                    <p></p>
+                    <p>{{ app.user.panier.prixTotal }} &#8364;</p>            
+                </div>
+
+                <div class="dropdown-item dropdown_panier_row">
+                    <a href="{{ path('app_panier_show', {'user_id': app.user.id}) }}">Afficher</a>
+                </div>
+            
+            {% else %}
+
+                <div>
+                    <p> Votre panier est vide</p>
+                </div>        
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+ {% endif %}
+
+
+

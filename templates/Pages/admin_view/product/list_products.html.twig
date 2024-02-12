@@ -1,0 +1,109 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Liste des produits{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h1></h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+
+                </tr>
+            </thead>
+            <tbody>
+            {% for produit in produits %}
+                <tr>
+                    <td>{{ produit.nomProduit }}</td>
+                    <td>{{ produit.descriptionProduit }}</td>
+                    <td>{{ produit.imgProduit }}</td>
+                    <td>{{ produit.prixProduit }}</td>
+                    <td>{{ produit.quantStock }}</td>
+                    <td>
+                        <a href="{{ path('app_produits_show', { 'user_id': app.user.id , 'id': produit.id}) }}">Voir</a>
+                        <a href="{{ path('app_produits_edit', {'id': produit.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Aucun produits trouver</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+
+
+        <div class="d-flex justify-content-center">
+            <button>
+                <a href="{{ path('app_produits_new') }}">Ajouter un produit</a>
+            </button>
+        </div>
+
+
+    </div>
+{% endblock %} #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste des produits {% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('./rework_css/component_temps_list_produit.css')}}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container bloc">
+
+        <div class="bloc_show">
+
+            <div class="bloc_show_header">
+                <h1> Liste des produits </h1>
+            </div>
+
+            <div class="bloc_show_content">
+            
+                <div class="show_content_row">
+                    <h5>Nom </h5>
+                    <h5>Description</h5>
+                    <h5>Image</h5>
+                    <h5>Prix</h5>
+                    <h5>Stock</h5>
+                    <h5>Action</h5>
+                </div>
+
+
+                {% for content in produits %}
+                    <div class="show_content_row">
+                        <p> {{ content.nomProduit }} </p>
+                        <p> {{ content.descriptionProduit }} </p>
+                        <img class="" src="{{ asset('images/produits/' ~ content.imgProduit) }}" alt="photo du produit :" ~ {{content.nomProduit }} style="height:100px;">
+                        <p> {{ content.prixProduit }} </p>
+                        <p> {{ content.quantStock }} </p>
+                    </div>
+                {% endfor %}
+                
+
+                <div class="show_content_footer" >
+
+                    <button class="bloc_show_footer">
+                        <a href="{{ path('app_administration') }}">Retour</a>
+                    </button>                        
+
+                    {# <button class="bloc_show_footer"> #}
+                        {# {{ button_label|default('Enregistrer') }} #}
+                    {# </button> #}
+                </div>           
+                
+            </div>
+        
+        </div>
+
+    </div>
+
+{% endblock %}
+

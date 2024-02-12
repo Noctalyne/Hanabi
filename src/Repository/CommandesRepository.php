@@ -21,6 +21,26 @@ class CommandesRepository extends ServiceEntityRepository
         parent::__construct($registry, Commandes::class);
     }
 
+
+    public function findAllCmd(int $id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+                SELECT *
+                FROM commandes as cmd
+                INNER JOIN user  as u
+                ON cmd.user_id = :id
+                ';
+        $params = ['id' => $id]; // recupère la valeur de l'url
+
+        $resultSet = $conn->executeQuery($sql, $params);
+
+        // return $resultSet->fetchAllAssociative(); // returns un tableau de tableau SANS objet
+        return $resultSet;
+    }
+
+
+
 //    /**
 //     * @return Commandes[] Returns an array of Commandes objects
 //     */

@@ -22,7 +22,7 @@ class FormulaireDemandeProduitController extends AbstractController
     #[Route('/', name: 'app_formulaire_demande_produit_index', methods: ['GET'])]
     public function index( FormulaireDemandeProduitRepository $formulaireDemandeProduitRepository ): Response
     {
-        return $this->render('formulaire_demande_produit/index.html.twig', [
+        return $this->render('pages/admin_view/forms_product/list_forms_product.html.twig', [
             'formulaire_demande_produits' => $formulaireDemandeProduitRepository->findAll(),
         ]);
     }
@@ -63,8 +63,7 @@ class FormulaireDemandeProduitController extends AbstractController
             return $this->redirectToRoute('app_formulaire_demande_produit_show_liste', ['id'=> $id], Response::HTTP_SEE_OTHER);  
         }
 
-        return $this->render('pages/user_view/new_form.html.twig', [
-    
+        return $this->render('pages/user_view/forms_product/new_form.html.twig', [
             'formulaire_demande_produit' => $formulaireDemandeProduit,
             'form' => $form,
         ]);
@@ -93,7 +92,7 @@ class FormulaireDemandeProduitController extends AbstractController
         // $listeFormulaires = $formulaireDemandeProduitRepository->findAllForms($id);
         // $user = $userRepository->find($id);
         
-        return $this->render('pages/user_view/form_list.html.twig', [
+        return $this->render('pages/user_view/forms_product/form_list.html.twig', [
             'formulaire_demande_produits' => $listeFormulaires= $formulaireDemandeProduitRepository->findAllForms($id),
             'user' => $user = $userRepository->find($id) 
 

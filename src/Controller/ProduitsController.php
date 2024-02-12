@@ -24,7 +24,7 @@ class ProduitsController extends AbstractController
     #[Route('/', name: 'app_produits_index', methods: ['GET'])]
     public function index(ProduitsRepository $produitsRepository): Response
     {
-        return $this->render('produits/index.html.twig', [
+        return $this->render('pages/admin_view/product/list_products.html.twig', [
             'produits' => $produitsRepository->findAll(),
         ]);
     }
@@ -66,7 +66,7 @@ class ProduitsController extends AbstractController
             return $this->redirectToRoute('app_produits_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('produits/new.html.twig', [
+        return $this->render('pages/admin_view/product/add_new.html.twig', [
             'produit' => $produit,
             'form' => $form,
         ]);

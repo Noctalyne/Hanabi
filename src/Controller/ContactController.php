@@ -20,7 +20,7 @@ class ContactController extends AbstractController
         // last username entered by the user
         // $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('Pages/contact.html.twig', [
+        return $this->render('pages/contact.html.twig', [
             'controller_name' => 'ContactController',
             // 'last_username' => $lastUsername, 
             // 'error' => $error

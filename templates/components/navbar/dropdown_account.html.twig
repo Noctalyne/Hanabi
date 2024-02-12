@@ -1,7 +1,5 @@
-{# <div class="dropdown-center d-inline-flex justify-content-center account_dropdown"> #}
-{# {% %} #}
 
-<div class="dropdown-center account_dropdown">
+<div class="dropdown dropdown-center account_dropdown">
 
     <button id="menuProfil" class="dropdown-toggle dropdown-toggle-split show" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
         <img id="img_profil" src="{{ asset('images/icones/user_black_line.png') }}" alt="Logo profil" class="m-1" width="40px"height="40px">
@@ -34,7 +32,7 @@
 
         <div class="dropdown-divider"></div>
 
-        <a class="dropdown-item" href="{{ path('app_commandes_index') }}">Mes commandes</a>
+        <a class="dropdown-item" href="{{ path('app_commandes_user_show', {'id': app.user.id}) }}">Mes commandes</a>
 
         <div class="dropdown-divider"></div>
 

@@ -16,7 +16,7 @@
                         <p>{{ produit.nomProduit }}</p>
                         <img src="{{ asset('images/produits/' ~ produit.imgProduit) }}" alt="photo du produit :" ~ {{produit.nomProduit }} style="height:150px; "> {# style="height:100%; width:200px;" #}
                         <p class="text-break" style="width:200px;">{{ produit.descriptionProduit }}</p>
-                        <p>{{ produit.prixProduit }} $</p>
+                        <p>{{ produit.prixProduit }} &#8364;</p>
                 </div>
 
             {% endfor %}
@@ -29,8 +29,11 @@
             </div>
 
             {# <div>{{ panier.quantite }}</div> #}
-            {{ include('panier/_delete_form.html.twig') }}
 
+            <div>
+                {{ include('./components/panier/_delete_all_prodduct.html.twig') }}
+                {{ include('./components/commandes/create_cmd.html.twig') }}
+            </div>
             
         {% else  %}
 
@@ -40,11 +43,6 @@
 
         {% endif %}
 
-        {# <div id="panier"></div> #}
-
-        {# {% for resp in response %}
-        <p>  {{ resp }} </p>
-        {% endfor %} #}
 
     </div>
 

@@ -93,7 +93,7 @@ class AdressesController extends AbstractController
             return $this->redirectToRoute('app_user_show', ['id' => $id ], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('adresses/new_adresse.html.twig', [
+        return $this->render('pages/user_view/adresse/_new_adresse.html.twig', [
             'adress' => $adress,
             'form' => $form,
             'msg' => $msg,
@@ -134,7 +134,7 @@ class AdressesController extends AbstractController
             return $this->redirectToRoute('app_clients_show', ['id' => $id, 'id_adrss' => $id_adrss], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('adresses/edit.html.twig', [
+        return $this->render('pages/user_view/adresse/_edit_adresse.html.twig', [
             'adresse' => $adresse ,
             'form' => $form,
         ]);

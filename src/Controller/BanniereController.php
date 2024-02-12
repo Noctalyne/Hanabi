@@ -19,7 +19,7 @@ class BanniereController extends AbstractController
     #[Route('/', name: 'app_banniere_index', methods: ['GET'])]
     public function index(BanniereRepository $banniereRepository): Response
     {
-        return $this->render('Pages/admin_view/list_ban.html.twig', [
+        return $this->render('pages/admin_view/banner/list_ban.html.twig', [
             'bannieres' => $banniereRepository->trieBaniere() 
             // renvoie un liste trier avec celui activer en premier
         ]);
@@ -91,7 +91,7 @@ class BanniereController extends AbstractController
             return $this->redirectToRoute('app_banniere_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('banniere/new.html.twig', [
+        return $this->render('pages/admin_view/banner/add_new_carousel.html.twig', [
             'banniere' => $banniere,
             'form' => $form,
         ]);
@@ -100,7 +100,7 @@ class BanniereController extends AbstractController
     #[Route('/{id}', name: 'app_banniere_show', methods: ['GET'])]
     public function show(Banniere $banniere): Response
     {
-        return $this->render('Pages/admin_view/show_banner.html.twig', [
+        return $this->render('pages/admin_view/banner/show_banner.html.twig', [
             'banniere' => $banniere,
         ]);
     }
@@ -178,7 +178,7 @@ class BanniereController extends AbstractController
             
             $msg2 ='Super ! Bannière enregistrée.';
 
-            return $this->render('banniere/edit.html.twig', [
+            return $this->render('pages/admin_view/banner/_edit_banner.html.twig', [
                 'banniere' => $banniere,
                 'form' => $form,
                 'actuelBanniere' => $actuelBanniere,
@@ -189,7 +189,7 @@ class BanniereController extends AbstractController
         }
         
 
-        return $this->render('banniere/edit.html.twig', [
+        return $this->render('pages/admin_view/banner/_edit_banner.html.twig', [
             'banniere' => $banniere,
             'form' => $form,
             'actuelBanniere' => $actuelBanniere,
