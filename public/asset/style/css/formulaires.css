@@ -1,0 +1,49 @@
+/* FORMULAIRE TYPE : NEW  */
+.bloc_add {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border: 1px solid #AD0011;
+    border-radius: 10px;
+}
+
+.bloc_add_header {
+    text-align: center;
+    border-bottom: 1px solid #AD0011;
+    margin: 20px 20px 40px 20px;
+    padding: 10px;
+}
+
+
+.add_content_row {
+    margin-left: 10%;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: repeat(1, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+}
+
+.add_content_row div {
+    margin-left: 20px;
+}
+
+.add_content_footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.bloc_add_footer {
+    width: 25%;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

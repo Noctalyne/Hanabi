@@ -1,27 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connectez vous !{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('asset/style/css/composants/composant_log.css')}}">
+{% endblock %}
 
 {% block body %}
-    <section class="container w-75 pt-5 pb-5 ">
-        <form method="post" class=" container w-75 pt-3 pb-3">
+
+    <section class="container login_bloc">
+
+        <form method="post">
+
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
             {% if app.user %}
+
                 <div class="mb-3">
                     Vous êtes connecter comme {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Deconnexion</a>
                 </div>
-            {% else %}
-                <div class="container text-center">
-                    <h1 class="h3 mb-3 font-weight-normal"> Connectez-vous</h1>
-                </div>
 
-                <!--div principal qui modifie la largeur du formulaire-->
-                <div class="container w-75 d-flex flex-column justify-content-between">
+            {% else %}
+
+                <div class="container ">
+
+                    <div class="login_bloc_header">
+                        <h1> Connectez-vous</h1>
+                    </div>
                                                 
-                    <div class="p-2">
+                    <div class="login_bloc_content">
+
                         <div class="form-floating  p-2">
                             <label for="inputEmail">Email : </label>
                             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
@@ -33,17 +43,17 @@
                         </div>
 
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                        <button class="login_bloc_button" type="submit">Connexion</button>
+                        
                     </div>
-                    
-                    <div class="d-flex justify-content-around mt-3">
-                        <button class="btn  btn-sm btn-outline-dark rounded" type="submit">Connexion</button>
-                    </div>
+
                 </div>
             {% endif %}
         </form>
 
-        <div> {# Changer la taile de la police  #}
-            <a class="text-black text-center" href="{{ path('app_register') }}">
+        <div class="login_bloc_footer">
+            <a href="{{ path('app_register') }}">
                 <p>Pas encore inscrit ? Rejoignez nous dès maintenant !</p>
             </a>
         </div>

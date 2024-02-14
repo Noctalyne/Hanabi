@@ -1,0 +1,36 @@
+.card_produit {
+    width: fit-content;
+    border: 1px solid #AD0011 !important;
+    border-radius: 9px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px !important;
+}
+
+.card_produit img {
+    height: 300px !important;
+    width: 200px!important;
+    border-radius: 9px;
+}
+
+.card_produit_content {
+    display: flex;
+    flex-direction: column;
+    margin: auto 10px;
+}
+
+.card_produit_content p {
+    margin: 20px auto;
+    text-wrap: wrap;
+}
+
+.card_produit_header {
+    color: #AD0011 !important;
+    margin: 20px auto;
+}
+
+
+.card_footer {
+    display: flex;
+    flex-direction: row;
+}

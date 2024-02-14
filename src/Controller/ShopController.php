@@ -16,7 +16,7 @@ class ShopController extends AbstractController
         $produit=$produitsRepository->findAll(); // permet de récupérer les info produits
         $carrousel = $banniereRepository->findOneBy(['activated' => 'true']);
         
-        return $this->render('pages/shop.html.twig', [
+        return $this->render('pages/Boutique/shop.html.twig', [
             'controller_name' => 'ShopController',
             'carrousels' => $carrousel,
             'produits' => $produit,

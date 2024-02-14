@@ -93,7 +93,7 @@ class AdressesController extends AbstractController
             return $this->redirectToRoute('app_user_show', ['id' => $id ], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('pages/user_view/adresse/_new_adresse.html.twig', [
+        return $this->render('pages/User/adresses/_new_adresse.html.twig', [
             'adress' => $adress,
             'form' => $form,
             'msg' => $msg,
@@ -119,22 +119,18 @@ class AdressesController extends AbstractController
     #[Route('/{id}/{id_adrss}/edit', name: 'app_adresses_edit', methods: ['GET', 'POST'])]
     public function edit(int $id_adrss, int $id, Request $request, AdressesRepository $adressesRepository, EntityManagerInterface $entityManager): Response
     {
-
         $adresse = $adressesRepository->findOneBy(['id' => $id_adrss]);
 
         $form = $this->createForm(AdressesType::class, $adresse);
         $form->handleRequest($request);
 
-        // $add = $adressesRepository->findOneBy
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            // return $this->redirectToRoute('app_adresses_index', [], Response::HTTP_SEE_OTHER);
             return $this->redirectToRoute('app_clients_show', ['id' => $id, 'id_adrss' => $id_adrss], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('pages/user_view/adresse/_edit_adresse.html.twig', [
+        return $this->render('pages/User/adresses/_edit_adresse.html.twig', [
             'adresse' => $adresse ,
             'form' => $form,
         ]);

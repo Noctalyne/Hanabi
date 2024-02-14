@@ -1,5 +1,5 @@
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('./rework_css/component_navbar.css') }}" />
+    <link rel="stylesheet" href="{{ asset('asset/style/css/composants/composant_navbar.css') }}"/>
 {% endblock %}
 
 <div class="container">
@@ -10,26 +10,21 @@
             <img src="{{ asset('images/logo/grp_marque.png') }}" alt="Logo Hanabi" />
         </a>
 
-        <nav class="w-100 navigation_link">
+        <nav class="navigation_link">
+
             <a href="{{ path('app_accueil') }}">Accueil</a>
             <a href="{{ path('app_shop')}}">Boutique</a>
-            
-            {# {% if app.user %}
-                <a href="{{ path('app_formulaire_demande_produit_show_liste', {'id': app.user.id}) }}">
-                    Contact
-                </a>
-            {% else %} renvoie sur la page qui informe du besoin de connexion #}
-                <a  href="{{ path('app_contact')}}">Contact</a>
-            {# {% endif %} #}
-        
-            {# {% if app.user.roles == 'ROLE_ADMIN'  %} #}
-                <a href="{{ path('app_administration')}}">Admin</a>
-            {# {% endif %} #}
+            <a  href="{{ path('app_contact')}}">Contact</a>
 
+            {% if app.user %}
+                {% if app.user.roles ? app.user.roles|json_encode : '' == 'ROLE_ADMIN' %}
+                    <a href="{{ path('app_administration')}}">Admin</a>
+                {% endif %}
+            {% endif %}
 
-            <form>
-                <div class="input-group border rounded texte-color">
-                    <input type="text" class="form-control form-control" placeholder="produit, licence...">
+            <form class="nav_search">
+                <div class="input-group border rounded ">
+                    <input type="text" class="form-control form-control" placeholder="Rechercher...">
                     <div class="input-group-text">
                         <img src="{{ asset('images/icones/search.png') }}" alt="" width="20px" height="20px">
                     </div>
@@ -37,25 +32,22 @@
             </form>
 
             {% if app.user %}
-                <div class="d-flex flew-row justify-content-between">
-                    <div>{% include './components/panier/_dropdown.html.twig' %}</div>{# Icone Pannier #}
-                    <div>{% include './components/navbar/dropdown_account.html.twig' %}</div>
-                    
-                    
+                <div class="connected">
+                    {# Icone Pannier #}
+                    <div>{% include './components/panier/_dropdown.html.twig' %}</div>
+                    <div>{% include './components/navbar/dropdown_account.html.twig' %}</div>                
                 </div>
-
             {% else %}
-
-                <div class="menu_connect">
-                    <button>
-                        <a style="font-size:15px;" href="{{ path('app_login') }}">Connexion / Inscription</a>
-                    </button>    
+                <div class="connected">
+                    <button class="icon_button">
+                        <a href="{{ path('app_login') }}">
+                            <img id="img_profil" src="{{ asset('images/icones/user_black_line.png') }}" alt="Logo profil">
+                        </a>
+                    </button> 
                 </div>
             {% endif %}
 
         </nav>
-
     </div>
-
-
+    
 </div>

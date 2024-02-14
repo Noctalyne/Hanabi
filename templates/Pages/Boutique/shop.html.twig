@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Boutique{% endblock %}
+
+
+{% block stylesheets %}
+    {# <link rel="stylesheet" href="{{asset('css/shop/shop.css')}}">
+	<link rel="stylesheet" href="{{asset('css/shop/card_produit.css')}}"> #}
+
+    {# <link rel="stylesheet" href="{{ asset('asset/style/css/composants/composant_card_produit.css') }}"> #}
+
+    {# <link rel="stylesheet" href="{{ asset('./rework_css/BISstyle.css') }}"> #}
+{% endblock %}
+
+
+{% block body %}
+
+    {% include "./components/base/banner.html.twig" %}
+
+    <div class="container bloc">
+
+        <div>
+            <h1> Boutique </h1>
+        </div>
+
+        <div class="container mozaic_produits">
+            {# Permet de boucler sur chaque produits existant #}
+            {% for produit in produits %} 
+                {% include "./pages/Boutique/produits/card_produit.html.twig" %}
+            {% endfor %}    
+        </div>
+
+    </div>
+{% endblock %}

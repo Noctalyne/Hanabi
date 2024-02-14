@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ produit.nomProduit }} {% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('./asset/style/css/produit.css')}}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container bloc">
+
+        <div class="container bloc_show_produit">
+
+            <div class="bloc_show_content_produit">
+            
+                <div class="show_content_row_produit">
+                    <img class="" src="{{ asset('images/produits/' ~ produit.imgProduit) }}" alt="photo du produit :" ~ {{produit.nomProduit }} style="height:400px;">
+                </div>
+
+                <div class="show_content_row_produit">
+                    <h1> {{ produit.nomProduit }} </h1>
+                    <em>{{ produit.descriptionProduit }}</em>
+                    <p>{{ produit.prixProduit }} &#8364; </p>
+                    {% if app.user %}
+                        {% include './components/panier/add_cart.html.twig' %}
+                    {% endif %}
+                </div>
+
+            </div>
+        
+        </div>
+                            
+        {% if app.user %}
+            <div class="container show_content_footer_produit" >
+                <button class="bloc_show_footer_produit">
+                    <a href="{{ path('app_shop') }}">Retour à la boutique</a>
+                </button>                        
+            </div>           
+        {% endif %}
+
+    </div>
+
+{% endblock %}
+

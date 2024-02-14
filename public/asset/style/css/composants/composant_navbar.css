@@ -1,0 +1,66 @@
+.navigation_bar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 30px auto;
+}
+
+
+.navigation_link {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.navigation_link a {
+    font-size: 25px;
+    text-align: center;
+    margin: 0px 15px ;
+}
+
+/* Search */
+.nav_search {
+    width: 20%;
+    margin: 20px 30px;
+}
+
+
+.connected {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.connected button a {
+    /* font-size:15px;
+    margin: 5%; */
+}
+
+/* Dropdown */
+
+.account_dropdown {
+
+    display: flex;
+    justify-content: center;
+
+}
+
+
+/* Responssive CSS for mobile */
+@media (max-width: 430px) {
+    .navigation_bar div a img {
+        /* flex-direction: column !important; */
+        width: 90%;
+    }
+
+    .navbar {
+        margin: auto 5% !important ;
+    }
+
+
+    .navigation_link {
+        flex-direction: column !important;
+    }
+}

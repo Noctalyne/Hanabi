@@ -22,7 +22,7 @@ class FormulaireDemandeProduitController extends AbstractController
     #[Route('/', name: 'app_formulaire_demande_produit_index', methods: ['GET'])]
     public function index( FormulaireDemandeProduitRepository $formulaireDemandeProduitRepository ): Response
     {
-        return $this->render('pages/admin_view/forms_product/list_forms_product.html.twig', [
+        return $this->render('/pages/Administration/formulaires/list_forms_product.html.twig', [
             'formulaire_demande_produits' => $formulaireDemandeProduitRepository->findAll(),
         ]);
     }
@@ -63,7 +63,7 @@ class FormulaireDemandeProduitController extends AbstractController
             return $this->redirectToRoute('app_formulaire_demande_produit_show_liste', ['id'=> $id], Response::HTTP_SEE_OTHER);  
         }
 
-        return $this->render('pages/user_view/forms_product/new_form.html.twig', [
+        return $this->render('pages/User/formulaires/new_form.html.twig', [
             'formulaire_demande_produit' => $formulaireDemandeProduit,
             'form' => $form,
         ]);
@@ -79,7 +79,7 @@ class FormulaireDemandeProduitController extends AbstractController
         $description = 
         $desc->setDescriptionProduit(wordwrap($desc->getDescriptionProduit(),20, 10));
 
-        return $this->render('formulaire_demande_produit/show.html.twig', [
+        return $this->render('/show_one.html.twig', [ // a modifier
             'formulaire_demande_produit' => $formulaireDemandeProduit,
         ]);
     }
@@ -89,10 +89,7 @@ class FormulaireDemandeProduitController extends AbstractController
     #[Route('/{id}/liste', name: 'app_formulaire_demande_produit_show_liste', methods: ['GET'])]
     public function showUserListe( int $id, UserRepository $userRepository, FormulaireDemandeProduitRepository $formulaireDemandeProduitRepository ): Response
     {
-        // $listeFormulaires = $formulaireDemandeProduitRepository->findAllForms($id);
-        // $user = $userRepository->find($id);
-        
-        return $this->render('pages/user_view/forms_product/form_list.html.twig', [
+        return $this->render('pages/User/formulaires/form_list.html.twig', [
             'formulaire_demande_produits' => $listeFormulaires= $formulaireDemandeProduitRepository->findAllForms($id),
             'user' => $user = $userRepository->find($id) 
 
@@ -111,8 +108,6 @@ class FormulaireDemandeProduitController extends AbstractController
 
         $formRecup = $formulaireDemandeProduitRepository->find($id);
 
-
-        // dd($form->getData());
         if ($form->isSubmitted() && $form->isValid()) {
             // Enregistrez la réponse du vendeur dans l'entité
             $dateReponseForm = new \DateTime();
@@ -125,7 +120,7 @@ class FormulaireDemandeProduitController extends AbstractController
             return $this->redirectToRoute('app_formulaire_demande_produit_index');
         }
 
-        return $this->render('formulaire_demande_produit/traiter.html.twig', [
+        return $this->render('pages/Administration/formulaires/gestion/traiter_form.html.twig', [
             'formulaire_demande_produit' => $formulaireDemandeProduit,
             'form' => $form,
         ]);

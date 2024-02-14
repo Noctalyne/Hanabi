@@ -1,0 +1,36 @@
+.footer_bloc {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+
+}
+
+.footer_bloc div {
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: nowrap;*/
+    /* justify-content: space-around;  */
+    margin: 20px;
+
+}
+
+.footer_bloc div a {
+    margin: auto 20px ;
+
+}
+/* 
+.foot_link {
+}
+
+.social_media  {
+    display: flex;
+    flex-direction: row;
+    
+} */
+
+.social_media a img {
+    width: 25px;
+    height: 25px;
+    
+}

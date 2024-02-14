@@ -1,0 +1,31 @@
+
+/*  ADMIN ACCUEIL */
+
+/* Bloc avec les liens vers les index des pages indiquer */
+
+.bloc_admin {
+    text-align: center;
+    margin: 50px auto
+}
+
+
+.bloc_admin_content {
+    width: 75%;
+    margin: 60px auto
+}
+
+
+.accordion div {
+    margin: 20px auto !important;
+}
+
+
+
+.index_admin {
+    margin-top:30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 40px;
+}
+

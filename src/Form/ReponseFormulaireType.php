@@ -19,6 +19,7 @@ class ReponseFormulaireType extends AbstractType
                 'placeholder' => 'Choisir',
                 'choices' => [
                         'Oui' => 'Accepter',
+                        'En attente' => 'attente',
                         'Non' => 'Refuser',
                 ],
                 'required' => false, // Pour rendre le champ facultatif

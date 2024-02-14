@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Nouvelle bannière {% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('asset/style/css/banniere.css')}}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container bloc">
+
+        {# {% if msg  %}
+            <div class='container text-center '>
+                <div class="alert alert-sm alert-success p-1">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>{{ msg2 }}</strong>
+                    <p class='mb-0'> {{ msg }} </p>
+                </div>
+            </div> 
+        {% endif %} #}
+
+        <div class="bloc_add">
+
+            <div class="bloc_add_header">
+                <h1> Ajouter un nouvelle bannière </h1>
+            </div>
+
+            <div class="bloc_add_content">
+
+                {{ form_start(form) }}
+                {{ form_errors(form) }}            
+                
+                    <div class="add_content_row">
+                        <p>Nom :</p>
+                        {{ form_row( form.nomBanniere, {label: ' '} )}}
+                    </div>
+
+                    
+                    <div class="add_content_row">
+                        <p>Choisir la première image </p>
+                        {{ form_row( form.premiereImage, {label: ' '})}}
+                    </div>
+
+
+                    <div class="add_content_row">
+                        <p>Choisir la deuxième image </p>
+                        {{ form_row( form.deuxiemeImage, {label: ' '})}}
+                    </div>
+
+
+
+                    <div class="add_content_row">
+                        <p>Choisir la troisième image </p>
+                        {{ form_row( form.troisiemeImage, {label: ' '})}}
+                    </div>
+
+                    <div class="add_content_footer" >
+
+                        <button class="bloc_add_footer">
+                            <a href="{{ path('app_banniere_index') }}">Retour</a>
+                        </button>                        
+
+                        <button class="bloc_add_footer">
+                            {{ button_label|default('Enregistrer') }}
+                        </button>
+                    </div>         
+                
+                {{ form_end(form) }}
+
+
+            </div>
+
+        
+        </div>
+
+    </div>
+
+{% endblock %}

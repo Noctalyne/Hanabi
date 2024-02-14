@@ -1,0 +1,171 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}FormulaireDemandeProduit index{% endblock %}
+
+{% block body %}
+    <div class=" container pt-5 pb-5">
+    <div class=" container bloc">
+
+        <h1>Liste des formulaires</h1>
+
+        <div class="">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>N° de demande</th>
+                        <th>Type de produit</th>
+                        <th>Description envoyer</th>
+                        <th>Date d'envoie</th>
+                        <th>Statut </th>
+                        <th>Action / </th>
+                        <th>Afficher</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for  %}
+                        <tr>
+                            <td></td>
+
+                            <td></td>
+
+                            <td class="text-break">
+                            
+                            </td>
+
+                            <td></td>
+
+
+                                <td>
+                                    <p> </p>
+                                </td>
+                                <td>
+                                    
+                                </td>
+                            {% else %}
+                                <td>
+                                    
+                                </td>
+
+                                <td class="">
+
+                                </td>
+                            {% endif %}
+
+                            <td>
+
+                            </td>
+                        </tr>
+
+                    {% else %}
+
+                        <tr>
+                            <td colspan="6">Aucun formulaires trouvés</td>
+                        </tr>
+                        
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+{% endblock %} #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}  {% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('asset/style/css/_show_list.css')}}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container bloc">
+
+        <div class="bloc_show_form_list">
+
+            <div class="bloc_show_header">
+                <h1> Liste des formulaires </h1>
+            </div>
+
+            <div class="bloc_show_content">
+            
+                <div class="show_content_row_form_list">
+                    {# <h5>N° de demande</h5>
+                    <h5>Type de produit</h5>
+                    <h5>Description envoyer</h5>
+                    <h5>Date d'envoie</h5>
+                    <h5>Statut</h5>
+                    <h5>Action</h5>
+                    <h5>Afficher</h5> #}
+                    <p>N° de demande</p>
+                    <p>Type de produit</p>
+                    <p>Description</p>
+                    <p>Date d'envoie</p>
+                    <p>Afficher</p>
+                    <p>Statut</p>
+                    {# <p>Action</p> #}
+
+                </div>
+   
+                   {% for formulaire_demande_produit in formulaire_demande_produits %}
+                    <div class="show_content_row_form_list">
+                        {# <h5>{{ commande.dateCommande ? commande.dateCommande|date('Y-m-d H:i:s') : '' }}</h5>
+                        <h5>{{ commande.listeProduits ? commande.listeProduits|json_encode : '' }}</h5>
+                        <h5>{{ commande.prixTotal }}</h5>
+                        <h5><a href="{{ path('app_commandes_show_one', {'cmd_id': commande.id}) }}">Voir</a></h5> #}
+                        <p>{{ formulaire_demande_produit.id }}</p>
+                        <p>{{ formulaire_demande_produit.typeProduit }}</p>
+                        <p>{{ formulaire_demande_produit.descriptionProduit }}</p>
+                        <p>{{ formulaire_demande_produit.dateEnvoieForm ? formulaire_demande_produit.dateEnvoieForm|date('d M Y à H:i') : '' }}</p>
+                        <a class="btn" href="{{ path('app_formulaire_demande_produit_show', {'id': formulaire_demande_produit.id}) }}">
+                            <img src="{{ asset('images/icones/voir.png') }}" alt="icone voir" style="width : 40px;">
+                        </a>
+
+                        {# Renvoie à la page pour accepeter la demande si celle ci est "en attente" #}
+                        {% if  formulaire_demande_produit.reponseDemande is same as('attente')  %}
+
+                            <p>En attente</p>
+                            <button>
+                                <a class="" href="{{ path('app_formulaire_demande_produit_traiter', {'id': formulaire_demande_produit.id}) }}">Répondre</a>
+                            </button>
+
+                        
+                        {% else %}
+                        
+                            <p>{{ formulaire_demande_produit.reponseDemande }}
+                            le {{ formulaire_demande_produit.dateReponseForm ? formulaire_demande_produit.dateReponseForm|date('d M Y à H:i') : ''}}</p>
+                            {# <a href="{{ path('app_formulaire_demande_produit_traiter', {'id': formulaire_demande_produit.id}) }}">
+                                <img src="{{ asset('images/icones/user_black_line.png') }}" alt="profil du client" class="m-1" width="40px"height="40px">
+                            </a> #}
+
+                        {% endif %}
+
+
+
+                    </div>
+
+                    {% endfor %}
+                
+                
+
+                <div class="show_content_footer" >
+
+                    <button class="bloc_show_footer">
+                        {# <a href="{{ path('app_banniere_index') }}">Retour</a> #}
+                    </button>                        
+
+                    <button class="bloc_show_footer">
+                        {# {{ button_label|default('Enregistrer') }} #}
+                    </button>
+                </div>           
+                
+            </div>
+        
+        </div>
+
+    </div>
+
+{% endblock %}
+

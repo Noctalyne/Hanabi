@@ -1,0 +1,14 @@
+.dropdown_panier_row {
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(1, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+
+.dropdown_panier_row a {
+
+    font-size: 30px;
+}

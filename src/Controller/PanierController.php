@@ -101,8 +101,9 @@ class PanierController extends AbstractController
         $user = $this->userRepository->find($user_id);
         $panier = $user->getPanier();
  
-        return $this->render('./pages/user_view/cart/show_cart.html.twig', [
+        return $this->render('pages/User/panier/show_cart.html.twig', [
             'panier' => $panier,
+            'user' => $user,
         ]);
     }
 

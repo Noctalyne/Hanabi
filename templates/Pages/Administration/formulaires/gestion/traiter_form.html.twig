@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Traiter la demande {% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{asset('asset/style/css/formulaires.css')}}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container bloc">
+
+        {# {% if msg  %}
+            <div class='container text-center '>
+                <div class="alert alert-sm alert-success p-1">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>{{ msg2 }}</strong>
+                    <p class='mb-0'> {{ msg }} </p>
+                </div>
+            </div> 
+        {% endif %} #}
+
+        <div class="bloc_add">
+
+            <div class="bloc_add_header">
+                <h1> Traiter la demande numéro {{ formulaire_demande_produit.id }} </h1>
+            </div>
+
+            <div class="bloc_add_content">
+               
+                <div class="add_content_row">
+                    <p>Type de produit :</p>
+                    <p>{{ formulaire_demande_produit.typeProduit }} </p>
+                </div>
+
+                    
+                <div class="add_content_row">
+                    <p>* Autres :</p>
+                    <p>{{ formulaire_demande_produit.autresTypes }}</p>
+                </div>
+
+
+                <div class="add_content_row">
+                    <p>Description envoyée :</p>
+                    <texarea>
+                        {{ formulaire_demande_produit.descriptionProduit }}
+                    </textarea>                       
+                </div>
+            
+
+                <div class="add_content_row">
+                    <p>Date d'envoie de la demande :</p>
+                    <p>{{ formulaire_demande_produit.dateEnvoieForm ? formulaire_demande_produit.dateEnvoieForm|date('d M Y à H:i') : '' }}</p>
+                </div>
+
+
+                <div class="add_content_row">
+                    <p>Réponse du vendeur :</p>
+
+                    {% if  formulaire_demande_produit.reponseDemande is same as('attente')  %}
+                        Demande en attente   
+                    {% else %}
+                        {{ formulaire_demande_produit.reponseDemande ? 'Accepter' : 'Refuser' }}
+                        le {{ formulaire_demande_produit.dateReponseForm ? formulaire_demande_produit.dateReponseForm|date('d M Y à H:i') : '' }}
+                    {% endif %}
+
+                </div>
+
+
+                <div class="add_content_row">
+                    <p>Réponse du vendeur :</p>
+                    {{ form_start(form) }}
+                        {{ form_row(form.reponseDemande, {label: ' ' }) }} 
+                </div>
+
+                <div class="add_content_footer" >
+
+                    <button class="bloc_add_footer">
+                        <a href="{{ path('app_administration') }}">Retour</a>
+                    </button>                        
+
+                    <button class="bloc_add_footer">
+                        {{ button_label|default('Enregistrer') }}
+                    </button>
+                </div>           
+                
+                    {{ form_end(form) }}
+
+            </div>
+
+        
+        </div>
+
+    </div>
+
+
+{% endblock %}

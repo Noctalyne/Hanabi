@@ -1,9 +1,9 @@
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('./rework_css/component_navbar.css') }}" />
+    <link rel="stylesheet" href="{{ asset('asset/style/css/composants/composant_navbar.css') }}"/>
 {% endblock %}
 
 
-<div class="navigation">
+<div class="navigation_bar">
 
     {#  Logo #}
     <div>
@@ -14,11 +14,11 @@
 
     {# Bouton burger #}
     <nav class="navbar">
-        <div class="">
+        {# <div class=""> #}
             <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-        </div> 
+        {# </div>  #}
     </nav>
 </div>
 
@@ -28,30 +28,20 @@
 
 <div class="navbar-collapse collapse d-lg-block" id="navbarToggleExternalContent">
 
-
-
     <div class="navigation_bar">
 
         {# Liens vers les autres pages      //      Link to the other pages #}
         <nav class="navigation_link">
-             <a href="{{ path('app_accueil') }}">Accueil</a>
-            <a href="{{ path('app_shop')}}">Boutique</a>
-           {% if app.user %}
-                <a href="{{ path('app_formulaire_demande_produit_show_liste', {'id': app.user.id}) }}">
-                    Contact
-                </a>
-            {% else %} {# renvoie sur la page qui informe du besoin de connexion #}
-                <a  href="{{ path('app_contact')}}">
-                    Contact
-                </a>
-            {% endif %}
-        
-            {# {% if app.user.roles == 'ROLE_ADMIN'  %} #}
-                <a href="{{ path('app_administration')}}">
-                    Admin
-                </a>
-            {# {% endif %} #}
 
+            <a href="{{ path('app_accueil') }}">Accueil</a>
+            <a href="{{ path('app_shop')}}">Boutique</a>
+            <a href="{{ path('app_contact')}}">Contact</a>
+
+            {% if app.user %}
+                {% if app.user.roles ? app.user.roles|json_encode : '' == 'ROLE_ADMIN' %}
+                    <a href="{{ path('app_administration')}}">Admin</a>
+                {% endif %}
+            {% endif %}
 
             <form>
                 <div class="input-group border rounded texte-color">
@@ -62,20 +52,26 @@
                 </div>
             </form>
 
-            {# Icone Pannier #}
-            <div class="mx-auto my-auto">
-              {{ include('./components/panier/_dropdown.html.twig') }}
-            </div>
-            
             {% if app.user %}
-                {% include './components/navbar/dropdown_account.html.twig' %}
+            
+                <div class="connected">
+                    {# Icone Pannier #}
+                    <div>{% include './components/panier/_dropdown.html.twig' %}</div>
+                    <div>{% include './components/navbar/dropdown_account.html.twig' %}</div>                
+                </div>
+
             {% else %}
-                <div class="menu_connect">
-                    <a class="btn btn-sm btn-outline-dark rounded p-1 p-0" href="{{ path('app_login') }}">Connexion / Inscription</a>
+                <div class="connected">
+                    <button class="icon_button">
+                        <a href="{{ path('app_login') }}">
+                            <img id="img_profil" src="{{ asset('images/icones/user_black_line.png') }}" alt="Logo profil">
+                        </a>
+                    </button> 
                 </div>
             {% endif %}
 
         </nav>
-        
+
     </div>
+
 </div>

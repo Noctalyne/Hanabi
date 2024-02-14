@@ -1,0 +1,55 @@
+.login_bloc {
+    width: 75%;
+    border: 1px solid #AD0011;
+    border-radius: 10px;
+    text-align: center;
+    margin: 50px auto;
+    padding: 30px;
+}
+
+/* .login_bloc {
+    width: 75%;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+} */
+
+
+.login_bloc_header {
+    border-bottom: 1px solid #AD0011;
+    margin: 20px 20px 40px 20px;
+    padding: 10px;
+
+}
+
+/* .login_bloc_header h1 {
+    font-size: 30px;
+} */
+
+.login_bloc_content {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.login_bloc_content div {
+    width: 50%;
+    margin: 15px auto;
+}
+
+.login_bloc_content div input {
+    border: 1px solid #AD0011;
+
+}
+
+
+.login_bloc_button {
+
+    margin: 30px;
+
+}
+
+.login_bloc_footer {
+    font-size: 30px;
+}

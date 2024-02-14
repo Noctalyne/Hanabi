@@ -1,0 +1,35 @@
+<div class="card_produit">
+
+  <img class="card_img_produit" src="{{ asset('images/produits/' ~ produit.imgProduit) }}" alt="photo du produit :" ~ {{produit.nomProduit}} max-height:"200px">
+
+  <div class="card_produit_content">
+
+    <div class="card_produit_header">
+        <h5>{{ produit.nomProduit }}</h5>
+    </div>
+    
+    <div class="card_produit_content">
+
+      <em>{{ produit.descriptionProduit }}</em>
+      <p>{{ produit.prixProduit }} &#8364; </p>
+
+
+      {% if app.user %}
+
+        <div class="card_footer">
+
+          <button>
+              <a href="{{ path('app_produits_show', { 'user_id': app.user.id , 'id': produit.id}) }}"> Voir </a>
+          </button>
+
+          {% include './components/panier/add_cart.html.twig' %}
+
+        </div>
+
+      {% endif %}
+
+    </div>
+
+  </div>
+  
+</div>

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'administration {% endblock %}
+
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ asset('./asset/style/css/page_admin.css') }}">
+{% endblock %}
+
+
+{% block body %}
+
+  <div class="container bloc_admin">
+
+    <h1>Tableau de bord de l'administration</h1>
+
+    <div class="container bloc_admin_content">
+
+      <div class="accordion w-100" id="accordionAdmin">
+        {% include "./pages/Administration/accordeon/accordeon_produits.html.twig" %}
+        {% include "./pages/Administration/accordeon/accordeon_formulaires.html.twig" %}
+        {% include "./pages/Administration/accordeon/accordeon_commandes.html.twig" %}
+      </div> 
+
+
+      <div class="container index_admin">
+
+        <div>
+          <button>
+              <a href="{{ path('app_user_index') }}">Liste des "User"</a>
+            </button>
+        </div>
+
+        <div>
+          <button>
+            <a href="{{ path('app_banniere_index') }}">Gestion de la bannière</a>
+          </button>
+        </div>
+
+
+      </div>
+    
+    </div>
+
+  </div>
+
+{% endblock %}

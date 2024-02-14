@@ -21,7 +21,7 @@ class AdministrationController extends AbstractController
         CommandesRepository $commandesRepository,
         ): Response
     {
-        return $this->render('pages/administration.html.twig', [
+        return $this->render('pages/Administration/administration.html.twig', [
 
             'users' => $userRepository->findAll(),
             'produits' => $produitsRepository->findAll(),

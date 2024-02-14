@@ -23,7 +23,7 @@ class CommandesController extends AbstractController
     #[Route('/', name: 'app_commandes_index', methods: ['GET'])]
     public function index(CommandesRepository $commandesRepository): Response
     {
-        return $this->render('pages/admin_view/commandes/list_commandes.html.twig', [
+        return $this->render('/pages/Administration/commandes/list_commandes.html.twig', [
             'commandes' => $commandesRepository->findAll(),
         ]);
     }
@@ -90,11 +90,11 @@ class CommandesController extends AbstractController
         $user = $userRepository->findOneBy(['id' => $id]);
         $commandes = $user->getListCommandes();
 
-        return $this->render('pages/user_view/cmd/show_all_cmd.html.twig', [
+        return $this->render('/pages/User/commandes/show_all_cmd.html.twig', [
             'commandes' => $commandes ,
         ]);
     }
-
+    
 
     // Voir UNE seule commande
     #[Route('/show/{cmd_id}', name: 'app_commandes_show_one', methods: ['GET'])]
@@ -104,7 +104,7 @@ class CommandesController extends AbstractController
 
         $produits = $commande->getListeProduits(); 
 
-        return $this->render('pages/user_view/cmd/show_one_cmd.html.twig', [
+        return $this->render('/pages/User/commandes/show_one_cmd.html.twig', [
             'commande' => $commande ,
             'produits' => $produits,
         ]);

@@ -1,0 +1,101 @@
+/* @font-face {
+    font-family: "JapaneseTourist";
+    src: url(./JapaneseTourist.ttf); 
+}*/
+
+
+h1 {
+    /* font-family:"JapaneseTourist"; */
+    color: #AD0011 !important;
+    font-size: 50px;
+}
+
+a {
+    color: #AD0011 !important;
+    text-decoration: none !important;
+}
+
+p {
+    margin: 0px;
+    color: #AD0011 !important;
+}
+
+button {
+    color: #AD0011 !important;
+    background-color: transparent !important;
+    border: 2px solid #AD0011 !important;
+    border-radius: 9px !important;
+    height: 50px !important;
+}
+
+button a img {
+    width: 40px !important;
+    height: 40px !important;
+
+}
+
+.trait_x {
+    width: 80%;
+    /* margin-left: 10%;
+    margin-right: 10%; */
+    margin: 1% 10%;
+    border-top: solid 2px #AD0011;
+}
+
+
+.mozaic_produits {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 50px auto;
+}
+
+/* .icon_button {
+    width:50px !important;
+    height:50px !important;
+} */
+
+/* button a {
+    color: #ffffff;
+    color: #AD0011;
+    margin: 10px;
+} */
+
+.bloc h1 {
+    text-align: center;
+    margin: 25px;
+}
+
+
+
+
+
+/**********     Navbar Responssive CSS  **********/
+
+
+/* Responssive CSS for nav bar display */
+@media (max-width: 430px) {
+    .windows_resp {
+        display: none !important;
+    }
+
+    .phone_resp {
+        display: block !important;
+    }
+
+}
+
+/* Responssive CSS for nav bar display */
+@media (min-width: 900px) {
+
+    .windows_resp {
+        display: block !important;
+    }
+
+    .phone_resp {
+        display: none !important;
+    }
+
+}
