@@ -76,7 +76,9 @@ button a img {
 
 
 /* Responssive CSS for nav bar display */
-@media (max-width: 430px) {
+/* @media screen and (max-width: 430px) {
+
+    
     .windows_resp {
         display: none !important;
     }
@@ -85,10 +87,10 @@ button a img {
         display: block !important;
     }
 
-}
+} */
 
 /* Responssive CSS for nav bar display */
-@media (min-width: 900px) {
+/* @media screen and (min-width: 1200px) {
 
     .windows_resp {
         display: block !important;
@@ -98,4 +100,4 @@ button a img {
         display: none !important;
     }
 
-}
+} */

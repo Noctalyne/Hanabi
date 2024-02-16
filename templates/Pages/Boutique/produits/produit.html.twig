@@ -23,7 +23,7 @@
                     <em>{{ produit.descriptionProduit }}</em>
                     <p>{{ produit.prixProduit }} &#8364; </p>
                     {% if app.user %}
-                        {% include './components/panier/add_cart.html.twig' %}
+                        {% include 'pages/Boutique/produits/add_cart.html.twig' %}
                     {% endif %}
                 </div>
 

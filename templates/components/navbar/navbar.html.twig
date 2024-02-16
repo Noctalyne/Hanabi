@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    <div class="navigation_bar">
+    {# <div class="navigation_bar">
 
         <a href="{{ path('app_accueil') }}">
             <img src="{{ asset('images/logo/grp_marque.png') }}" alt="Logo Hanabi" />
@@ -33,7 +33,7 @@
 
             {% if app.user %}
                 <div class="connected">
-                    {# Icone Pannier #}
+                    Icone Pannier
                     <div>{% include './components/panier/_dropdown.html.twig' %}</div>
                     <div>{% include './components/navbar/dropdown_account.html.twig' %}</div>                
                 </div>
@@ -48,6 +48,8 @@
             {% endif %}
 
         </nav>
-    </div>
+    </div> #}
+
+    
     
 </div>

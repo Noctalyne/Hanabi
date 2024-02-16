@@ -108,7 +108,7 @@ class AdressesController extends AbstractController
     #[Route('/{id}/{id_adrss}/show', name: 'app_adresses_show', methods: ['GET'])]
     public function show(int $id_adrss, AdressesRepository $adressesRepository): Response
     {
-        return $this->render('components/adresses/modal_show_one_adresse.html.twig', [
+        return $this->render('pages/User/adresses/modal_show_one_adresse.html.twig', [
             'adresse' => $adressesRepository->findOneBy(['id' => $id_adrss]),
         ]);
     }

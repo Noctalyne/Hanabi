@@ -51,12 +51,10 @@
 
                             {% if banniere.activated == 0 %}
                                 <span class="badge rounded-pill bg-danger">Inactif</span>
-                                {{ include('components/banniere/_activate.html.twig') }}
+                                {{ include('pages/Administration/banniere/gestion/_activate.html.twig') }}
                             {% else %}
                                 <span class="badge rounded-pill bg-success">Actif</span>
                             {% endif %}
-
-                            
                         
                         </td>
                         

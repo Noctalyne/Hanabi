@@ -15,10 +15,13 @@
 }
 
 
-.accordion div {
+/* .accordion div {
     margin: 20px auto !important;
+} */
+.accordion-item {
+    margin: 20px auto !important;
+    border: none !important;
 }
-
 
 
 .index_admin {

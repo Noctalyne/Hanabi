@@ -1,5 +1,5 @@
 
-/* TYPE : NEW  */
+/* TYPE : ShOW  */
 .bloc_show_produit {
     width: 75%;
     display: flex;
@@ -87,3 +87,6 @@
     justify-content: center;
     align-items: center;
 }
+
+
+/* TYPE : LIST */

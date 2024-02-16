@@ -79,7 +79,7 @@ class FormulaireDemandeProduitController extends AbstractController
         $description = 
         $desc->setDescriptionProduit(wordwrap($desc->getDescriptionProduit(),20, 10));
 
-        return $this->render('/show_one.html.twig', [ // a modifier
+        return $this->render('/show_one_form.html.twig', [ // a modifier
             'formulaire_demande_produit' => $formulaireDemandeProduit,
         ]);
     }

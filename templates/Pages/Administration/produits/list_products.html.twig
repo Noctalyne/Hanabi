@@ -19,7 +19,7 @@
                     <td>{{ produit.nomProduit }}</td>
                     <td>{{ produit.descriptionProduit }}</td>
                     <td>{{ produit.imgProduit }}</td>
-                    <td>{{ produit.prixProduit }}</td>
+                    <td>{{ produit.prixProduit }} &#8364; </td>
                     <td>{{ produit.quantStock }}</td>
                     <td>
                         <a href="{{ path('app_produits_show', { 'user_id': app.user.id , 'id': produit.id}) }}">Voir</a>

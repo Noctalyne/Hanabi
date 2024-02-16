@@ -3,6 +3,8 @@
 {% endblock %}
 
 
+<div class="container">
+
 <div class="navigation_bar">
 
     {#  Logo #}
@@ -20,58 +22,63 @@
             </button>
         {# </div>  #}
     </nav>
-</div>
 
 
 
 
 
-<div class="navbar-collapse collapse d-lg-block" id="navbarToggleExternalContent">
 
-    <div class="navigation_bar">
+    <div class="navbar-collapse collapse d-lg-block" id="navbarToggleExternalContent">
 
-        {# Liens vers les autres pages      //      Link to the other pages #}
-        <nav class="navigation_link">
+        {# <div class="navigation_bar"> #}
+        <div>
 
-            <a href="{{ path('app_accueil') }}">Accueil</a>
-            <a href="{{ path('app_shop')}}">Boutique</a>
-            <a href="{{ path('app_contact')}}">Contact</a>
+            {# Liens vers les autres pages      //      Link to the other pages #}
+            <nav class="navigation_link">
 
-            {% if app.user %}
-                {% if app.user.roles ? app.user.roles|json_encode : '' == 'ROLE_ADMIN' %}
-                    <a href="{{ path('app_administration')}}">Admin</a>
+                <a href="{{ path('app_accueil') }}">Accueil</a>
+                <a href="{{ path('app_shop')}}">Boutique</a>
+                <a href="{{ path('app_contact')}}">Contact</a>
+
+                {% if app.user %}
+                    {% if app.user.roles ? app.user.roles|json_encode : '' == 'ROLE_ADMIN' %}
+                        <a href="{{ path('app_administration')}}">Admin</a>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
 
-            <form>
-                <div class="input-group border rounded texte-color">
-                    <input type="text" class="form-control form-control" placeholder="produit, licence...">
-                    <div class="input-group-text btn">
-                        <img src="{{ asset('images/icones/search.png') }}" alt="" width="20px" height="20px">
+                <form>
+                    <div class="input-group border rounded texte-color">
+                        <input type="text" class="form-control form-control" placeholder="produit, licence...">
+                        <div class="input-group-text btn">
+                            <img src="{{ asset('images/icones/search.png') }}" alt="" width="20px" height="20px">
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
 
-            {% if app.user %}
-            
-                <div class="connected">
-                    {# Icone Pannier #}
-                    <div>{% include './components/panier/_dropdown.html.twig' %}</div>
-                    <div>{% include './components/navbar/dropdown_account.html.twig' %}</div>                
-                </div>
+                {% if app.user %}
+                
+                    <div class="connected">
+                        {# Icone Pannier #}
+                        <div>{% include 'components/navbar/_dropdown_panier.html.twig' %}</div>
+                        <div>{% include 'components/navbar/dropdown_account.html.twig' %}</div>                
+                    </div>
 
-            {% else %}
-                <div class="connected">
-                    <button class="icon_button">
-                        <a href="{{ path('app_login') }}">
-                            <img id="img_profil" src="{{ asset('images/icones/user_black_line.png') }}" alt="Logo profil">
-                        </a>
-                    </button> 
-                </div>
-            {% endif %}
+                {% else %}
+                    <div class="connected">
+                        <button class="icon_button">
+                            <a href="{{ path('app_login') }}">
+                                <img id="img_profil" src="{{ asset('images/icones/user_black_line.png') }}" alt="Logo profil">
+                            </a>
+                        </button> 
+                    </div>
+                {% endif %}
 
-        </nav>
+            </nav>
+
+        </div>
 
     </div>
+
+</div>    
 
 </div>
