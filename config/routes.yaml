@@ -12,3 +12,7 @@ controllers:
 # panier_show:
 #   path: /panier/show/cart/{user}
 #   controller: App\Controller\PanierController::afficherPanier
+
+order_success:
+    path: /order/success/{id_panier}
+    controller: App\Controller\OrderController::success

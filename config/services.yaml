@@ -8,6 +8,9 @@ parameters:
     produit_directory: '%kernel.project_dir%/public/images/produits' # liens pour enregistrer les imgs produits envoyé 
     banniere_directory: '%kernel.project_dir%/public/images/banniere' # liens pour enregistrer les imgs de la banniere envoyé 
 
+    stripe_public_key: 'pk_test_51OkvVjCM4LcP8Marhv7pz3YM6GmaW1sXmxlRfeP7Tfet4dsQ80nBUDfl86qiQaMZ27nUdLZnjcXngGv5xNieV6VP008mv61Fqd'
+    stripe_secret_key: 'sk_test_51OkvVjCM4LcP8MarBx2mlHjNk7ZogncczHVyB3EmQLEr8gRntUmQcMAvofYEs9h8YEFblVVtVJoPnJGSCCoHAbre00dYPqgb6s'
+
 services:
     # default configuration for services in *this* file
     _defaults:

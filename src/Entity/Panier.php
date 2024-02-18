@@ -16,6 +16,8 @@ class Panier
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column]
+    private ?int $quantite = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2, nullable: true)]
     private ?string $prixTotal = null;
@@ -26,6 +28,8 @@ class Panier
 
     #[ORM\OneToOne(mappedBy: 'panier', cascade: ['persist', 'remove'])]
     private ?User $user = null;
+
+
 
     public function __construct()
     {
@@ -76,6 +80,19 @@ class Panier
         return $this;
     }
 
+    public function getQuantite(): ?int
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(int $quantite): static
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -97,4 +114,5 @@ class Panier
 
         return $this;
     }
+
 }
