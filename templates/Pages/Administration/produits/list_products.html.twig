@@ -52,22 +52,36 @@
 {% block title %} Liste des produits {% endblock %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{asset('./rework_css/component_temps_list_produit.css')}}">
+	{# <link rel="stylesheet" href="{{asset('./rework_css/component_temps_list_produit.css')}}"> #}
+
+    <link rel="stylesheet" href="{{asset('asset/style/css/produit.css')}}">
+    {# <link rel="stylesheet" href="{{asset('asset/style/css/_show_list.css')}}"> #}
+
+    {#  #}
 {% endblock %}
 
 {% block body %}
 
     <div class="container bloc">
 
-        <div class="bloc_show">
+        <div class="bloc_show_form_list">
 
             <div class="bloc_show_header">
+                    {# <button class="bloc_show_footer"> #}
+                    <button>
+                        <a href="{{ path('app_administration') }}">Retour</a>
+                    </button>
+
                 <h1> Liste des produits </h1>
+
+                <button>
+                    <a href="{{ path('app_produits_new') }}">Ajouter un produit</a>
+                </button>
             </div>
 
             <div class="bloc_show_content">
             
-                <div class="show_content_row">
+                <div class="show_content_row_form_list">
                     <h5>Nom </h5>
                     <h5>Description</h5>
                     <h5>Image</h5>
@@ -78,28 +92,38 @@
 
 
                 {% for content in produits %}
-                    <div class="show_content_row">
+                    <div class="show_content_row_form_list">
                         <p> {{ content.nomProduit }} </p>
-                        <p> {{ content.descriptionProduit }} </p>
+                        {# <p><em> {{ content.descriptionProduit }} </em> </p> #}
+                        <em> {{ content.descriptionProduit }} </em>
                         <img class="" src="{{ asset('images/produits/' ~ content.imgProduit) }}" alt="photo du produit :" ~ {{content.nomProduit }} style="height:100px;">
                         <p> {{ content.prixProduit }} </p>
                         <p> {{ content.quantStock }} </p>
+                        <button>
+                            <a href="{{ path('app_produits_show',  {'user_id': app.user.id, 'id' : content.id }) }}">Afficher</a>
+                        </button>
                     </div>
                 {% endfor %}
                 
 
-                <div class="show_content_footer" >
+                {# <div class="show_content_footer" > #}
 
-                    <button class="bloc_show_footer">
+                    {# <button class="bloc_show_footer">
                         <a href="{{ path('app_administration') }}">Retour</a>
-                    </button>                        
+                    </button>                         #}
 
                     {# <button class="bloc_show_footer"> #}
                         {# {{ button_label|default('Enregistrer') }} #}
                     {# </button> #}
-                </div>           
+
+
+            {# <div class="d-flex justify-content-center">
+                <button>
+                    <a href="{{ path('app_produits_new') }}">Ajouter un produit</a>
+                </button>
+            </div>            #}
                 
-            </div>
+            {# </div> #}
         
         </div>
 

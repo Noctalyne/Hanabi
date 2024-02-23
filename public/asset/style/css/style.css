@@ -2,7 +2,9 @@
     font-family: "JapaneseTourist";
     src: url(./JapaneseTourist.ttf); 
 }*/
-
+body {
+    background-color: #fff;
+}
 
 h1 {
     /* font-family:"JapaneseTourist"; */
@@ -31,13 +33,15 @@ button {
 button a img {
     width: 40px !important;
     height: 40px !important;
+}
 
+.cross {
+    border: none !important;
+    height: auto !important;
 }
 
 .trait_x {
     width: 80%;
-    /* margin-left: 10%;
-    margin-right: 10%; */
     margin: 1% 10%;
     border-top: solid 2px #AD0011;
 }

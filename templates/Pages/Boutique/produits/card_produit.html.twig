@@ -22,7 +22,21 @@
               <a href="{{ path('app_produits_show', { 'user_id': app.user.id , 'id': produit.id}) }}"> Voir </a>
           </button>
 
+
+        {% if app.user.accountActivate == true %}
+
           {% include 'pages/Boutique/produits/add_cart.html.twig' %}
+
+        {% else %}
+
+          <div class="connected">
+            <button class="icon_button">
+            <a href="{{ path('app_login') }}"> Conectez vous</a>
+                            
+            </button> 
+          </div>
+
+        {% endif %}
 
         </div>
 

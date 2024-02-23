@@ -1,0 +1,64 @@
+<div class="bloc_card_header">
+    <h4> Liste de mes formulaires </h4>
+    {# <a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a> #}
+</div>
+
+<div class="bloc_card_body_formulaires">
+
+    {% for formulaire in formulaires %}
+
+    <div class="card">
+
+        <div class="card-body">
+            <h5 class="card-title text-center">Formulaire {{  loop.index }}</h5>
+
+            <div class="bloc_card_row">
+                {# <p>Type de produit :</p> #}
+                <p>Type :</p>
+                <p>{{ formulaire.type_produit }}</p>
+            </div>
+
+            <div class="bloc_card_row">
+                <p>Autres :</p>
+                <p>{{ formulaire.autres_types }}</p>
+            </div>
+
+            {# <div class="bloc_card_row">
+                <p>Description envoyée :</p>
+                <p>{{ formulaire.description_produit }}</p>
+            </div> #}
+
+            <div class="bloc_card_row">
+                <p>Date d'envoie :</p>
+                <p>{{ formulaire.date_envoie_form ? formulaire.date_envoie_form|date('d/m/Y') : '' }}</p>
+            </div>
+
+            {% if  formulaire.reponse_demande is same as('attente')  %}
+                <div class="bloc_card_row">
+                    <p>Réponse :</p>
+                    <p>En attente</p>
+                </div>
+
+            {% else %}
+
+                <div class="bloc_card_row">
+                    <p>Réponse :</p>
+                    <p>{{ formulaire.reponse_demande ? 'Accepter' : 'Refuser' }}</p>
+                </div>
+                
+            {% endif %}
+
+
+        </div>
+
+        <div class="modal_footer">
+        {# <button> #}
+        {# {{ include('pages/User/adresses/_delete_addresse.html.twig') }} #}
+        {# </button> #}
+        {# {{ include('pages/User/adresses/modal_show_one_adresse.html.twig') }} #}
+        </div>
+
+    </div>
+
+    {% endfor %}   
+</div>

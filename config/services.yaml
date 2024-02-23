@@ -23,8 +23,10 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
-            # - '../src/Entity/' --> voir pk ca bloque
+            - '../src/Entity/'
             - '../src/Kernel.php'
+    App\Service\MessagerieServices:
+        arguments: ['%env(LOGIN_MAIL)%', '%env(PASSWORD_MAIL)%', '%env(SERVEUR_MAIL)%', '%env(PORT_MAIL)%']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -32,6 +32,18 @@ class Commandes
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\Column]
+    private ?string $transporteur = null;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 2)]
+    private ?string $prixTransport = null;
+
+    #[ORM\Column]
+    private ?bool $succesPaiement = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $idTransaction = null;
+
     // public function __construct()
     // {
     //     $this->client = new ArrayCollection();
@@ -110,6 +122,54 @@ class Commandes
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getTransporteur(): ?string
+    {
+        return $this->transporteur;
+    }
+
+    public function setTransporteur(string $transporteur): static
+    {
+        $this->transporteur = $transporteur;
+
+        return $this;
+    }
+
+    public function getPrixTransport(): ?string
+    {
+        return $this->prixTransport;
+    }
+
+    public function setPrixTransport(string $prixTransport): static
+    {
+        $this->prixTransport = $prixTransport;
+
+        return $this;
+    }
+
+    public function isSuccesPaiement(): ?bool
+    {
+        return $this->succesPaiement;
+    }
+
+    public function setSuccesPaiement(bool $succesPaiement): static
+    {
+        $this->succesPaiement = $succesPaiement;
+
+        return $this;
+    }
+
+    public function getIdTransaction(): ?string
+    {
+        return $this->idTransaction;
+    }
+
+    public function setIdTransaction(string $idTransaction): static
+    {
+        $this->idTransaction = $idTransaction;
 
         return $this;
     }

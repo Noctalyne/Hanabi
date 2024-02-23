@@ -19,11 +19,13 @@ class AccueilController extends AbstractController
         $carrousel = $banniereRepository->findOneBy(['activated' => 'true']);
 
         $panier = $session->get('panier');
+        $msg = "";
         
         // $this->get('session')->get('panier');
         
         return $this->render('pages/accueil.html.twig', [
             'controller_name' => 'AccueilController',
+            'msg' => $msg,
             'carrousels' => $carrousel,
             'produits' => $produit,
             'panier' => $panier,

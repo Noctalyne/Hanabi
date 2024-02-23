@@ -34,9 +34,6 @@ class FormulaireDemandeProduit
     #[ORM\Column(length: 10, nullable: true)]
     private ?string $reponseDemande = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'formEnvoyer', cascade: ['persist'])] //, 'remove'
-    // #[ORM\JoinColumn(nullable: false)]
-    // private ?Clients $refClient = null;
 
     #[ORM\ManyToOne(inversedBy: 'liste_formulaires')]
     #[ORM\JoinColumn(nullable: false)]
@@ -121,17 +118,6 @@ class FormulaireDemandeProduit
         return $this;
     }
 
-    // public function getRefClient(): ?Clients
-    // {
-    //     return $this->refClient;
-    // }
-
-    // public function setRefClient(?Clients $refClient): static
-    // {
-    //     $this->refClient = $refClient;
-
-    //     return $this;
-    // }
 
     public function getUser(): ?User
     {

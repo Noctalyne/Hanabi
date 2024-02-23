@@ -1,0 +1,41 @@
+{# BLOC ADRESSES #}
+<div class="bloc_card_header">
+    <h4> Mes adresse </h4>
+</div>
+
+<div class="bloc_card_body_center">
+
+    {% for adresse in adresses %}
+
+    <div class="card" style="width: 12rem;">
+
+        <div class="card-body">
+            <h5 class="card-title text-center">Adresse</h5>
+            <p class="card-text">{{ adresse.num_adrss }} {{ adresse.rue_adrss }}</p>
+            <p class="card-text">{{ adresse.complement_adrss }}</p>
+            <p class="card-text">{{ adresse.code_postal_adrss }} {{ adresse.ville_adrss }}</p>
+            <p class="card-text">{{ adresse.pays_adrss }}</p>
+        </div>
+
+        <div class="modal_footer">
+            {# <button> #}
+            {{ include('pages/User/adresses/_delete_addresse.html.twig') }}
+            {# </button> #}
+            {{ include('pages/User/adresses/modal_show_one_adresse.html.twig') }}
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+    {% if limiteAdress < 3 %} {# si la limite est inférieur à 3 #}
+
+        <div class="card" style="width: 12rem;">
+            <div class="card-body">
+
+                <a href="{{ path('app_adresses_new' , {'id': app.user.id }) }}"> Ajouter une adresse </a>
+            </div>
+        </div>
+    {% endif %}
+
+</div>

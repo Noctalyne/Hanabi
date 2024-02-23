@@ -25,7 +25,7 @@ class AdministrationController extends AbstractController
 
             'users' => $userRepository->findAll(),
             'produits' => $produitsRepository->findAll(),
-            'formulaire_demande_produits' => $formulaireDemandeProduitRepository->findAll(),
+            'formulaires' => $formulaireDemandeProduitRepository->findAll(),
             'commandes' => $commandesRepository->findAll(),
 
             'controller_name' => 'AdministrationController',

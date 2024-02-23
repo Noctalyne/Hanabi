@@ -49,16 +49,16 @@
       
                 <div class="show_content_footer" >
 
-                    {% if app.user.roles ? app.user.roles|json_encode : '' == 'ROLE_ADMIN' %}
+                    {% if 'ROLE_ADMIN' in app.user.roles %}
 
                         <button class="bloc_show_footer">
-                            <a href="{{ path('app_commandes_index') }}">Retour</a>
+                            <a href="{{ path('app_administration')}}">Admin</a>
                         </button>
 
-                    {% elseif app.user.roles ? app.user.roles|json_encode : '' == 'ROLE_USER' %}
+                    {% elseif 'ROLE_USER' in app.user.roles %}
 
                         <button class="bloc_show_footer">
-                            <a href="{{ path('app_commandes_user_show') }}">Retour</a>
+                            <a href="{{ path('app_commandes_user_show', {'id' : app.user.id}) }}">Retour</a>
                         </button>
 
                     {% endif %}

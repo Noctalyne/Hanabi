@@ -2,16 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Adresses;
-use App\Entity\Clients;
 use App\Entity\User;
-use App\Form\AdressesType;
 use App\Form\ClientsType;
 use App\Form\UserType;
 use App\Repository\AdressesRepository;
-use App\Repository\ClientsRepository;
 use App\Repository\FormulaireDemandeProduitRepository;
 use App\Repository\UserRepository;
+use App\Service\UtilsServices;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -79,6 +76,7 @@ class UserController extends AbstractController
     }
 
 
+    // Ajout informations personnels
     #[Route('/{id}/add/infos', name: 'app_user_add_infos', methods: ['GET', 'POST'])]
     public function addInfos(int $id, Request $request, UserRepository $userRepository, AdressesRepository $adressesRepository, EntityManagerInterface $entityManager): Response
     {
@@ -90,9 +88,9 @@ class UserController extends AbstractController
 
         if ($formClient->isSubmitted() && $formClient->isValid()) {
 
-            $user->setNom($formClient->get('nom')->getData());
-            $user->setPrenom($formClient->get('prenom')->getData());
-            $user->setTelephone($formClient->get('telephone')->getData());
+            $user->setNom(UtilsServices::cleanInput ( $formClient->get('nom')->getData() ));
+            $user->setPrenom(UtilsServices::cleanInput ( $formClient->get('prenom')->getData() ));
+            $user->setTelephone(UtilsServices::cleanInput ( $formClient->get('telephone')->getData() ));
 
             $user->setClientActivate(true);
 
@@ -104,7 +102,7 @@ class UserController extends AbstractController
         }
 
         // Renvoie sur la page qui crée un nouveau client 
-            return $this->render('user/add_infos.html.twig', [
+            return $this->render('pages/User/account/add_infos.html.twig', [
                 'user' => $user,
                 'form' => $formClient,
         ]);

@@ -22,23 +22,23 @@ class FormulaireDemandeProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, FormulaireDemandeProduit::class);
     }
 
-    public function createForm(FormulaireDemandeProduit $formulaireDemandeProduit, int $refClient ): void
-    {
-        // Obtient la connexion à la base de données
-        $connection = $this->getEntityManager()->getConnection();
+    // public function createForm(FormulaireDemandeProduit $formulaireDemandeProduit, int $refClient ): void
+    // {
+    //     // Obtient la connexion à la base de données
+    //     $connection = $this->getEntityManager()->getConnection();
 
-        // Exécute la requête SQL
-        $statement = $connection->prepare('UPDATE FormulaireDemandeProduit as formu
-                    SET typeProduit = :typeProduit,
-                        descriptionProduit = :descriptionProduit,
-                    WHERE c.user_id = :user_id
-                    ');
-        $statement->bindValue('typeProduit', $formulaireDemandeProduit->getTypeProduit());
-        $statement->bindValue('descriptionProduit', $formulaireDemandeProduit->getDescriptionProduit());
-        $statement->bindValue('refClient', $refClient);
+    //     // Exécute la requête SQL
+    //     $statement = $connection->prepare('UPDATE FormulaireDemandeProduit as formu
+    //                 SET typeProduit = :typeProduit,
+    //                     descriptionProduit = :descriptionProduit,
+    //                 WHERE c.user_id = :user_id
+    //                 ');
+    //     $statement->bindValue('typeProduit', $formulaireDemandeProduit->getTypeProduit());
+    //     $statement->bindValue('descriptionProduit', $formulaireDemandeProduit->getDescriptionProduit());
+    //     $statement->bindValue('refClient', $refClient);
 
-        $statement->executeStatement();
-    }
+    //     $statement->executeStatement();
+    // }
 
     public function findAllFormsByClient($user_id)
     {

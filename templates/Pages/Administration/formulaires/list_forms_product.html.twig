@@ -109,34 +109,32 @@
 
                 </div>
    
-                   {% for formulaire_demande_produit in formulaire_demande_produits %}
+                   {% for form in formulaires %}
                     <div class="show_content_row_form_list">
                         {# <h5>{{ commande.dateCommande ? commande.dateCommande|date('Y-m-d H:i:s') : '' }}</h5>
                         <h5>{{ commande.listeProduits ? commande.listeProduits|json_encode : '' }}</h5>
                         <h5>{{ commande.prixTotal }}</h5>
                         <h5><a href="{{ path('app_commandes_show_one', {'cmd_id': commande.id}) }}">Voir</a></h5> #}
-                        <p>{{ formulaire_demande_produit.id }}</p>
-                        <p>{{ formulaire_demande_produit.typeProduit }}</p>
-                        <p>{{ formulaire_demande_produit.descriptionProduit }}</p>
-                        <p>{{ formulaire_demande_produit.dateEnvoieForm ? formulaire_demande_produit.dateEnvoieForm|date('d M Y à H:i') : '' }}</p>
-                        <a class="btn" href="{{ path('app_formulaire_demande_produit_show', {'id': formulaire_demande_produit.id}) }}">
+                        <p>{{ form.id }}</p>
+                        <p>{{ form.typeProduit }}</p>
+                        <p>{{ form.descriptionProduit }}</p>
+                        <p>{{ form.date_envoie_form ? form.date_envoie_form|date('d M Y à H:i') : '' }}</p>
+                        <a class="btn" href="{{ path('app_formulaire_demande_produit_show', {'id': form.id}) }}">
                             <img src="{{ asset('images/icones/voir.png') }}" alt="icone voir" style="width : 40px;">
                         </a>
 
                         {# Renvoie à la page pour accepeter la demande si celle ci est "en attente" #}
-                        {% if  formulaire_demande_produit.reponseDemande is same as('attente')  %}
+                        {% if  form.reponse_demande is same as('attente')  %}
 
                             <p>En attente</p>
                             <button>
-                                <a class="" href="{{ path('app_formulaire_demande_produit_traiter', {'id': formulaire_demande_produit.id}) }}">Répondre</a>
+                                <a class="" href="{{ path('app_formulaire_demande_produit_traiter', {'id': form.id}) }}">Répondre</a>
                             </button>
-
-                        
                         {% else %}
                         
-                            <p>{{ formulaire_demande_produit.reponseDemande }}
-                            le {{ formulaire_demande_produit.dateReponseForm ? formulaire_demande_produit.dateReponseForm|date('d M Y à H:i') : ''}}</p>
-                            {# <a href="{{ path('app_formulaire_demande_produit_traiter', {'id': formulaire_demande_produit.id}) }}">
+                            <p>{{ form.reponse_demande }}
+                            le {{ form.date_reponse_form ? form.date_reponse_form|date('d M Y à H:i') : ''}}</p>
+                            {# <a href="{{ path('app_formulaire_demande_produit_traiter', {'id': form.id}) }}">
                                 <img src="{{ asset('images/icones/user_black_line.png') }}" alt="profil du client" class="m-1" width="40px"height="40px">
                             </a> #}
 

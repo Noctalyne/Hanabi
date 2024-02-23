@@ -8,6 +8,11 @@
 
 {% block body %}
 
+
+
+
+
+
     <section class="container login_bloc">
 
         <form method="post">
@@ -16,21 +21,49 @@
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
-            {% if app.user %}
 
-                <div class="mb-3">
-                    Vous êtes connecter comme {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Deconnexion</a>
-                </div>
-
-            {% else %}
 
                 <div class="container ">
+
+
+
+
 
                     <div class="login_bloc_header">
                         <h1> Connectez-vous</h1>
                     </div>
+                    {% if app.request.query.get('msg') != "" %}
+                            <div class="alert alert-dismissible alert-info">
+                                <button type="button" class="btn-close cross" data-bs-dismiss="alert"></button>
+                                <strong>{{app.request.query.get('msg')  }} </strong>
+                                
+                            </div> 
+                    {% endif %}
+
+
+                    {% if app.user  %}
+
+                        <div class="alert alert-dismissible alert-warning">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            <p>
+                                <em>
+                                    Vérifier vodre adresse email. Vous ne l'avez pas reçu ?
+                                    <strong>
+                                        <a  href=" {{ path("app_register_send_mail",  {'id': app.user.id}  ) }}">
+                                            Renvoyer le moi
+                                        </a>
+                                    </strong>
+                                </em>
+                            </p>  
+                        </div>
+
+
+
+                    {% else %}
                                                 
                     <div class="login_bloc_content">
+
+
 
                         <div class="form-floating  p-2">
                             <label for="inputEmail">Email : </label>
@@ -48,8 +81,11 @@
                         
                     </div>
 
+
+                    {% endif %}
+
                 </div>
-            {% endif %}
+            
         </form>
 
         <div class="login_bloc_footer">

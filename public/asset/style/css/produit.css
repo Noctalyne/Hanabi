@@ -1,4 +1,3 @@
-
 /* TYPE : ShOW  */
 .bloc_show_produit {
     width: 75%;
@@ -22,6 +21,17 @@
     justify-content: space-between;
     padding: 25px;
 }
+.show_content_row_produit button {
+    /* width: fit-content; */
+    text-align: end;
+    margin-left: auto;
+}
+
+.show_content_row_produit p {
+    font-size: 35px !important;
+    text-align: end;
+}
+
 
 .show_content_row_produit form {
     margin: 15px auto;
@@ -90,3 +100,72 @@
 
 
 /* TYPE : LIST */
+.bloc_show_form_list {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border: 1px solid #AD0011;
+    border-radius: 10px;
+    margin: 50px auto;
+}
+
+.bloc_show_header {
+    text-align: center;
+    border-bottom: 1px solid #AD0011;
+    margin: 10px;
+    padding: 0px 10px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bloc_show_content {
+    padding: 40px;
+}
+
+.show_content_row_form_list {
+    /* margin-left: 10%; */
+    text-align: center;
+    display: grid;
+    /* grid-template-columns: repeat(6, 1fr); */
+    grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(1, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+    justify-items: center;
+
+}
+
+.show_content_row div {
+    margin-left: 20px;
+}
+
+.show_content_footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* width: 50%; */
+}
+
+
+.bloc_show_footer {
+    width: 25%;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.show_content_row_form_list em {
+
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
+}

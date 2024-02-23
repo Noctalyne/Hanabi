@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter mes information personnels{% endblock %}
+{% block title %}Ajouter mes informations personnels{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('./rework_css/account.css') }}">
+    <link rel="stylesheet" href="{{ asset('asset/style/css/account.css') }}">
 {% endblock %}
 
 
@@ -11,29 +11,13 @@
 
     <div class="container bloc">
     
-        <h1>Ajouter mes informations personnels</h1>
-
-        {# Informations de connexion #}
-        {# <div class="bloc_card">
-
-            <div class="bloc_card_header">
-                <h4> Mes information de connexion </h4>      
-            </div>
-
-            <div class="bloc_card_body">
-                <p>Email : {{ user.email }}</p>
-                <p>Nom d'utilisateur : {{ user.username }}</p>
-                <p>Mot de passe : **********</p>            
-            </div>
-        
-        </div> #}
-
+        <h1> Mes informations personnels </h1>
 
         <div class="bloc_card">
 
-            <div class="bloc_card_header">
-                {# <h4> Mes information de connexion </h4> #}
-                <h4> Mes information personnels </h4>
+            <div class="bloc_card_header text-center">
+                {# <h4>Ajouter mes informations personnels</h4> #}
+                <h4>Ajouter</h4>
             </div>
 
             <div class="bloc_card_body">
@@ -77,14 +61,9 @@
             </div>
 
         </div>
-
-                
-
     
     </div>
-
-    {# {{ include('clients/_delete_form.html.twig',{'id': client.id} ) }} #}
-
+    
 {% endblock %}
 
 

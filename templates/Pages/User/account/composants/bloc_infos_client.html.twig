@@ -1,0 +1,36 @@
+ {% if user.ClientActivate == true  %}
+
+{# BLOC INFOS PERSO #}
+<div class="bloc_card_header">
+<h4> Mes information personnels </h4>
+<button>
+<a href="#">Modifier</a>
+</button>
+</div>
+
+
+<div class="bloc_card_body">
+<p> Nom : {{ user.nom }}</p>
+<p> Prénom : {{ user.prenom }}</p>
+<p> Téléphone : {{ user.telephone }}</p>
+</div>
+
+
+
+
+{% else %}
+
+<div class="bloc_card_header">
+<h4> Mes information personnels </h4>
+</div>
+
+
+<div class="bloc_card_body_center">
+<button>
+<a href="{{ path('app_user_add_infos' , {'id': app.user.id }) }}">Ajouter mes infos personnels</a>
+</button>   
+</div>
+
+
+
+{% endif %}

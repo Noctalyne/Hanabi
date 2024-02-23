@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Banniere;
 use App\Form\BanniereType;
 use App\Repository\BanniereRepository;
+use App\Service\UtilsServices;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -34,8 +35,9 @@ class BanniereController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $premiereImage = $form->get('premiereImage')->getData(); // On récupère les données qui composent l’image
+            $banniere->setNomBanniere( UtilsServices::cleanInput( $form->get('nomBanniere')->getData() ) );
 
+            $premiereImage = $form->get('premiereImage')->getData(); // On récupère les données qui composent l’image
             if ($premiereImage) { // Si une image a bien été insérée 
                 $originalFilename = pathinfo($premiereImage->getClientOriginalName(), PATHINFO_FILENAME); // On prend le nom de base du fichier
                 $safeFilename = $slugger->slug($originalFilename);// this is needed to safely include the file name as part of the URL
@@ -201,7 +203,8 @@ class BanniereController extends AbstractController
 
     // "bouton" qui active le carousel pour qu'il s'affiche
     #[Route('/{id}', name: 'app_banniere_activated', methods: ['POST'])]
-    public function activate(Request $request, Banniere $banniere, EntityManagerInterface $entityManager, BanniereRepository $banniereRepository): Response
+    public function activate(Request $request, Banniere $banniere, 
+        EntityManagerInterface $entityManager, BanniereRepository $banniereRepository): Response
     {
         // Récupère toutes les bannières en BDD
         $listeBanniere = $banniereRepository->findAll();

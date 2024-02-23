@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,10 +22,14 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
     use TargetPathTrait;
 
     public const LOGIN_ROUTE = 'app_login';
-
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    private UserRepository $userRepository;
+    public function __construct(private UrlGeneratorInterface $urlGenerator, UserRepository $userRepository)
     {
+        $this->userRepository= $userRepository;
     }
+
+    
+
 
     public function authenticate(Request $request): Passport
     {
@@ -48,10 +53,21 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        // For example:
-        return new RedirectResponse($this->urlGenerator->generate('app_accueil'));
-        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        $email = $request->request->get('email', '');
+        $user = $this->userRepository->findOneBy(['email'=> $email]);
+        
+        if ($user->isAccountActivate() == true) {
+            $msg = "Bienvenue" . $user->getUsername();
+            // Si l'utilisateur a activer son compte
+            return new RedirectResponse($this->urlGenerator->generate('app_accueil', ['msg'=> $msg] ));
+        }
+        else {
+            // Sinon cela renvoie sur la page de connexion et affiche un message pour renvoyer le mail
+            return new RedirectResponse($this->urlGenerator->generate('app_login'));
+        }
     }
+
+
 
     protected function getLoginUrl(Request $request): string
     {

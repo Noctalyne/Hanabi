@@ -31,11 +31,11 @@
             {# <div>{{ panier.quantite }}</div> #}
 
             <div>
-                {{ include('pages/User/panier/_delete_cart.html.twig') }}
+                {{ include('./pages/User/panier/_delete_cart.html.twig') }}
                 {{ include('./components/commandes/create_cmd.html.twig') }}
             </div>
 
-             {{ include('/test_stripe.html.twig') }}
+             {{ include('./pages/User/panier/stripe_paiement.html.twig') }}
         {% else  %}
 
             <div class="text-center">

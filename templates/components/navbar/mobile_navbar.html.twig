@@ -38,13 +38,19 @@
 
                 <a href="{{ path('app_accueil') }}">Accueil</a>
                 <a href="{{ path('app_shop')}}">Boutique</a>
-                <a href="{{ path('app_contact')}}">Contact</a>
 
-                {% if app.user %}
-                    {% if app.user.roles ? app.user.roles|json_encode : '' == 'ROLE_ADMIN' %}
-                        <a href="{{ path('app_administration')}}">Admin</a>
-                    {% endif %}
+
+                {% if app.user and app.user.accountActivate == true %}
+                    <a href="{{ path('app_contact_client', {'id' : app.user.id })}}">Contact</a>
+                {% else %}
+                    <a href="{{ path('app_contact')}}">Contact</a>
                 {% endif %}
+
+
+                {% if app.user and 'ROLE_ADMIN' in app.user.roles %}
+                    <a href="{{ path('app_administration')}}">Admin</a>
+                {% endif %}
+
 
                 <form>
                     <div class="input-group border rounded texte-color">
@@ -56,13 +62,27 @@
                 </form>
 
                 {% if app.user %}
-                
-                    <div class="connected">
-                        {# Icone Pannier #}
-                        <div>{% include 'components/navbar/_dropdown_panier.html.twig' %}</div>
-                        <div>{% include 'components/navbar/dropdown_account.html.twig' %}</div>                
-                    </div>
 
+                    {% if app.user.accountActivate == true %}
+
+                        <div class="connected">
+                            
+                            <div>{% include 'components/navbar/_dropdown_panier.html.twig' %}</div>{# Icone Panier #}
+                            <div>{% include 'components/navbar/dropdown_account.html.twig' %}</div>{# Icone Compte #}                
+                        </div>
+
+                    {% else %}
+
+                        <div class="connected">
+                            <button class="icon_button">
+                                <a href="{{ path('app_logout') }}">
+                                    <img id="img_profil" src="{{ asset('images/icones/user_black_line.png') }}" alt="Logo profil">
+                                </a>
+                            </button> 
+                        </div>
+
+                    {% endif %}
+                
                 {% else %}
                     <div class="connected">
                         <button class="icon_button">

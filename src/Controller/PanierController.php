@@ -62,6 +62,7 @@ class PanierController extends AbstractController
             if ($user->getPanier() == null ) {
 
                 $panier = new Panier();
+                $panier->setQuantite(1);
                 $total = $panier->setPrixTotal( $produit->getPrixProduit()) ;
 
                 $user->setPanier($panier);

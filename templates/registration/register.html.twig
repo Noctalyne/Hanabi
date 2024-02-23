@@ -1,6 +1,11 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('asset/style/css/style.css')}}">
+      
+{% endblock %}
 
 {% block body %}
 
@@ -33,7 +38,7 @@
                     </div>
 
                     <div class="p-2">
-                        {{ form_row(registrationForm.plainPassword, {
+                        {{ form_row(registrationForm.password, {
                             class:"form-control",
                             label: 'Mot de passe :',
                         }) }}
@@ -53,5 +58,33 @@
             </div>
         {{ form_end(registrationForm) }}
     </section>
+
+{% endblock %} #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+    {% if msg != "" %}
+        <div class="alert alert-dismissible">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <em><strong>{{ msg }}</strong></em>
+        </div>
+    {% endif %}
+
+
+    {{ form_start(form)}}
+        {# {{ form_row(form.firstname) }} #}
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password.first) }}
+        {{ form_row(form.password.second) }}
+
+        <div class="d-flex justify-content-around mt-3">
+            <button id="registration_form_submit" type="submit" class="btn btn-secondary">S'enregistrer</button>
+        </div>
+        
+    {{ form_end(form) }}
 
 {% endblock %}

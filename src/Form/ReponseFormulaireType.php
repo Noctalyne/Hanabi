@@ -15,7 +15,7 @@ class ReponseFormulaireType extends AbstractType
         $builder
 
         // Permet d accepter ou non la demande
-            ->add('reponseDemande', ChoiceType::class, [
+            ->add('reponse_demande', ChoiceType::class, [
                 'placeholder' => 'Choisir',
                 'choices' => [
                         'Oui' => 'Accepter',

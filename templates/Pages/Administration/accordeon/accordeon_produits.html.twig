@@ -17,7 +17,7 @@
     
         <div class="accordion_content">
             
-            <div class="accordion_row">
+            <div class="accordion_row_produit">
                 <h5>Nom</h5>
                 <h5>Description</h5>
                 <h5>Image</h5>
@@ -28,9 +28,9 @@
 
             {% for produit in produits %}
 
-                <div class="accordion_row"> 
+                <div class="accordion_row_produit"> 
                     <p>{{ produit.nomProduit }}</p>
-                    <p>{{ produit.descriptionProduit }}</p>
+                    <p><em>{{ produit.descriptionProduit }}</em></p>
                     <p><img class="" src="{{ asset('images/produits/' ~ produit.imgProduit) }}" alt="photo du produit :" ~ {{produit.nomProduit }} style="height:100px;"></p>
                     <p>{{ produit.prixProduit }} &#8364; </p>
                     <p>{{ produit.quantStock }}</p>

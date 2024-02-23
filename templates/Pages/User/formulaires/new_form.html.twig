@@ -3,7 +3,8 @@
 {% block title %}Faire une demande{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('./rework_css/account.css') }}">
+    {# <link rel="stylesheet" href="{{ asset('asset/style/css/account.css') }}"> #}
+    <link rel="stylesheet" href="{{ asset('asset/style/css/formulaires.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -12,31 +13,32 @@
 
         <h1>Contact</h1>
 
-        <div class="bloc_card">
+        <div class="bloc_add">
 
-            <div class="bloc_card_header">
+            <div class="bloc_add_header">
                 <h4> Faire une demande personalisé </h4>
             </div>
 
             {{ form_start(form) }}
 
                 
-                <div class="bloc_card_add">
-                    <p>ChoisissSez le type de produit voulue :</p>
-                    {{ form_row(form.typeProduit, {label: ' '}) }}    
+                <div class="add_content_row">
+                <div> <p>ChoisissSez le type de produit voulue :</p> </div>
+                    
+                    {{ form_row(form.type_produit, {label: ' '}) }}    
                 </div>
 
-                <div class="bloc_card_add">
+                <div class="add_content_row">
                     <p>* Autres :</p>
-                    {{ form_row(form.autresTypes, {label: ' '}) }}
+                    {{ form_row(form.autres_types, {label: ' '}) }}
                 </div>
 
-                <div class="bloc_card_add">
+                <div class="add_content_row">
                     <p>Veuillez préciser votre recherche :</p>
-                    {{ form_row(form.descriptionProduit, {label: ' '}) }}
+                    {{ form_row(form.description_produit, {label: ' '}) }}
                 </div>
 
-                <div class="bloc_card_edit_footer">
+                <div class="add_content_footer">
                     <button>
                         {{ button_label|default('Enregistrer') }}
                     </button>

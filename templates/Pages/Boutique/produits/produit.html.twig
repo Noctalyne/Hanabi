@@ -19,6 +19,13 @@
                 </div>
 
                 <div class="show_content_row_produit">
+                    {% if app.user and 'ROLE_ADMIN' in app.user.roles %}
+                        <button>
+                            <a href="{{ path('app_produits_edit', {'id' : produit.id}) }}">Modifier</a>
+                        </button>
+
+                    {% endif %}
+                    
                     <h1> {{ produit.nomProduit }} </h1>
                     <em>{{ produit.descriptionProduit }}</em>
                     <p>{{ produit.prixProduit }} &#8364; </p>

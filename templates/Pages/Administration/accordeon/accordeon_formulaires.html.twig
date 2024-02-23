@@ -32,44 +32,39 @@
 
                 
 
-                {% for formulaire_demande_produit in formulaire_demande_produits %}
+                {% for form in formulaires %}
                     <div class="accordion_row">    
-                        <p>{{ formulaire_demande_produit.id }}</p>
+                        <p>{{ form.id }}</p>
 
-                        <p>{{ formulaire_demande_produit.typeProduit }}</p>
+                        <p>{{ form.type_produit }}</p>
 
-                        <p>{{ formulaire_demande_produit.dateEnvoieForm ? formulaire_demande_produit.dateEnvoieForm|date('d M Y à H:i') : '' }}</p> 
+                        <p>{{ form.date_envoie_form ? form.date_envoie_form|date('d M Y à H:i') : '' }}</p> 
 
-
-                        {% if  formulaire_demande_produit.reponseDemande is same as('attente')  %}
-
-                            {# <p>Demande en attente </p> #}
+                        {# Si l'attribut reponse_demande est égal ) "attente" #}
+                        {% if  form.reponse_demande is same as('attente')  %}
                             <div id="attente">
                                 <span class="badge rounded-pill bg-warning">Attente</span>
-                                <a class="" href="{{ path('app_formulaire_demande_produit_traiter', {'id': formulaire_demande_produit.id}) }}">Traiter</a>
+                                <a class="" href="{{ path('app_formulaire_demande_produit_traiter', {'id': form.id}) }}">Traiter</a>
                             </div>
-                            
-
                         {% else %}
                         
                             <div>
-                                {% if formulaire_demande_produit.reponseDemande is same as('Accepter') %}
-                                    <span class="badge rounded-pill bg-success">{{ formulaire_demande_produit.reponseDemande }}</span>
+                                {% if form.reponse_demande is same as('Accepter') %}
+                                    <span class="badge rounded-pill bg-success">{{ form.reponse_demande }}</span>
                                 {% else  %}
-                                    <span class="badge rounded-pill bg-danger">{{ formulaire_demande_produit.reponseDemande }}</span>
+                                    <span class="badge rounded-pill bg-danger">{{ form.reponse_demande }}</span>
                                 {% endif %}
-
-                                <p> le {{ formulaire_demande_produit.dateReponseForm ? formulaire_demande_produit.dateReponseForm|date('d M Y à H:i') : ''}}</p>
+                                <p> le {{ form.date_reponse_form ? form.date_reponse_form|date('d M Y à H:i') : ''}}</p>
                             </div>
 
                         {% endif %}
 
 
-                        <a href="{{ path('app_formulaire_demande_produit_traiter', {'id': formulaire_demande_produit.id}) }}">
+                        <a href="{{ path('app_formulaire_demande_produit_traiter', {'id': form.id}) }}">
                             <img src="{{ asset('images/icones/user_black_line.png') }}" alt="profil du client" class="m-1" width="40px"height="40px">
                         </a>
 
-                        <a href="{{ path('app_formulaire_demande_produit_show', {'id': formulaire_demande_produit.id}) }}">
+                        <a href="{{ path('app_formulaire_demande_produit_show', {'id': form.id}) }}">
                             <img src="{{ asset('images/icones/voir.png') }}" alt="icone voir" style="width : 40px;">
                         </a>
                     </div>            

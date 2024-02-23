@@ -33,6 +33,20 @@ span {
     border-bottom: solid 1px #AD0011;
 }
 
+.accordion_row_produit {
+    /* margin-left: 10%; */
+    margin: 15px auto !important;
+    text-align: center !important;
+    display: grid !important;
+    /* grid-template-columns: repeat(6, 1fr); */
+    grid-template-columns: 1fr 6fr 2fr 2fr 1fr 1fr !important;
+    grid-template-rows: repeat(1, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    align-items: center;
+    border-bottom: solid 1px #AD0011;
+}
+
 .accordion_row div {
     display: flex;
     flex-direction: column;
@@ -43,6 +57,12 @@ span {
 .accordion_row p {
     color: #000000 !important;
     font-size: 20px;
+}
+
+.accordion_row em {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 

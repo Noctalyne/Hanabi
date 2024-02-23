@@ -3,7 +3,7 @@
 {% block title %}Mon Compte{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('./rework_css/account.css') }}">
+    <link rel="stylesheet" href="{{ asset('asset/style/css/account.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -23,9 +23,22 @@
             </div>
 
             <div class="bloc_card_body">
-                <p>Email : {{ user.email }}</p>
-                <p>Nom d'utilisateur : {{ user.username }}</p>
-                <p>Mot de passe : **********</p> {# voir pour modifier le mot de passe #}            
+
+                <div class="bloc_card_row">
+                    <p>Email : </p>
+                    <p>{{ user.email }}</p>
+                </div>
+
+                <div class="bloc_card_row">
+                    <p>Nom d'utilisateur : </p>
+                    <p>{{ user.username }}</p>
+                </div>
+
+                <div class="bloc_card_row">
+                    <p>Mot de passe :</p>
+                    <p>**********</p>{# voir pour modifier le mot de passe #} 
+                </div>
+          
             </div>
         
         </div>
@@ -33,141 +46,18 @@
 
         {# INFORMATIONS PERSSONNELS  #}
         <div class="bloc_card">
-
-
-            {% if user.ClientActivate == true  %}
-
-                {# BLOC INFOS PERSO #}
-                <div class="bloc_card_header">
-                    <h4> Mes information personnels </h4>
-                    <button>
-                        <a href="#">Modifier</a>
-                    </button>
-                </div>
-
-
-                <div class="bloc_card_body">
-                    <p> Nom : {{ user.nom }}</p>
-                    <p> Prénom : {{ user.prenom }}</p>
-                    <p> Téléphone : {{ user.telephone }}</p>
-                </div>
-
-
-                {# BLOC ADRESSES #}
-                <div class="bloc_card_header">
-                    <h4> Mes adresse </h4>
-                </div>
-
-                <div class="bloc_card_body_center">
-                    
-                    {% for adresse in adresses %}
-
-                        <div class="card" style="width: 12rem;">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">Adresse</h5>
-                                <p class="card-text">{{ adresse.num_adrss }} {{ adresse.rue_adrss }}</p>
-                                <p class="card-text">{{ adresse.complement_adrss }}</p>
-                                <p class="card-text">{{ adresse.code_postal_adrss }} {{ adresse.ville_adrss }}</p>
-                                <p class="card-text">{{ adresse.pays_adrss }}</p>
-                            </div>
-
-                            <div class="modal_footer">
-                                {# <button> #}
-                                    {{ include('pages/User/adresses/_delete_addresse.html.twig') }}
-                                {# </button> #}
-                                {{ include('pages/User/adresses/modal_show_one_adresse.html.twig') }}
-                            </div>
-
-                        </div>
-                        
-                    {% endfor %}
-
-                    {% if limiteAdress < 3 %} {# si la limite est inférieur à 3 #}
-                        <div class="card" style="width: 12rem;">
-                            <div class="card-body">
-
-                                <button>
-                                    <a href="{{ path('app_adresses_new' , {'id': app.user.id }) }}"> Ajouter une adresse </a>
-                                </button>  
-                            </div>
-
-                        </div>
-                    {% endif %}
-                
-                </div>
-
-            {% else %}
-
-                <div class="bloc_card_header">
-                    <h4> Mes information personnels </h4>
-                </div>
-
-
-                <div class="bloc_card_body_center">
-                    <button>
-                        <a href="{{ path('app_user_add_infos' , {'id': app.user.id }) }}">Ajouter mes infos personnels</a>
-                    </button>   
-                </div>
-
-
-
-            {% endif %}
-
-           
-        
+            {% include "./pages/User/account/composants/bloc_infos_client.html.twig" %}
         </div>
 
-
+        {# Adresses #}
         <div class="bloc_card">
-
-            <div class="bloc_card_header">
-                <h4> Liste de mes formulaires </h4>
-                <button class="">
-                    {# <a href="{{ path('app_user_edit', {'id': user.id}) }}">Modifier</a> #}
-                </button>             
-            </div>
-
-            <div class="bloc_card_body">
-                {% for formulaire in formulaires %}
-
-                    <div class="card" style="width: 12rem;">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Formulaire {{  loop.index }}</h5>
-
-                            <p class="card-text">Type de produit : {{ formulaire.type_produit }}</p>
-
-                            <p class="card-text">Précision autres {{ formulaire.autres_types }}</p>
-
-                            <p class="card-text text-break">Description envoyée : {{ formulaire.description_produit }}</td> </p>
-
-                            <p class="card-text">
-                                Date d'envoie de la demande : 
-                                {{ formulaire.date_envoie_form ? formulaire.date_envoie_form|date('d M Y à H:i') : '' }}
-                            </p>
-                            
-                            <p class="card-text">
-                                Réponse du vendeur :
-                                {% if  formulaire.reponse_demande is same as('attente')  %}
-                                    Demande en attente   
-                                {% else %}
-                                    {{ formulaire.reponse_demande ? 'Accepter' : 'Refuser' }}
-                                    le {{ formulaire.date_reponse_form ? formulaire.date_reponse_form|date('d M Y à H:i') : '' }}
-                                {% endif %}
-                            
-                        </div>
-
-                        <div class="modal_footer">
-                            {# <button> #}
-                            {# {{ include('pages/User/adresses/_delete_addresse.html.twig') }} #}
-                            {# </button> #}
-                            {# {{ include('pages/User/adresses/modal_show_one_adresse.html.twig') }} #}
-                        </div>
-
-                    </div>
-
-                {% endfor %}           
-            </div>
+            {% include "./pages/User/account/composants/bloc_adresses.html.twig" %}
+        </div>
         
+
+        {# Formulaires #}
+        <div class="bloc_card">
+            {% include "./pages/User/account/composants/bloc_formulaires.html.twig" %}
         </div>
 
         {# Modifier le booléen de la validation d inscription #}

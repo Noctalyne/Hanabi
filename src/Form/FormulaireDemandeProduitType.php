@@ -16,7 +16,7 @@ class FormulaireDemandeProduitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('typeProduit', ChoiceType::class, [
+            ->add('type_produit', ChoiceType::class, [
                 'choices' => [
                     'Manga' => 'Manga',
                     'Figurine' => 'Figurine',
@@ -27,7 +27,7 @@ class FormulaireDemandeProduitType extends AbstractType
                 'label' => 'Réponse du vendeur', // Libellé du champ
             ])
 
-            ->add('autresTypes', TextType::class, [
+            ->add('autres_types', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => "Préciser",
@@ -37,17 +37,14 @@ class FormulaireDemandeProduitType extends AbstractType
                 // 'mapped' =>false
             ])
 
-            ->add('descriptionProduit', TextareaType::class, [
-                // 'attr' => ['style' => 'word-break: break-word;'], //voir pour  casser les mots et remplir la case sans la dépassé
+            ->add('description_produit', TextareaType::class, [
                 'constraints' =>
                 new Length([
                     'min' => 0,
                     'maxMessage' => 'Votre demande ne peux exceder {{ limit }} charactères',
-                    // max length allowed by Symfony for security reasons
                     'max' => 300,
                 ]),
             ]);
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -18,7 +18,15 @@
     display: flex;
     flex-direction: column;
     margin: auto 10px;
+    /* word-break: break-word; */
+    max-width: 300px;
 }
+.card_produit_content em {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 
 .card_produit_content p {
     margin: 20px auto;
