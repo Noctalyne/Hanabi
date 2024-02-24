@@ -12,6 +12,8 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    /* margin: 25px auto; */
+    margin-top: 25px;
 }
 
 .navigation_link a {

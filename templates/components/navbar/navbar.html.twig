@@ -50,6 +50,74 @@
         </nav>
     </div> #}
 
+
+
+            <nav class="navigation_link">
+
+
+        <a href="{{ path('app_accueil') }}">
+            <img src="{{ asset('images/logo/grp_marque.png') }}" alt="Logo Hanabi" />
+        </a>
+
+
+                <a href="{{ path('app_accueil') }}">Accueil</a>
+                <a href="{{ path('app_shop')}}">Boutique</a>
+
+
+                {% if app.user and app.user.accountActivate == true %}
+                    <a href="{{ path('app_contact_client', {'id' : app.user.id })}}">Contact</a>
+                {% else %}
+                    <a href="{{ path('app_contact')}}">Contact</a>
+                {% endif %}
+
+
+                {% if app.user and 'ROLE_ADMIN' in app.user.roles %}
+                    <a href="{{ path('app_administration')}}">Admin</a>
+                {% endif %}
+
+
+                <form>
+                    <div class="input-group border rounded texte-color">
+                        <input type="text" class="form-control form-control" placeholder="produit, licence...">
+                        <div class="input-group-text btn">
+                            <img src="{{ asset('images/icones/search.png') }}" alt="" width="20px" height="20px">
+                        </div>
+                    </div>
+                </form>
+
+                {% if app.user %}
+
+                    {% if app.user.accountActivate == true %}
+
+                        <div class="connected">
+                            
+                            <div>{% include 'components/navbar/_dropdown_panier.html.twig' %}</div>{# Icone Panier #}
+                            <div>{% include 'components/navbar/dropdown_account.html.twig' %}</div>{# Icone Compte #}                
+                        </div>
+
+                    {% else %}
+
+                        <div class="connected">
+                            <button class="icon_button">
+                                <a href="{{ path('app_logout') }}">
+                                    <img id="img_profil" src="{{ asset('images/icones/circle-user-2.svg') }}" alt="Logo profil">
+                                </a>
+                            </button> 
+                        </div>
+
+                    {% endif %}
+                
+                {% else %}
+                    <div class="connected">
+                        <button class="icon_button">
+                            <a href="{{ path('app_login') }}">
+                                <img id="img_profil" src="{{ asset('images/icones/circle-user-2.svg') }}" alt="Logo profil">
+                            </a>
+                        </button> 
+                    </div>
+                {% endif %}
+
+            </nav>
     
     
 </div>

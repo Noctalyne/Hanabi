@@ -23,38 +23,38 @@
         <div class="bloc_add">
 
             <div class="bloc_add_header">
-                <h1> Traiter la demande numéro {{ form.id }} </h1>
+                <h1> Traiter la demande numéro {{ formulaire_demande_produit.id }} </h1>
             </div>
 
             <div class="bloc_add_content">
                
                 <div class="add_content_row">
                     <p>Type de produit :</p>
-                    <p>{{ form.typeProduit }} </p>
+                    <p>{{ formulaire_demande_produit.typeProduit }} </p>
                 </div>
 
                     
                 <div class="add_content_row">
                     <p>* Autres :</p>
-                    <p>{{ form.autresTypes }}</p>
+                    <p>{{ formulaire_demande_produit.autresTypes }}</p>
                 </div>
 
 
                 <div class="add_content_row">
                     <p>Description envoyée :</p>
                     <texarea>
-                        {{ form.descriptionProduit }}
+                        {{ formulaire_demande_produit.descriptionProduit }}
                     </textarea>                       
                 </div>
             
 
                 <div class="add_content_row">
                     <p>Date d'envoie de la demande :</p>
-                    <p>{{ form.date_envoie_form ? form.date_envoie_form|date('d M Y à H:i') : '' }}</p>
+                    <p>{{ formulaire_demande_produit.dateEnvoieForm ? formulaire_demande_produit.dateEnvoieForm|date('d M Y à H:i') : '' }}</p>
                 </div>
 
 
-                <div class="add_content_row">
+                {# <div class="add_content_row">
                     <p>Réponse du vendeur :</p>
 
                     {% if  form.reponse_demande is same as('attente')  %}
@@ -64,11 +64,11 @@
                         le {{ form.date_reponse_form ? form.date_reponse_form|date('d M Y à H:i') : '' }}
                     {% endif %}
 
-                </div>
+                </div> #}
 
 
                 <div class="add_content_row">
-                    <p>Réponse du vendeur :</p>
+                    <p> <strong> Réponse : </strong></p>
                     {{ form_start(form) }}
                         {{ form_row(form.reponse_demande, {label: ' ' }) }} 
                 </div>

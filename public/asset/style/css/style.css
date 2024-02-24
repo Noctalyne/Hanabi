@@ -2,6 +2,10 @@
     font-family: "JapaneseTourist";
     src: url(./JapaneseTourist.ttf); 
 }*/
+#hash {
+    -webkit-text-security : disc
+}
+
 body {
     background-color: #fff;
 }

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hanabi ~{% block title %}{% endblock %}</title>
+    <title>Hanabi ~ {% block title %}{% endblock %}</title>
       
     {# Change l icone de l'onglet #}{# <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"> #}
         
@@ -42,15 +42,15 @@
 
 
   <header>
-    {# <div class="windows_resp"> #}
-      {# {% include './components/navbar/navbar.html.twig' %} #}
-    {# </div> #}
 
+    {# <div class="windows_resp">  #}
     <div>
-      
-    {# <div class="phone_resp"> #}
-      {% include './components/navbar/mobile_navbar.html.twig' %}
+      {% include './components/navbar/navbar.html.twig' %}
     </div>
+
+    {# <div class="phone_resp">
+      {% include './components/navbar/mobile_navbar.html.twig' %}
+    </div> #}
 
   </header>
 

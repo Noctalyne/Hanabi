@@ -19,29 +19,24 @@
             <div class="accordion_content">
             
                 <div class="accordion_row">
-
                     <h5>N°</h5>
                     <h5>Type</h5>
                     <h5>Date d'envoie</h5>
                     <h5>Statut </h5>
                     <h5>Client </h5>
                     <h5>Afficher</h5>
-
                 </div>
-
-
-                
 
                 {% for form in formulaires %}
                     <div class="accordion_row">    
                         <p>{{ form.id }}</p>
 
-                        <p>{{ form.type_produit }}</p>
+                        <p>{{ form.typeProduit }}</p>
 
-                        <p>{{ form.date_envoie_form ? form.date_envoie_form|date('d M Y à H:i') : '' }}</p> 
+                        <p>{{ form.dateEnvoieForm ? form.dateEnvoieForm|date('d M Y à H:i') : '' }}</p> 
 
                         {# Si l'attribut reponse_demande est égal ) "attente" #}
-                        {% if  form.reponse_demande is same as('attente')  %}
+                        {% if  form.reponseDemande is same as('attente')  %}
                             <div id="attente">
                                 <span class="badge rounded-pill bg-warning">Attente</span>
                                 <a class="" href="{{ path('app_formulaire_demande_produit_traiter', {'id': form.id}) }}">Traiter</a>
@@ -49,12 +44,12 @@
                         {% else %}
                         
                             <div>
-                                {% if form.reponse_demande is same as('Accepter') %}
-                                    <span class="badge rounded-pill bg-success">{{ form.reponse_demande }}</span>
+                                {% if form.reponseDemande is same as('Accepter') %}
+                                    <span class="badge rounded-pill bg-success">{{ form.reponseDemande }}</span>
                                 {% else  %}
-                                    <span class="badge rounded-pill bg-danger">{{ form.reponse_demande }}</span>
+                                    <span class="badge rounded-pill bg-danger">{{ form.reponseDemande }}</span>
                                 {% endif %}
-                                <p> le {{ form.date_reponse_form ? form.date_reponse_form|date('d M Y à H:i') : ''}}</p>
+                                <p> le {{ form.dateReponseForm ? form.dateReponseForm|date('d M Y à H:i') : ''}}</p>
                             </div>
 
                         {% endif %}

@@ -1,0 +1,140 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Mes formulaires{% endblock %}
+
+{% block body %} #}
+
+
+{# <div class="container bloc">
+
+    <div class="p-1 text-center">
+
+    </div>
+    
+
+   
+    <table class="table">
+        <pead>
+            <tr>
+                <p>Type de produit</p>
+                <p>* Autres :</p>
+                <p>Description</p>
+                <p>Date de la demande</p>
+                <p>Réponse</p>
+                <p>Afficher</p>
+            </tr>
+        </pead>
+        <tbody>
+        {% for form in formulaires %}
+            <tr>
+                <p>{{ form.type_produit }}</p>
+                                
+                <p>{{ form.autresTypes }}</p>
+                <p class="text-break">{{ form.description_produit }}</p>
+                <p>Envoyer le {{ form.date_envoie_form ? form.date_envoie_form|date('d M Y à H:i') : '' }}</p>
+
+                {% if  form.reponse_demande is same as('attente')  %}
+                    <p><p>Demande en attente </p></p>                    
+                {% else %}
+                    <p>{{ form.date_reponse_form ? form.date_reponse_form|date('d M Y à H:i') : ''}} </p>
+                    <p>{{ form.reponse_demande }}</p>
+                {% endif %}
+
+                <p>{{ form.date_reponse_form ? form.date_reponse_form|date('d M Y à H:i') : '' }}</p>
+                <p >
+                    <a href="{{ path('app_formulaire_demande_produit_show', {'id': form.id}) }}">
+                        <img  src="{{ asset('images/icones/voir.png') }}" alt="icone voir" style="widp : 60px;">
+                    </a>
+                </p>
+            </tr>
+        {% else %}
+            <tr>
+                <p colspan="6">Aucun formulaires trouvés</p>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center">
+        <button>
+            <a href="{{ path('app_formulaire_demande_produit_new', {'id' : app.user.id}) }}">Faire une nouvelle demande</a>
+        </button>
+    </div>
+        
+</div>    
+{% endblock %} #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste des formulaires {% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{asset('asset/style/css/formulaires.css')}}">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container bloc">
+
+        <div class="bloc_show_form_list">
+
+            <div class="show_form_list_header">
+                <h1>Liste de mes formulaires</h1>
+                <p>Vous trouverez ici la liste de tous vos fomulaires envoyés.</p>
+            </div>
+
+            <div class="bloc_show_content">
+            
+                <div class="show_content_row_form_list">
+                    <p>N° de demande</p>
+                    <p>Type de produit</p>
+                    <p>Description</p>
+                    <p>Date d'envoie</p>
+                    <p>Statut</p>
+                    <p>Afficher</p>
+                </div>
+   
+                {% for form in formulaires %}
+
+                    <div class="show_content_row_form_list">
+                        <p>{{ form.id }}</p>
+                        {# <p>{{ form.type_produit }}</p>
+                        <p>{{ form.description_produit }}</p>
+                        <p>{{ form.date_envoie_form ? form.date_envoie_form|date('d/m/y') : '' }}</p> #}
+                        <p>{{ form.typeProduit }}</p>
+                        <p>{{ form.descriptionProduit }}</p>
+                        <p>{{ form.dateEnvoieForm ? form.dateEnvoieForm|date('d/m/y') : '' }}</p>
+
+                        {# Renvoie à la page pour accepeter la demande si celle ci est "en attente" #}
+                        {% if  form.reponseDemande is same as('attente')  %}
+                            <span class="badge rounded-pill bg-warning">Attente</span>
+                         {% elseif form.reponseDemande is same as('Accepter') %}
+                            <span class="badge rounded-pill bg-success">{{ form.reponseDemande }}</span>
+                        {% else %}
+                                <span class="badge rounded-pill bg-danger">{{ form.reponseDemande }}</span>
+                        {% endif %}
+
+                        <a class="btn" href="{{ path('app_formulaire_demande_produit_show', {'id': form.id}) }}">
+                            <img src="{{ asset('images/icones/voir.png') }}" alt="icone voir" style="width : 40px;">
+                        </a>
+
+                    </div>
+
+                {% endfor %}
+
+                <div class="show_content_footer" >
+                    <button class="bloc_show_footer">
+                        <a href="{{ path('app_banniere_index') }}">Retour</a>
+                    </button>
+                    <button>
+                        <a href="{{ path('app_formulaire_demande_produit_new', {'id' : app.user.id}) }}">Faire une nouvelle demande</a>
+                    </button>                      
+                </div>           
+                
+            </div>
+        
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -14,91 +14,95 @@
         <tbody>
 
             <tr>
-                <th>Type de produit :</th>
-                <td>{{ form.typeProduit }}</td>
+
             </tr>
             <tr>
-                <th>Description envoyée :</th>
-                <td class="text-break">{{ form.descriptionProduit }}</td>
+
             </tr>
             <tr>
-                <th>Date d'envoie de la demande :</th>
-                <td>{{ form.date_envoie_form ? form.date_envoie_form|date('d M Y à H:i') : '' }}</td>
+
             </tr>
             <tr>
-                <th>Réponse du vendeur :</th> permet d'afficher le état de la demande 
-                    <td>
-                    {% if  form.reponse_demande is same as('attente')  %}
-                        Demande en attente   
-                    {% else %}
-                        {{ form.reponse_demande ? 'Accepter' : 'Refuser' }}
-                        le {{ form.date_reponse_form ? form.date_reponse_form|date('d M Y à H:i') : '' }}
-                    {% endif %}
-                </td>
+
             </tr>
         </tbody>
     </table>
-    {% if app.user.clients %} si utilisateur est un client renvoie à sa liste personnelle
-        <button>
-            <a class="btn p-0" href="{{ path('app_formulaire_demande_produit_show_liste', {'user_id': app.user.clients.id}) }}">Retour à la liste</a>
-        </button>
-    {% elseif app.user.vendeurs %}si utilisateur est un vendeur renvoie à la liste de tous les formulaires
-        <button>
-            <a class="btn p-0" href="{{ path('app_formulaire_demande_produit_index') }}">Retour à la liste</a>
-        </button>
-    {% endif %}
+
 </div>    
 
 {% endblock %} #}
 
 {% extends 'base.html.twig' %}
 
-{% block title %}  {% endblock %}
+{% block title %} Formulaire {{ form.dateEnvoieForm ? form.dateEnvoieForm|date('d/m/y') : '' }} {% endblock %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{asset('asset/style/css/_show_list.css')}}">
+	{# <link rel="stylesheet" href="{{asset('asset/style/css/_show_list.css')}}"> #}
+    <link rel="stylesheet" href="{{asset('asset/style/css/formulaires.css')}}">
 {% endblock %}
 
 {% block body %}
 
     <div class="container bloc">
 
-        <div class="bloc_show">
+        <div class="bloc_show_one_form">
 
-            <div class="bloc_show_header">
-                <h1> Titre </h1>
+            <div class="show_one_form_header">
+                <h1> Formulaire du {{ form.dateEnvoieForm ? form.dateEnvoieForm|date('d/m/y') : '' }}</h1>
             </div>
 
-            <div class="bloc_show_content">
-            
-                <div class="show_content_row">
-                    <h5>Date de commande</h5>
-                    <h5>Liste produits</h5>
-                    <h5>Prix total</h5>
-                    <h5>Action</h5>
+            <div class="bloc_show_one_form_content">
+
+                <div class="show_one_form_row">
+                    <p>Type de produit :</p>
+                    <p>{{ form.typeProduit }}</p>
+                </div>
+
+                <div class="show_one_form_row">
+                    <p>Description envoyée :</p>
+                    <p>{{ form.descriptionProduit }}</p>
                 </div>
 
 
+                <div class="show_one_form_row">
+                    <p>Date d'envoie de la demande :</p>
+                    <p>{{ form.dateEnvoieForm ? form.dateEnvoieForm|date('d M Y') : '' }}</p>
+                </div>
 
-                {# {% for commande in commandes %} #}
-                    <div class="show_content_row">
-                        {# <h5>{{ commande.dateCommande ? commande.dateCommande|date('Y-m-d H:i:s') : '' }}</h5>
-                        <h5>{{ commande.listeProduits ? commande.listeProduits|json_encode : '' }}</h5>
-                        <h5>{{ commande.prixTotal }}</h5>
-                        <h5><a href="{{ path('app_commandes_show_one', {'cmd_id': commande.id}) }}">Voir</a></h5> #}
-                    </div>
-                
+                <div class="show_one_form_row">
+                    <p>Réponse :</p>
+
+                    {% if  form.reponseDemande is same as('attente')  %}
+
+                        <span class="badge rounded-pill bg-warning">Attente</span>
+
+                    {% elseif form.reponseDemande is same as('Accepter') %}
+
+                        <span class="badge rounded-pill bg-success">{{ form.reponseDemande }}</span>
+
+                    {% else %}
+
+                        <span class="badge rounded-pill bg-danger">{{ form.reponseDemande }}</span>
+
+                    {% endif %}
+
+                </div>
+               
                 
 
                 <div class="show_content_footer" >
 
-                    <button class="bloc_show_footer">
-                        {# <a href="{{ path('app_banniere_index') }}">Retour</a> #}
-                    </button>                        
 
-                    <button class="bloc_show_footer">
-                        {# {{ button_label|default('Enregistrer') }} #}
+                {% if app.user and app.user.id == userForm  %} 
+                    <button>
+                        <a href="{{ path('app_formulaire_demande_produit_show_liste', {'id': app.user.id}) }}">Retour à ma liste</a>
                     </button>
+                {% elseif app.user and 'ROLE_ADMIN' in app.user.roles %}
+                    <button>
+                        <a href="{{ path('app_formulaire_demande_produit_index') }}">Retour à la liste</a>
+                    </button>
+                {% endif %}
+
                 </div>           
                 
             </div>

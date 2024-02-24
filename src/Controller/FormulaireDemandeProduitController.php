@@ -29,7 +29,7 @@ class FormulaireDemandeProduitController extends AbstractController
     }
 
 
-
+    // Créa nouveau formulaire par utilisateur
     #[Route('/{id}/creer', name: 'app_formulaire_demande_produit_new', methods: ['GET', 'POST'])]
     public function new(int $id, Request $request, UserRepository $userRepository, 
         FormulaireDemandeProduitRepository $formulaireRepository,  EntityManagerInterface $entityManager ): Response   
@@ -49,8 +49,8 @@ class FormulaireDemandeProduitController extends AbstractController
             $newForm->setUser($user);
 
             // Ajoute les données saisies
-            $newForm->setTypeProduit( UtilsServices::cleanInput ( $form->get('typeProduit')->getData() ) );
-            $newForm->setDescriptionProduit(UtilsServices::cleanInput ( $form->get('descriptionProduit')->getData() ) );
+            $newForm->setTypeProduit( UtilsServices::cleanInput ( $form->get('type_produit')->getData() ) );
+            $newForm->setDescriptionProduit(UtilsServices::cleanInput ( $form->get('description_produit')->getData() ) );
 
             // Permet d enregistrer la date et l heure de l envoie (format gmt a changer)
             $dateEnvoiForm = new \DateTime();
@@ -74,27 +74,34 @@ class FormulaireDemandeProduitController extends AbstractController
 
 
 
+    // Voir 1 formulaire
     #[Route('/{id}', name: 'app_formulaire_demande_produit_show', methods: ['GET'])]
     public function show(int $id, FormulaireDemandeProduit $formulaireDemandeProduit, FormulaireDemandeProduitRepository $formulaireDemandeProduitRepository): Response
     {
-        $desc = $formulaireDemandeProduitRepository->find($id);
-
-        $description = 
-        $desc->setDescriptionProduit(wordwrap($desc->getDescriptionProduit(),20, 10));
+        // $desc = $formulaireDemandeProduitRepository->find($id);
 
         return $this->render('pages/User/formulaires/show_one_form.html.twig', [ // a modifier
-            'formulaire_demande_produit' => $formulaireDemandeProduit,
+            'form' => $formulaireDemandeProduit,
+            'userForm' => $formulaireDemandeProduit->getUser()->getId(),
         ]);
     }
 
 
-
+    // voir la liste de mes formulaires utilisateur
     #[Route('/{id}/liste', name: 'app_formulaire_demande_produit_show_liste', methods: ['GET'])]
     public function showUserListe( int $id, UserRepository $userRepository, FormulaireDemandeProduitRepository $formulaireDemandeProduitRepository ): Response
     {
-        return $this->render('pages/User/formulaires/form_list.html.twig', [
-            'formulaires' => $listeFormulaires= $formulaireDemandeProduitRepository->findAllForms($id),
-            'user' => $user = $userRepository->find($id) 
+
+        $user = $userRepository->findOneBy(['id'=> $id]);
+        $myForm = $user->getListeFormulaires();
+
+        
+        // $myForm = $formulaireDemandeProduitRepository->findAllForms($user->getId());
+
+        return $this->render('pages/User/formulaires/my_form_list.html.twig', [
+            // 'formulaires' => $listeFormulaires= $formulaireDemandeProduitRepository->findAllForms($id),
+            'formulaires' => $myForm,
+            // 'user' => $user = $userRepository->find($id) 
 
         ]);
     }

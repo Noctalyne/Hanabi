@@ -73,10 +73,10 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}  {% endblock %}
+{% block title %} Liste des formulaires {% endblock %}
 
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{asset('asset/style/css/_show_list.css')}}">
+    <link rel="stylesheet" href="{{asset('asset/style/css/formulaires.css')}}">
 {% endblock %}
 
 {% block body %}
@@ -85,78 +85,55 @@
 
         <div class="bloc_show_form_list">
 
-            <div class="bloc_show_header">
-                <h1> Liste des formulaires </h1>
+            <div class="show_form_list_header">
+                <h1> Liste de tous les formulaires </h1>
             </div>
 
             <div class="bloc_show_content">
             
                 <div class="show_content_row_form_list">
-                    {# <h5>N° de demande</h5>
-                    <h5>Type de produit</h5>
-                    <h5>Description envoyer</h5>
-                    <h5>Date d'envoie</h5>
-                    <h5>Statut</h5>
-                    <h5>Action</h5>
-                    <h5>Afficher</h5> #}
                     <p>N° de demande</p>
                     <p>Type de produit</p>
                     <p>Description</p>
                     <p>Date d'envoie</p>
-                    <p>Afficher</p>
                     <p>Statut</p>
-                    {# <p>Action</p> #}
-
+                    <p>Afficher</p>
                 </div>
    
-                   {% for form in formulaires %}
+                {% for form in formulaires %}
                     <div class="show_content_row_form_list">
-                        {# <h5>{{ commande.dateCommande ? commande.dateCommande|date('Y-m-d H:i:s') : '' }}</h5>
-                        <h5>{{ commande.listeProduits ? commande.listeProduits|json_encode : '' }}</h5>
-                        <h5>{{ commande.prixTotal }}</h5>
-                        <h5><a href="{{ path('app_commandes_show_one', {'cmd_id': commande.id}) }}">Voir</a></h5> #}
                         <p>{{ form.id }}</p>
                         <p>{{ form.typeProduit }}</p>
                         <p>{{ form.descriptionProduit }}</p>
-                        <p>{{ form.date_envoie_form ? form.date_envoie_form|date('d M Y à H:i') : '' }}</p>
+                        <p>{{ form.dateEnvoieForm ? form.dateEnvoieForm|date('d/m/y') : '' }}</p>
+
+
+                        {# Renvoie à la page pour accepeter la demande si celle ci est "en attente" #}
+                        {% if  form.reponseDemande is same as('attente')  %}
+                            <div id="attente">
+                                <span class="badge rounded-pill bg-warning">Attente</span>
+                                {# <button> #}
+                                    <a class="" href="{{ path('app_formulaire_demande_produit_traiter', {'id': form.id}) }}">Répondre</a>
+                                {# </button> #}
+                            </div>    
+                        {% elseif form.reponseDemande is same as('Accepter') %}
+                            <span class="badge rounded-pill bg-success">{{ form.reponseDemande }}</span>
+                        {% else %}
+                                <span class="badge rounded-pill bg-danger">{{ form.reponseDemande }}</span>
+                        {% endif %}
+
                         <a class="btn" href="{{ path('app_formulaire_demande_produit_show', {'id': form.id}) }}">
                             <img src="{{ asset('images/icones/voir.png') }}" alt="icone voir" style="width : 40px;">
                         </a>
 
-                        {# Renvoie à la page pour accepeter la demande si celle ci est "en attente" #}
-                        {% if  form.reponse_demande is same as('attente')  %}
-
-                            <p>En attente</p>
-                            <button>
-                                <a class="" href="{{ path('app_formulaire_demande_produit_traiter', {'id': form.id}) }}">Répondre</a>
-                            </button>
-                        {% else %}
-                        
-                            <p>{{ form.reponse_demande }}
-                            le {{ form.date_reponse_form ? form.date_reponse_form|date('d M Y à H:i') : ''}}</p>
-                            {# <a href="{{ path('app_formulaire_demande_produit_traiter', {'id': form.id}) }}">
-                                <img src="{{ asset('images/icones/user_black_line.png') }}" alt="profil du client" class="m-1" width="40px"height="40px">
-                            </a> #}
-
-                        {% endif %}
-
-
-
                     </div>
 
-                    {% endfor %}
-                
-                
+                {% endfor %}
 
                 <div class="show_content_footer" >
-
                     <button class="bloc_show_footer">
-                        {# <a href="{{ path('app_banniere_index') }}">Retour</a> #}
+                        <a href="{{ path('app_banniere_index') }}">Retour</a>
                     </button>                        
-
-                    <button class="bloc_show_footer">
-                        {# {{ button_label|default('Enregistrer') }} #}
-                    </button>
                 </div>           
                 
             </div>

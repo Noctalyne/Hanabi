@@ -3,63 +3,64 @@
 {% block title %}Banniere{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('style/css/account.css') }}">
+    <link rel="stylesheet" href="{{ asset('asset/style/css/banniere.css') }}">
 {% endblock %}
 
 {% block body %}
 
     <div class="container bloc">
         
-        <h1>Banniere : {{ banniere.nomBanniere }}</h1>
+        <div class="bloc_show_one">
 
-        {# <div class="bloc_card_header">
-        
-        </div> #}
+            <div class="show_one_header">
+                {{ include('pages/Administration/banniere/gestion/_delete_ban.html.twig') }}
 
-        <div class="bloc_card_body">
-            <p>Nom</p>
-            {{ banniere.nomBanniere }}
+                <h1>Bannière {{ banniere.id }}</h1>
+
+                <button>
+                    <a href="{{ path('app_banniere_edit', {'id': banniere.id}) }}">Modifier</a>
+                </button>
+            </div>
+
+            <div class="show_one_content">
+
+                <div class="show_content_row">
+                    <p>Nom</p>
+                    <p>{{ banniere.nomBanniere }}</p>
+                </div>
+
+
+                <div class="show_content_row">
+                    <p>Première image</p>
+                    <img src="{{ asset('images/banniere/' ~ banniere.premiereImage ) }}" alt="photo du produit :" ~ {{banniere.premiereImage}}>            
+                </div>
+
+
+                <div class="show_content_row">
+                    <p>Deuxième image</p>
+                    <img src="{{ asset('images/banniere/' ~ banniere.deuxiemeImage  ) }}" alt="photo du produit :" ~ {{banniere.deuxiemeImage}}>            
+                </div>
+
+
+                <div class="show_content_row">
+                    <p>Troisième image</p>
+                    <img src="{{ asset('images/banniere/' ~ banniere.troisiemeImage ) }}" alt="photo du produit :" ~ {{banniere.troisiemeImage}}>            
+                </div>
+
+
+            </div>
+
+
+            <div class="show_content_footer">
+                <button>
+                    <a href="{{ path('app_banniere_index') }}">Retour</a>
+                </button>
+            </div>
+
+
+
         </div>
-
-        <div class="bloc_card_body">
-            <p>Premiere image</p>
-            <img src="{{ asset('images/banniere/' ~ banniere.premiereImage ) }}" alt="photo du produit :" ~ {{banniere.premiereImage}} style="height : 200px; width : 800px;">
-        </div>
-
-        <div class="bloc_card_body">
-            <p>Deuxieme image</p>
-            <img src="{{ asset('images/banniere/' ~ banniere.deuxiemeImage  ) }}" alt="photo du produit :" ~ {{banniere.deuxiemeImage}} style="height : 200px; width : 800px;">
-        </div>
-    
-        <div class="bloc_card_body">
-            <p>Troisieme image</p>
-            <img src="{{ asset('images/banniere/' ~ banniere.troisiemeImage ) }}" alt="photo du produit :" ~ {{banniere.troisiemeImage}} style="height : 200px; width : 800px;">
-        </div>
-
-        <div class="">
-
-            {{ include('pages/Administration/banniere/gestion/_delete_ban.html.twig') }}
-            {# <button>
-                <a href="{{ path('app_banniere_index') }}">Retour</a>
-            </button> #}
-
-            <button>
-                <a href="{{ path('app_banniere_edit', {'id': banniere.id}) }}">Modifier</a>
-            </button>
-        </div>
-
-
-
 
     </div>
-
-    <button>
-        <a href="{{ path('app_banniere_index') }}">Retour</a>
-    </button>
-    
-
-
-
-
 
 {% endblock %}

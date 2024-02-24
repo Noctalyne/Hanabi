@@ -39,6 +39,9 @@
                 </div>
 
                 <div class="add_content_footer">
+                                <button>
+                    <a href="{{ path('app_formulaire_demande_produit_show_liste', {'id': app.user.id}) }}">Retour </a>
+                </button>
                     <button>
                         {{ button_label|default('Enregistrer') }}
                     </button>
@@ -47,11 +50,11 @@
             {{ form_end(form) }} 
 
 
-            <div class="d-flex justify-content-center">
+            {# <div class="d-flex justify-content-center">
                 <button>
                     <a href="{{ path('app_formulaire_demande_produit_show_liste', {'id': app.user.id}) }}">Retour </a>
                 </button>
-            </div>
+            </div> #}
         
         </div>
     </div>

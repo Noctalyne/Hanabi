@@ -6,6 +6,7 @@
     flex-wrap: nowrap;
     border: 1px solid #AD0011;
     border-radius: 10px;
+    margin: 40px auto;
 }
 
 .bloc_edit_header {
@@ -78,6 +79,7 @@
     flex-wrap: nowrap;
     border: 1px solid #AD0011;
     border-radius: 10px;
+    margin: 40px auto;
 }
 
 .bloc_add_header {
@@ -118,3 +120,123 @@
     justify-content: center;
     align-items: center;
 }
+
+
+
+
+/* TYPE : SHOW LIST*/
+
+.bloc_show_form_list {
+    /* width: 75%; */
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border: 1px solid #AD0011;
+    border-radius: 10px;
+    margin: 60px auto;
+}
+
+
+.show_form_list_header {
+    /* text-align: center; */
+    border-bottom: 1px solid #AD0011;
+    /* margin: 20px 20px 40px 20px; */
+    /* padding: 10px; */
+}
+
+.show_form_list_content {
+    padding: 20px 40px;
+}
+
+.show_content_row_form_list {
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(4 ,2fr) 1fr 1fr 1fr;
+    grid-template-rows: repeat(1, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+    justify-items: center;
+    border-bottom: 1px solid #AD0011;
+}
+
+.bloc_show_form_list button {
+    text-align: center;
+    margin: 20px auto;
+}
+
+.show_form_list_content button {
+    text-align: center;
+    margin: 20px auto;
+}
+
+.activ_ban {
+    display: flex;
+    flex-direction: column;
+}
+
+.activ_ban form button {
+height: auto !important;
+}
+
+
+
+/* TYPE : SHOW ONE */
+
+.bloc_show_one {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border: 1px solid #AD0011;
+    border-radius: 10px;
+    margin: 60px auto;
+}
+
+
+.show_one_header {
+    border-bottom: 1px solid #AD0011;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.show_one_content {
+    padding: 20px 40px;
+}
+
+.show_content_row {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+    grid-template-rows: repeat(1, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+    justify-items: center;
+}
+
+.show_content_row img {
+    width : 450px;
+    border: 1px solid #AD0011;
+}
+
+.show_one_content button {
+    text-align: center;
+    margin: auto;
+}
+
+.show_content_footer {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+
+
+
+

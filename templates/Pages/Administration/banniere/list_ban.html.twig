@@ -3,78 +3,67 @@
 {% block title %}Liste des bannières{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('./rework_css/banniere.css') }}">
+    <link rel="stylesheet" href="{{ asset('./asset/style/css/banniere.css') }}">
 {% endblock %}
 
 {% block body %}
 
     <div class='container bloc'>
 
-        <h1>Liste des bannières</h1>
+        <div class="bloc_show_form_list">
 
-        {# <div> #}
-            <table class='table'>
-                <thead>
-                    <tr >
-                        <th>Nom</th>
-                        <th>Image 1</th>
-                        <th>Image 2</th>
-                        <th>Image 3</th>
-                        <th>Voir</th>
-                        <th>Modifier</th>
-                        <th>Statut</th>
-                    </tr>
-                </thead>
+            <div class="show_form_list_header">
+                <h1>Liste des bannières</h1>        
+            </div>
 
-                <tbody>
+            <div class="show_form_list_content">
+
+                <div class="show_content_row_form_list">
+                    <p>Nom</p>
+                    <p>Image 1</p>
+                    <p>Image 2</p>
+                    <p>Image 3</p>
+                    <p>Voir</p>
+                    <p>Modifier</p>
+                    <p>Statut</p>
+                </div>
+            
                 {% for banniere in bannieres %}
-                
-                    <tr class="text-center">
-                        <td>{{ banniere.nomBanniere }}</td>
-                        {# Changer le style en css #}
-                        <td><img class="img-thumbnail" src="{{ asset('images/banniere/' ~ banniere.premiereImage ) }}" alt="photo du produit :" ~ {{banniere.premiereImage}} style="width : 170px; height: 100%;"></td> {#  #}
-                        <td><img class="img-thumbnail" src="{{ asset('images/banniere/' ~ banniere.deuxiemeImage ) }}" alt="photo du produit :" ~ {{banniere.deuxiemeImage}} style="width : 170px; height: 100%;"></td>
-                        <td><img class="img-thumbnail" src="{{ asset('images/banniere/' ~ banniere.troisiemeImage ) }}" alt="photo du produit :" ~ {{banniere.troisiemeImage}} style="width : 170px; height: 100%;"></td>
-                        <td>
-                            <a href="{{ path('app_banniere_show', {'id': banniere.id}) }}">
-                                <img src="{{ asset('images/icones/voir.png') }}" alt="icone voir" style="width : 40px;">
-                            </a>
-                        </td>
+                <div class="show_content_row_form_list">
 
-                        <td>
-                            <a href="{{ path('app_banniere_edit', {'id': banniere.id}) }}">
-                                <img src="{{ asset('images/icones/modifier.png') }}" alt="icone modifier" style="width : 40px;">
-                            </a>
-                        </td>
+                    <p>{{ banniere.nomBanniere }}</p>
+                    <img class="img-thumbnail" src="{{ asset('images/banniere/' ~ banniere.premiereImage ) }}" alt="photo du produit :" ~ {{banniere.premiereImage}}>
+                    <img class="img-thumbnail" src="{{ asset('images/banniere/' ~ banniere.deuxiemeImage ) }}" alt="photo du produit :" ~ {{banniere.deuxiemeImage}}>
+                    <img class="img-thumbnail" src="{{ asset('images/banniere/' ~ banniere.troisiemeImage ) }}" alt="photo du produit :" ~ {{banniere.troisiemeImage}}>
+                    <a href="{{ path('app_banniere_show', {'id': banniere.id}) }}">
+                        <img src="{{ asset('images/icones/voir.png') }}" alt="icone voir" style="width : 40px;">
+                    </a>
+                    <a href="{{ path('app_banniere_edit', {'id': banniere.id}) }}">
+                        <img src="{{ asset('images/icones/modifier.png') }}" alt="icone modifier" style="width : 40px;">
+                    </a>                
+                    
+                    {% if banniere.activated == 0 %}
+                        <div class="activ_ban">
+                            <span class="badge rounded-pill bg-danger">Inactif</span>
+                            {{ include('pages/Administration/banniere/gestion/_activate.html.twig') }}
+                        </div>
+                    {% else %}
+                        <span class="badge rounded-pill bg-success">Actif</span>
+                    {% endif %}
+                    
+                </div>
 
-                        <td>
-
-                            {% if banniere.activated == 0 %}
-                                <span class="badge rounded-pill bg-danger">Inactif</span>
-                                {{ include('pages/Administration/banniere/gestion/_activate.html.twig') }}
-                            {% else %}
-                                <span class="badge rounded-pill bg-success">Actif</span>
-                            {% endif %}
-                        
-                        </td>
-                        
-                    </tr>
                 {% else %}
-                    <tr>
-                        <td colspan="5">Aucun carousel n'as encore été crée. </td>
-                    </tr>
-                {% endfor %}
+                    <p>Aucun carrousel n'as encore été crée.</p>
+                {% endfor %}        
 
-                </tbody>
+            </div>
 
-            </table>
-        {# </div> #}
 
-        <button>
-            <a href="{{ path('app_banniere_new') }}">Créer un carousel</a>
-        </button>
+            <button>
+                <a href="{{ path('app_banniere_new') }}">Créer un carrousel</a>
+            </button>
 
-    </div>
-
+        </div>
 
 {% endblock %}
